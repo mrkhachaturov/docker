@@ -7,7 +7,7 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      privatevlan:
+      bond0.1140:
         ipv4_address: ${VLAN_1140}.251
     # ports:
     #   - "3001:3001"

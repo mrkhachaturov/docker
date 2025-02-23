@@ -1,13 +1,13 @@
 services:
   # Traefik 3 - Reverse Proxy
-  trf-int:
-    container_name: trf-int
+  traefik-int:
+    container_name: traefik-int
     image: traefik:v3.3
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      privatevlan:
+      bond0.1140:
         ipv4_address: ${VLAN_1140}.254
 
     command: # CLI arguments
@@ -38,7 +38,7 @@ services:
       # - --providers.docker.endpoint=unix:///var/run/docker.sock # Disable for Socket Proxy. Enable otherwise.
       - --providers.docker.endpoint=tcp://socket-proxy:2375 # Enable for Socket Proxy. Disable otherwise.
       - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=privatevlan
+      - --providers.docker.network=bond0.1140
       # - --providers.docker.swarmMode=false # Traefik v2 Swarm
       # - --providers.swarm.endpoint=tcp://127.0.0.1:2377 # Traefik v3 Swarm
       - --entrypoints.websecure.http.tls=true
@@ -58,6 +58,8 @@ services:
       # - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.provider=cloudflare
       # - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53
       # - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
+      
+      # Prometheus
       - --metrics.prometheus=true
       - --metrics.prometheus.buckets=0.1,0.3,1.2,5.0
 
@@ -91,7 +93,7 @@ services:
       - ${DOCKERDIR}/logs/${HOSTNAME}/traefik:/logs # Traefik logs
       - ${DOCKERDIR}/appdata/traefik3/tls/certs:/etc/certs/ # TLS Certs
     environment:
-      - TZ=$TZ
+      - TZ=${TZ}
       # - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
       - HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAIN1
