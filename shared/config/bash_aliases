@@ -35,7 +35,7 @@ alias dp777='sudo chown -R $USER:$USER $HOME/docker/secrets ; sudo chmod -R 777 
 # DOCKER COMPOSE TRAEFIK 3 - All docker-compose commands start with "dc" 
 case $HOSTNAME in
     ivn-nas1) # synology at this point uses an old version of docker. Therefore, 'docker-compose' instead of 'docker compose'
-      alias dcrun='sudo docker-compose -f $HOME/docker/docker-hub/docker-compose-$HOSTNAME.yml' # /volume1/docker symlinked to /var/services/homes/user/docker
+      alias dcrun='sudo docker-compose -f $HOME/docker/docker-compose-$HOSTNAME.yml' # /volume1/docker symlinked to /var/services/homes/user/docker
       ;;
     *)
       alias dcrun='sudo docker compose --profile all -f $HOME/docker/docker-compose-$HOSTNAME.yml'
@@ -50,7 +50,7 @@ alias dcstop='dcrun stop' # usage: dcstop container_name
 alias dcrestart='dcrun restart ' # usage: dcrestart container_name
 alias dcstart='dcrun start ' # usage: dcstart container_name
 alias dcpull='dcrun pull' # usage: dcpull to pull all new images or dcpull container_name
-alias traefiklogs='tail -f $HOME/docker/docker-hub/logs/$HOSTNAME/traefik/traefik.log' # tail traefik logs
+alias traefiklogs='tail -f $HOME/docker/logs/$HOSTNAME/traefik/traefik.log' # tail traefik logs
 
 # Manage "core" services as defined by profiles in docker compose
 alias startcore='sudo docker compose --profile core -f $HOME/docker/docker-compose-$HOSTNAME.yml start'
