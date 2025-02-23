@@ -7,7 +7,7 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     networks:
-      privatevlan:
+      bond0.1140:
         ipv4_address: ${VLAN_1140}.253    # privileged: true # true for VM. False for unprivileged LXC container.
     ports:
     # - "$ZEROTIER_IP_SYNOLOGY:2375:2375" # Port 2375 should only ever get exposed to the internal network. When possible use this line.
