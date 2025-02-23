@@ -1,0 +1,68 @@
+########################### THIS COMPOSE FILE
+# - Synology (ivn-nas1) - Synology DS1821+
+# - Prefix/suffix "ivn-nas1" refers to the above host
+# - Docker version 20.10.23, build 876964a
+# - Docker Compose version v2.23.3
+
+########################### NETWORKS
+networks:
+  privatevlan:
+    name: privatevlan
+    driver: macvlan
+    driver_opts:
+      parent: bond0.1140 #vlan 1140 
+    ipam:
+      config:
+        - subnet: ${VLAN_1140}.0/24
+          ip_range: ${VLAN_1140}.240/28
+          gateway: ${VLAN_1140}.1
+
+########################### SECRETS
+secrets:
+  basic_auth_credentials:
+    file: $DOCKERDIR/secrets/basic_auth_credentials
+  cf_dns_api_token:
+    file: $DOCKERDIR/secrets/cf_dns_api_token
+  traefik_forward_auth:
+    file: $DOCKERDIR/secrets/traefik_forward_auth
+  mysql_root_password:
+    file: $DOCKERDIR/secrets/mysql_root_password
+  plex_claim:
+    file: $DOCKERDIR/secrets/plex_claim
+
+# Docker Compose v2.20 or greater required to use "include"
+include:
+  ########################### SERVICES
+  # PREFIX ivns-nas1 = Synology DS1821+ NAS
+  # HOSTNAME=ivn-nas1 - defined in .env
+
+  # CORE
+  - compose/$HOSTNAME/traefik.yml
+  - compose/$HOSTNAME/socket-proxy.yml
+  # - compose/$HOSTNAME/oauth.yml
+  # - compose/$HOSTNAME/portainer.yml
+  ## DATA
+  - compose/$HOSTNAME/minio.yml
+  ## DB
+  - compose/$HOSTNAME/mysql.yml
+  # NETWORK
+  # - compose/$HOSTNAME/zerotier.yml
+  # - compose/$HOSTNAME/adguardhome.yml
+  # MEDIA
+  # - compose/$HOSTNAME/plex.yml
+  # - compose/$HOSTNAME/plex-sync.yml
+  # - compose/$HOSTNAME/tdarr.yml
+  # FILE MANAGEMENT
+  # - compose/$HOSTNAME/rclone-gdrive.yml
+  # - compose/$HOSTNAME/rclone-gcrypt.yml
+  # - compose/$HOSTNAME/mergerfs.yml
+  # - compose/$HOSTNAME/syncthing.yml
+  # - compose/$HOSTNAME/vscode.yml
+  # MONITORING
+  # - compose/$HOSTNAME/glances.yml
+  # - compose/$HOSTNAME/qdirstat.yml
+  - compose/$HOSTNAME/uptime-kuma.yml
+  # MAINTENANCE
+  # - compose/$HOSTNAME/docker-gc.yml
+  # - compose/$HOSTNAME/ddns-updater.yml
+  # - compose/$HOSTNAME/certdumper.yml

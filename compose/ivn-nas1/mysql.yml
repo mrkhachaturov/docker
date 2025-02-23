@@ -1,0 +1,58 @@
+services:
+  mysql:
+    image: mysql:9.2.0
+    container_name: mysql_local
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      privatevlan:
+        ipv4_address: ${VLAN_1140}.250
+    environment:
+      MYSQL_DATABASE: uptime
+      MYSQL_USER: ${UPTIME_KUMA_DB_USERNAME}
+      MYSQL_PASSWORD: ${UPTIME_KUMA_DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD_INT}
+      TZ: $TZ
+    volumes:
+      - ${DOCKERDIR}/appdata/mysql/dbmysql:/var/lib/mysql
+    command: --datadir=/var/lib/mysql/data --character-set-server=utf8 --collation-server=utf8_bin
+    healthcheck:
+      test: mysqladmin ping -h localhost
+      start_period: 10s
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql-backup:
+    image: databack/mysql-backup:1.0.0 # use appropriate image tags
+    container_name: mysql_backup_local
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      privatevlan:
+        ipv4_address: ${VLAN_1140}.249  
+    restart: unless-stopped
+    environment:
+      DB_SERVER: mysql
+      DB_USER: ${UPTIME_KUMA_DB_USERNAME}
+      DB_PASS: ${UPTIME_KUMA_DB_PASSWORD}
+      DB_DUMP_TARGET: s3://backup/uptime
+      # DB_DUMP_FREQUENCY: 60
+      # DB_DUMP_BEGIN: 0100
+      DB_DUMP_PRE_BACKUP_SCRIPTS: "/scripts.d/pre-backup/"
+      CRON_SCHEDULE: "30 2 * * *"
+      # DB_DUMP_RETENTION: 7d
+      DB_DUMP_INCLUDE: uptime
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID_INT}
+      AWS_REGION: us-east-1
+      AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY_INT
+      AWS_ENDPOINT_URL: https://s3.${DOMAIN1}.net
+      COMPRESSION: bzip2
+      TZ: $TZ
+    volumes:
+      - $DOCKERDIR/appdata/mysql/backup/ca/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt
+      - $DOCKERDIR/appdata/mysql/backup/scripts:/scripts.d
+    command: dump
+    depends_on:
+      mysql:
+        condition: service_healthy
