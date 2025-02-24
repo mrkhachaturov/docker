@@ -4,7 +4,7 @@ services:
     container_name: autobase-console-api
     security_opt:
       - no-new-privileges:true
-    restart: unless-stopped
+    # restart: unless-stopped
     networks:
       bond0.1140:
         ipv4_address: ${VLAN_1140}.248
@@ -14,10 +14,10 @@ services:
       PG_CONSOLE_DOCKER_IMAGE: autobase/automation:latest
       PG_CONSOLE_DB_HOST: atobase-console-db
       PG_CONSOLE_LOGGER_LEVEL: ${PG_CONSOLE_LOGGER_LEVEL:-DEBUG}
-      DOCKER_HOST: tcp://socket-proxy:2375  
+      # DOCKER_HOST: tcp://socket-proxy:2375  
     volumes:
       - ${DOCKERDIR}/appdata/autobase/tmp/ansible:/tmp/ansible
-      # - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     labels:  
       - "traefik.enable=true"  
       # -- Consule-API  
@@ -35,13 +35,13 @@ services:
     container_name: autobase-console-ui
     security_opt:
       - no-new-privileges:true
-    restart: unless-stopped
+    # restart: unless-stopped
     networks:
           bond0.1140:
             ipv4_address: ${VLAN_1140}.247   
     environment:
-      - PG_CONSOLE_API_URL=/api/v1
-      - PG_CONSOLE_AUTHORIZATION_TOKEN=${PG_CONSOLE_AUTHORIZATION_TOKEN}
+      - PG_CONSOLE_API_URL: "http://${VLAN_1140}.248:8080/api/v1"
+      - PG_CONSOLE_AUTHORIZATION_TOKEN: ${PG_CONSOLE_AUTHORIZATION_TOKEN}
     labels:
       - "traefik.enable=true"  
       # -- Traefik Services
@@ -58,7 +58,7 @@ services:
     container_name: autobase-console-db
     security_opt:
       - no-new-privileges:true
-    restart: unless-stopped
+    # restart: unless-stopped
     networks:
           bond0.1140:
             ipv4_address: ${VLAN_1140}.246   
