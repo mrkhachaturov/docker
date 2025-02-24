@@ -1,0 +1,66 @@
+services:
+  autobase-console-api:
+    image: autobase/console:latest
+    container_name: autobase-console-api
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      bond0.1140:
+        ipv4_address: ${VLAN_1140}.248
+    environment:
+      PG_CONSOLE_API_URL: http://${VLAN_1140}.248:8080/api/v1
+      PG_CONSOLE_AUTHORIZATION_TOKEN: ${PG_CONSOLE_AUTHORIZATION_TOKEN}
+      PG_CONSOLE_DOCKER_IMAGE: autobase/automation:latest
+      PG_CONSOLE_DB_HOST: atobase-console-db
+      PG_CONSOLE_LOGGER_LEVEL: ${PG_CONSOLE_LOGGER_LEVEL:-INFO}
+      DOCKER_HOST: tcp://socket-proxy:2375  
+    volumes:
+      - ${DOCKERDIR}/appdata/autobase/tmp/ansible:/tmp/ansible
+      # - /var/run/docker.sock:/var/run/docker.sock
+    labels:  
+      - "traefik.enable=true"  
+      # -- Consule-API  
+      # -- Traefik Services
+      - "traefik.http.services.autobase-console-api-svc.loadbalancer.server.port=8080"
+      # -- Traefik Routers
+      - "traefik.http.routers.autobase-console-api-rtr.entrypoints=websecure"  
+      - "traefik.http.routers.autobase-console-api-rtr.rule=Host(`autobase.${DOMAIN1}.net`) && PathPrefix(`/api/v1`)"  
+      - "traefik.http.routers.autobase-console-api-rtr.tls=true"  
+      - "traefik.http.routers.autobase-console-api-rtr.service=autobase-console-api-svc"
+      # -- (Optinal) Authentication 
+
+  autobase-console-ui:
+    image: autobase/console_ui:latest
+    container_name: autobase-console-ui
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+          bond0.1140:
+            ipv4_address: ${VLAN_1140}.247   
+    environment:
+      - PG_CONSOLE_API_URL=/api/v1
+      - PG_CONSOLE_AUTHORIZATION_TOKEN=${AUTH_TOKEN}
+    labels:
+      - "traefik.enable=true"  
+      # -- Traefik Services
+      - "traefik.http.services.autobase-console-ui-svc.loadbalancer.server.port=80"  
+      # -- Traefik Routers
+      - "traefik.http.routers.autobase-console-ui-rtr.entrypoints=websecure"  
+      - "traefik.http.routers.autobase-console-ui-rtr.rule=Host(`autobase.${DOMAIN1}.net`) && PathPrefix(`/`)"  
+      - "traefik.http.routers.autobase-console-ui-rtr.tls=true"  
+      - "traefik.http.routers.autobase-console-ui-rtr.service=autobase-console-ui-svc"  
+      # -- (Optinal) Authentication 
+
+  autobase-console-db:
+    image: autobase/console_db:latest
+    container_name: autobase-console-db
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+          bond0.1140:
+            ipv4_address: ${VLAN_1140}.246   
+    volumes:
+      - ${DOCKERDIR}/appdata/autobase/console_postgres:/var/lib/postgresql

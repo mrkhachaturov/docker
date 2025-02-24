@@ -37,6 +37,7 @@ include:
   - compose/$HOSTNAME/minio.yml
   ## DB
   - compose/$HOSTNAME/mysql.yml
+  - compose/$HOSTNAME/autobase.yml
   # NETWORK
   # - compose/$HOSTNAME/zerotier.yml
   # - compose/$HOSTNAME/adguardhome.yml
