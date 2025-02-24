@@ -14,10 +14,10 @@ services:
       PG_CONSOLE_DOCKER_IMAGE: autobase/automation:latest
       PG_CONSOLE_DB_HOST: autobase-console-db
       PG_CONSOLE_LOGGER_LEVEL: ${PG_CONSOLE_LOGGER_LEVEL:-DEBUG}
-      # DOCKER_HOST: tcp://socket-proxy:2375  
+      DOCKER_HOST: tcp://socket-proxy:2375  
     volumes:
       - ${DOCKERDIR}/appdata/autobase/tmp/ansible:/tmp/ansible
-      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
     labels:  
       - "traefik.enable=true"  
       # -- Consule-API  
