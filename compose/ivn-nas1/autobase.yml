@@ -4,7 +4,7 @@ services:
     container_name: autobase-console-api
     security_opt:
       - no-new-privileges:true
-    # restart: unless-stopped
+    restart: unless-stopped
     networks:
       bond0.1140:
         ipv4_address: ${VLAN_1140}.248
@@ -35,7 +35,7 @@ services:
     container_name: autobase-console-ui
     security_opt:
       - no-new-privileges:true
-    # restart: unless-stopped
+    restart: unless-stopped
     networks:
           bond0.1140:
             ipv4_address: ${VLAN_1140}.247   
@@ -58,7 +58,7 @@ services:
     container_name: autobase-console-db
     security_opt:
       - no-new-privileges:true
-    # restart: unless-stopped
+    restart: unless-stopped
     networks:
           bond0.1140:
             ipv4_address: ${VLAN_1140}.246   
