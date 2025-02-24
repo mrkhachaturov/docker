@@ -2,8 +2,8 @@ services:
   autobase-console-api:
     image: autobase/console:latest
     container_name: autobase-console-api
-    security_opt:
-      - no-new-privileges:true
+    # security_opt:
+    #   - no-new-privileges:true
     restart: unless-stopped
     networks:
       bond0.1140:
@@ -14,10 +14,10 @@ services:
       PG_CONSOLE_DOCKER_IMAGE: autobase/automation:latest
       PG_CONSOLE_DB_HOST: atobase-console-db
       PG_CONSOLE_LOGGER_LEVEL: ${PG_CONSOLE_LOGGER_LEVEL:-DEBUG}
-      DOCKER_HOST: tcp://socket-proxy:2375  
+      # DOCKER_HOST: tcp://socket-proxy:2375  
     volumes:
       - ${DOCKERDIR}/appdata/autobase/tmp/ansible:/tmp/ansible
-      # - /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     labels:  
       - "traefik.enable=true"  
       # -- Consule-API  
