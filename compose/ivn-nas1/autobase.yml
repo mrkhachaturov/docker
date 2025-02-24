@@ -12,7 +12,7 @@ services:
       # PG_CONSOLE_API_URL: http://${VLAN_1140}.248:8080/api/v1
       PG_CONSOLE_AUTHORIZATION_TOKEN: ${PG_CONSOLE_AUTHORIZATION_TOKEN}
       PG_CONSOLE_DOCKER_IMAGE: autobase/automation:latest
-      PG_CONSOLE_DB_HOST: ${VLAN_1140}.246
+      PG_CONSOLE_DB_HOST: autobase-console-db
       PG_CONSOLE_LOGGER_LEVEL: ${PG_CONSOLE_LOGGER_LEVEL:-DEBUG}
       # DOCKER_HOST: tcp://socket-proxy:2375  
     volumes:
