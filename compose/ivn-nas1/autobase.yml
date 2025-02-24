@@ -1,6 +1,6 @@
 services:
   autobase-console-api:
-    image: autobase/console:latest
+    image: autobase/console_api:latest
     container_name: autobase-console-api
     security_opt:
       - no-new-privileges:true
