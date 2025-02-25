@@ -106,6 +106,7 @@ services:
       # - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
       - HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAIN1
+      - VLAN_1110
       - LEGO_CA_CERTIFICATES=/etc/certs/root_ca.crt
     secrets:
       # - cf_dns_api_token
