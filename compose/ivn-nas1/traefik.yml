@@ -99,7 +99,7 @@ services:
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
       # - $DOCKERDIR/appdata/traefik3/acme/acme.json:/acme.json # Certs File 
       - ${DOCKERDIR}/logs/${HOSTNAME}/traefik:/logs # Traefik logs
-      - ${DOCKERDIR}/appdata/traefik3/tls/certs:/etc/certs/ # TLS Certs
+      - ${DOCKERDIR}/appdata/traefik3/tls/certs:/etc/certs # TLS Certs
     environment:
       - TZ=${TZ}
       # - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
@@ -114,7 +114,8 @@ services:
       - "traefik.enable=true"
       # HTTP Routers
       - "traefik.http.routers.traefik-rtr.entrypoints=websecure"
-      # - "traefik.http.routers.traefik-rtr.tls=true"
+      - "traefik.http.routers.traefik-rtr.tls=true"
+      - "traefik.http.routers.traefik-rtr.tls.certresolver=internalca"
       - "traefik.http.routers.traefik-rtr.rule=Host(`traefik.${DOMAIN1}.net` )"
       # Services - API
       - "traefik.http.routers.traefik-rtr.service=api@internal"
