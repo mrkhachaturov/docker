@@ -36,7 +36,7 @@ include:
   # - compose/$HOSTNAME/oauth.yml
   # - compose/$HOSTNAME/portainer.yml
   ## DATA
-  # - compose/$HOSTNAME/minio.yml
+  - compose/$HOSTNAME/minio.yml
   ## DB
   # - compose/$HOSTNAME/mysql.yml
   # - compose/$HOSTNAME/autobase.yml
