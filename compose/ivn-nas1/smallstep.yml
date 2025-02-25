@@ -5,21 +5,20 @@ services:
     container_name: step-ca
     # security_opt:
     #   - no-new-privileges:true
-    # restart: unless-stopped
+    # restart: unless-stopped  # Need be to disabled when running `step ca init` 
     networks:
       bond0.1140:
         ipv4_address: ${VLAN_1140}.245
     # ports:
     #   - "9000:9000"
     volumes:
-      - ${DOCKERDIR}/appdata/step-ca:/home/step
+      - ${DOCKERDIR}/appdata/step-ca:/home/step # We must firs define special permission `sudo chmod -R 700 step-ca` `sudo chown -R 1000:1000 step-ca`
     environment:
-      DOCKER_STEPCA_INIT_NAME: Astra Team ACME Enterprise CA
-      DOCKER_STEPCA_INIT_DNS_NAMES: "localhost,$(hostname -f)" 
+      DOCKER_STEPCA_INIT_NAME: AT ACME Enterprise CA
+      DOCKER_STEPCA_INIT_DNS_NAMES: "acme.${DOMAIN1}.net,${VLAN_1140}.245" 
       DOCKER_STEPCA_INIT_ACME:
       DOCKER_STEPCA_INIT_PROVISIONER_NAME: ${DOCKER_STEPCA_INIT_PROVISIONER_NAME}
-      # DOCKER_STEPCA_INIT_PASSWORD: ${DOCKER_STEPCA_INIT_PASSWORD}
       DOCKER_STEPCA_INIT_PASSWORD_FILE: /run/secrets/stepca_init_password
     secrets:
       - stepca_init_password
-    command: step ca init  # This runs the step ca init command when the container starts  
+    command: step ca init  # This runs the step ca init command when the container starts , after first init must be disabled
