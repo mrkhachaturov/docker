@@ -38,6 +38,8 @@ include:
   ## DB
   - compose/$HOSTNAME/mysql.yml
   - compose/$HOSTNAME/autobase.yml
+  # CA AUTHORITY
+  - compose/$HOSTNAME/smallstep.yml
   # NETWORK
   # - compose/$HOSTNAME/zerotier.yml
   # - compose/$HOSTNAME/adguardhome.yml

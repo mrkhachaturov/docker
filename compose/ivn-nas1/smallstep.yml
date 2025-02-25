@@ -1,0 +1,22 @@
+services:
+  # Smallstep CA - private certificate authority
+  step-ca:
+    image: smallstep/step-ca
+    container_name: step-ca
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      bond0.1140:
+        ipv4_address: ${VLAN_1140}.245
+    # ports:
+    #   - "9000:9000"
+    volumes:
+      - ${DOCKERDIR}/appdata/step-ca:/home/step
+    environment:
+      DOCKER_STEPCA_INIT_NAME: Astra Team ACME Enterprise CA
+      DOCKER_STEPCA_INIT_DNS_NAMES: localhost,$(hostname -f)" 
+      DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: true
+      DOCKER_STEPCA_INIT_PROVISIONER_NAME: ${DOCKER_STEPCA_INIT_PROVISIONER_NAME}
+      DOCKER_STEPCA_INIT_PASSWORD: ${DOCKER_STEPCA_INIT_PASSWORD}
+    command: step ca init  # This runs the step ca init command when the container starts  
