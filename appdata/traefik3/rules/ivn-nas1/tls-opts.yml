@@ -1,9 +1,9 @@
 tls:
-  stores:
-    default:
-      defaultCertificate:
-        certFile: /etc/certs/cert.crt
-        keyFile: /etc/certs/cert.key
+  # stores:
+  #   default:
+  #     defaultCertificate:
+  #       certFile: /etc/certs/cert.crt
+  #       keyFile: /etc/certs/cert.key
   options:
     tls-opts:
       minVersion: VersionTLS12
