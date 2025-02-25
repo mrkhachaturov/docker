@@ -100,13 +100,13 @@ services:
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
       # - $DOCKERDIR/appdata/traefik3/acme/acme.json:/acme.json # Certs File 
       - ${DOCKERDIR}/logs/${HOSTNAME}/traefik:/logs # Traefik logs
-      - ${DOCKERDIR}/appdata/traefik3/tls/certs:/etc/certs # TLS Certs
+      - ${DOCKERDIR}/appdata/traefik3/tls/certs:/etc/certs/ # TLS Certs
     environment:
       - TZ=${TZ}
       # - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
       - HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAIN1
-      - LEGO_CA_CERTIFICATES=/etc/certs/root_ca.pem
+      - LEGO_CA_CERTIFICATES=/etc/certs/root_ca.crt
     secrets:
       # - cf_dns_api_token
       - basic_auth_credentials
