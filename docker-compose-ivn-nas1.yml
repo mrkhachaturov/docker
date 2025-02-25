@@ -21,6 +21,8 @@ networks:
 secrets:
   basic_auth_credentials:
     file: ${SECRETSDIR}/basic_auth_credentials
+  stepca_init_password:
+    file: ${SECRETSDIR}/stepca_init_password
 
 # Docker Compose v2.20 or greater required to use "include"
 include:

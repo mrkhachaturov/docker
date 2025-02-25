@@ -18,5 +18,8 @@ services:
       DOCKER_STEPCA_INIT_DNS_NAMES: localhost,$(hostname -f)" 
       DOCKER_STEPCA_INIT_REMOTE_MANAGEMENT: true
       DOCKER_STEPCA_INIT_PROVISIONER_NAME: ${DOCKER_STEPCA_INIT_PROVISIONER_NAME}
-      DOCKER_STEPCA_INIT_PASSWORD: ${DOCKER_STEPCA_INIT_PASSWORD}
+      # DOCKER_STEPCA_INIT_PASSWORD: ${DOCKER_STEPCA_INIT_PASSWORD}
+      DOCKER_STEPCA_INIT_PASSWORD_FILE: /run/stepca_init_password
+    secrets:
+      - stepca_init_password
     command: step ca init  # This runs the step ca init command when the container starts  
