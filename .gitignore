@@ -86,6 +86,7 @@ appdata/traefik3/rules/ivn-nas1/*
 !appdata/traefik3/rules/ivn-nas1/tls-opts.yml
 !appdata/traefik3/rules/ivn-nas1/middlewares-*.yml
 !appdata/traefik3/rules/ivn-nas1/chain-*.yml
+!appdata/traefik3/rules/ivn-nas1/app-*.yml
 !appdata/traefik3/rules/hs
 appdata/traefik3/rules/hs/*
 !appdata/traefik3/rules/hs/*.example

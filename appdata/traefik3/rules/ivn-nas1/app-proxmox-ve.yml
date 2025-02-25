@@ -1,0 +1,24 @@
+http:
+  routers:
+    pve01-rtr:
+      rule: "Host(`pve01.{{env "DOMAIN1"}}.net`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-oauth
+      service: pve01-svc
+      tls:
+        certResolver: internalca
+        options: tls-opts@file
+
+  services:
+    pve01-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: pve01
+        servers:
+          - url: "https://{{env "VLAN_1110"}}.11:8006/"
+
+  serversTransports:
+    pve01:
+      insecureSkipVerify: true
