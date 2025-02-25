@@ -3,8 +3,8 @@ services:
   step-ca:
     image: smallstep/step-ca
     container_name: step-ca
-    security_opt:
-      - no-new-privileges:true
+    # security_opt:
+    #   - no-new-privileges:true
     restart: unless-stopped
     networks:
       bond0.1140:
