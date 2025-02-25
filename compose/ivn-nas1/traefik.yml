@@ -29,7 +29,7 @@ services:
       - --entrypoints.https.forwardedHeaders.trustedIPs=$CLOUDFLARE_IPS,$LOCAL_IPS
       - --log=true
       - --log.filePath=/logs/traefik.log
-      - --log.level=INFO # (Default: error) DEBUG, INFO, WARN, ERROR, FATAL, PANIC
+      - --log.level=DEBUG # (Default: error) DEBUG, INFO, WARN, ERROR, FATAL, PANIC
       - --accessLog=true
       - --accessLog.filePath=/logs/access.log
       - --accessLog.bufferingSize=100 # Configuring a buffer of 100 lines
@@ -45,6 +45,14 @@ services:
       - --entrypoints.websecure.http.tls.options=tls-opts@file
       - --providers.file.directory=/rules # Load dynamic configuration from one or more .toml or .yml files in a directory
       - --providers.file.watch=true # Only works on top level files in the rules folder
+
+      # Add step-ca as default certresolver. 
+      - --entrypoints.https.http.tls.certresolver=internalca
+      - --certificatesResolvers.internalca.acme.caServer=https://acme.${DOMAIN1}.net/acme/acme/directory # Internal Acme Server
+      - --certificatesResolvers.internalca.acme.storage=/acme.json
+      - --certificatesResolvers.internalca.acme.email=acme@${DOMAIN1}.net
+      - --certificatesResolvers.internalca.acme.certificatesDuration=2160
+
 
 
       # Add dns-cloudflare as default certresolver for all services. Also enables TLS and no need to specify on individual services
@@ -97,6 +105,7 @@ services:
       # - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
       - HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAIN1
+      - LEGO_CA_CERTIFICATES=/etc/certs/root_ca.pem
     secrets:
       # - cf_dns_api_token
       - basic_auth_credentials
@@ -105,7 +114,7 @@ services:
       - "traefik.enable=true"
       # HTTP Routers
       - "traefik.http.routers.traefik-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-rtr.tls=true"
+      # - "traefik.http.routers.traefik-rtr.tls=true"
       - "traefik.http.routers.traefik-rtr.rule=Host(`traefik.${DOMAIN1}.net` )"
       # Services - API
       - "traefik.http.routers.traefik-rtr.service=api@internal"
