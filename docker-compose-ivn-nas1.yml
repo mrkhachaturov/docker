@@ -38,7 +38,7 @@ include:
   ## DATA
   - compose/$HOSTNAME/minio.yml
   ## DB
-  # - compose/$HOSTNAME/mysql.yml
+  - compose/$HOSTNAME/mysql.yml
   # - compose/$HOSTNAME/autobase.yml
   # CA AUTHORITY
   - compose/$HOSTNAME/smallstep.yml
@@ -58,7 +58,7 @@ include:
   # MONITORING
   # - compose/$HOSTNAME/glances.yml
   # - compose/$HOSTNAME/qdirstat.yml
-  # - compose/${HOSTNAME}/uptime-kuma.yml
+  - compose/${HOSTNAME}/uptime-kuma.yml
   # MAINTENANCE
   # - compose/$HOSTNAME/docker-gc.yml
   # - compose/$HOSTNAME/ddns-updater.yml
