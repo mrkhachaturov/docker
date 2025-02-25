@@ -12,7 +12,8 @@ services:
     # ports:
     #   - "9000:9000"
     volumes:
-      - ${DOCKERDIR}/appdata/step-ca:/home/step # We must firs define special permission `sudo chmod -R 700 step-ca` `sudo chown -R 1000:1000 step-ca`
+    # We must firs define special permission `sudo chmod -R 700 step-ca` `sudo chown -R 1000:1000 step-ca`
+      - ${DOCKERDIR}/appdata/step-ca:/home/step 
     environment:
       DOCKER_STEPCA_INIT_NAME: AT ACME Enterprise CA
       DOCKER_STEPCA_INIT_DNS_NAMES: "acme.${DOMAIN1}.net,${VLAN_1140}.245" 
