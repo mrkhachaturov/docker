@@ -47,11 +47,12 @@ services:
       - --providers.file.watch=true # Only works on top level files in the rules folder
 
       # Add step-ca as default certresolver. 
-      - --entrypoints.https.http.tls.certresolver=internalca
+      - --entrypoints.websecure.http.tls.certresolver=internalca
       - --certificatesResolvers.internalca.acme.caServer=https://acme.${DOMAIN1}.net/acme/acme/directory # Internal Acme Server
       - --certificatesResolvers.internalca.acme.storage=/acme.json
       - --certificatesResolvers.internalca.acme.email=acme@${DOMAIN1}.net
       - --certificatesResolvers.internalca.acme.certificatesDuration=2160
+      - --certificatesresolvers.internalca.acme.tlschallenge=true
 
 
 
