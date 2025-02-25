@@ -22,4 +22,4 @@ services:
       DOCKER_STEPCA_INIT_PASSWORD_FILE: /run/secrets/stepca_init_password
     secrets:
       - stepca_init_password
-    command: step ca provisioner add acme --type ACME  # This runs the step ca init command when the container starts , after first init must be disabled
+    # command: step ca provisioner add acme --type ACME  # This runs the step ca init command when the container starts , after first init must be disabled
