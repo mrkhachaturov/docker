@@ -50,7 +50,7 @@ services:
       - --entrypoints.websecure.http.tls.certresolver=internalca
       - --certificatesResolvers.internalca.acme.caServer=https://acme.${DOMAIN1}.net/acme/acme/directory # Internal Acme Server
       - --certificatesResolvers.internalca.acme.storage=/acme.json
-      - --entrypoints.websecure.http.tls.domains[0].main=*.s3.$DOMAIN1.net
+      - --entrypoints.websecure.http.tls.domains[0].main=*.s3.${DOMAIN1}.net
       - --certificatesResolvers.internalca.acme.email=acme@${DOMAIN1}.net
       - --certificatesResolvers.internalca.acme.certificatesDuration=2160
       - --certificatesresolvers.internalca.acme.tlschallenge=true
