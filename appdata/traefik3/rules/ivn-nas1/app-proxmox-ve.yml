@@ -30,7 +30,7 @@ http:
     pve01-svc:
       loadBalancer:
         passHostHeader: true
-        # serversTransport: pve01
+        serversTransport: pve01
         servers:
           - url: "https://{{env "VLAN_1110"}}.11:8006"
     ##NODE02
@@ -41,6 +41,6 @@ http:
         servers:
           - url: "https://{{env "VLAN_1110"}}.12:8006"      
 
-  # serversTransports:
-  #   pve01:
-  #     insecureSkipVerify: true
+  serversTransports:
+    pve01:
+      insecureSkipVerify: true
