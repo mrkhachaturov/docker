@@ -17,7 +17,7 @@ http:
         passHostHeader: true
         serversTransport: pve01
         servers:
-          - url: "https://{{env "VLAN_1110"}}.11:8006/"
+          - url: "https://{{env "VLAN_1110"}}.11:8006"
 
   serversTransports:
     pve01:
