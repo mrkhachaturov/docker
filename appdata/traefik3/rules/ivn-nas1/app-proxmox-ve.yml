@@ -1,6 +1,7 @@
 http:
   #Routers
   routers:
+
     ##NODE01
     pve01-rtr:
       rule: "Host(`pve01.{{env "DOMAIN1"}}.net`)"
@@ -12,6 +13,7 @@ http:
       tls:
         certResolver: internalca
         options: tls-opts@file
+
     ##NODE02
     pve02-rtr:
       rule: "Host(`pve02.{{env "DOMAIN1"}}.net`)"
@@ -24,6 +26,54 @@ http:
         certResolver: internalca
         options: tls-opts@file    
 
+    ##NODE03
+    pve03-rtr:
+      rule: "Host(`pve03.{{env "DOMAIN1"}}.net`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: pve03-svc
+      tls:
+        certResolver: internalca
+        options: tls-opts@file
+
+    ##NODE04
+    pve04-rtr:
+      rule: "Host(`pve04.{{env "DOMAIN1"}}.net`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: pve04-svc
+      tls:
+        certResolver: internalca
+        options: tls-opts@file    
+
+    ##NODE05
+    pve05-rtr:
+      rule: "Host(`pve05.{{env "DOMAIN1"}}.net`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: pve05-svc
+      tls:
+        certResolver: internalca
+        options: tls-opts@file     
+
+    ##NODE06
+    pve06-rtr:
+      rule: "Host(`pve06.{{env "DOMAIN1"}}.net`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: pve06-svc
+      tls:
+        certResolver: internalca
+        options: tls-opts@file   
+          
   #Services
   services:
     ##NODE01
@@ -33,14 +83,57 @@ http:
         serversTransport: pve01
         servers:
           - url: "https://{{env "VLAN_1110"}}.11:8006"
+
     ##NODE02
     pve02-svc:
       loadBalancer:
         passHostHeader: true
-        # serversTransport: pve02
+        serversTransport: pve02
         servers:
           - url: "https://{{env "VLAN_1110"}}.12:8006"      
 
+    ##NODE03
+    pve03-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: pve03
+        servers:
+          - url: "https://{{env "VLAN_1110"}}.13:8006"
+
+    ##NODE04
+    pve04-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: pve04
+        servers:
+          - url: "https://{{env "VLAN_1110"}}.14:8006"      
+
+    ##NODE05
+    pve05-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: pve05
+        servers:
+          - url: "https://{{env "VLAN_1110"}}.15:8006"
+
+    ##NODE06
+    pve06-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: pve06
+        servers:
+          - url: "https://{{env "VLAN_1110"}}.16:8006"      
+
   serversTransports:
     pve01:
+      insecureSkipVerify: true
+    pve02:
+      insecureSkipVerify: true
+    pve03:
+      insecureSkipVerify: true      
+    pve04:
+      insecureSkipVerify: true
+    pve05:
+      insecureSkipVerify: true
+    pve06:
       insecureSkipVerify: true
