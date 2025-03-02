@@ -6,11 +6,11 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped  # Need be to disabled when running `step ca init` 
-    healthcheck:
-      test: ["CMD", "curl", "-fsS", "https://localhost/health"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
+    # healthcheck:
+    #   test: ["CMD", "curl", "-fsS", "https://localhost/health"]
+    #   interval: 30s
+    #   timeout: 10s
+    #   retries: 5
     networks:
       bond0.1140:
         ipv4_address: ${VLAN_1140}.245
