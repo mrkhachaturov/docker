@@ -6,7 +6,8 @@ services:
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped  # Need be to disabled when running `step ca init` 
-    # healthcheck:
+    healthcheck:
+      disable: true
     #   test: ["CMD", "curl", "-fsS", "https://localhost/health"]
     #   interval: 30s
     #   timeout: 10s
