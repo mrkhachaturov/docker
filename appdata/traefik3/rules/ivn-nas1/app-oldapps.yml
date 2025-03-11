@@ -27,4 +27,4 @@ http:
 
   serversTransports:
     oldwiki:
-      insecureSkipVerify: true
+      insecureSkipVerify: false
