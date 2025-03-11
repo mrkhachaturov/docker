@@ -18,10 +18,10 @@ http:
   #Services
   services:
     ##NODE01
-    pve01-svc:
+    oldwiki:
       loadBalancer:
         passHostHeader: true
-        serversTransport: pve01
+        serversTransport: oldwiki
         servers:
           - url: "https://10.10.0.149:8090"
 
