@@ -23,7 +23,7 @@ http:
         passHostHeader: true
         serversTransport: oldwiki
         servers:
-          - url: "https://10.10.0.149:8090"
+          - url: "https://10.10.0.124:8090"
 
   serversTransports:
     oldwiki:
