@@ -11,6 +11,7 @@ networks:
     driver: macvlan
     driver_opts:
       parent: bond0.1140 #vlan 1140 
+      com.docker.network.driver.mtu: "1500"
     ipam:
       config:
         - subnet: ${VLAN_1140}.0/24
