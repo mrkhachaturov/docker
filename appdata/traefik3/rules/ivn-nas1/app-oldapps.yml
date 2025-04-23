@@ -16,7 +16,7 @@ http:
 
     ##JIRA
     oldjira-rtr:
-      rule: "Host(`oldjira.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`jiraold.{{env "DOMAIN1"}}.net`)"
       entryPoints:
         - websecure
       middlewares:
@@ -41,7 +41,7 @@ http:
         passHostHeader: true
         serversTransport: oldjira
         servers:
-          - url: "https://10.10.0.141:8080"
+          - url: "http://10.10.0.141:8080"
 
   serversTransports:
     oldwiki:
