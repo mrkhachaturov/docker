@@ -3,7 +3,7 @@ http:
   routers:
 
     ##NODE01
-    pve01-rtr:
+    oldwiki-rtr:
       rule: "Host(`oldwiki.{{env "DOMAIN1"}}.net`)"
       entryPoints:
         - websecure
