@@ -47,4 +47,4 @@ http:
     oldwiki:
       insecureSkipVerify: false
     oldjira:
-      insecureSkipVerify: false
+      insecureSkipVerify: true
