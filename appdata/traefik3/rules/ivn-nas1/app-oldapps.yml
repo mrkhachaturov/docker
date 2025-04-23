@@ -21,7 +21,7 @@ http:
         - websecure
       middlewares:
         - chain-no-auth
-      service: oldwiki
+      service: oldjira
       tls:
         certResolver: internalca
         options: tls-opts@file
@@ -41,7 +41,7 @@ http:
         passHostHeader: true
         serversTransport: oldjira
         servers:
-          - url: "https://10.10.0.141:8080"
+          - url: "http://10.10.0.141:8080"
 
   serversTransports:
     oldwiki:
