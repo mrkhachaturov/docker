@@ -26,6 +26,18 @@ http:
         certResolver: internalca
         options: tls-opts@file
           
+    ##DRIVE
+    drive-rtr:
+      rule: "Host(`drive.{{env "DOMAIN1"}}.net`)"
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: drive
+      tls:
+        certResolver: internalca
+        options: tls-opts@file
+
   #Services
   services:
     ##WIKI
@@ -43,8 +55,18 @@ http:
         servers:
           - url: "http://10.10.0.141:8080"
 
+    ##DRIVE
+    drive:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: drive
+        servers:
+          - url: "http://10.1.120.25:11002"
+          
   serversTransports:
     oldwiki:
       insecureSkipVerify: false
     oldjira:
       insecureSkipVerify: true
+    drive:
+      insecureSkipVerify: false      
