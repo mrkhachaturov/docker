@@ -45,7 +45,7 @@ include:
   # SECRET MANAGEMENT
   - compose/$HOSTNAME/onepassword.yml
   # NETWORK
-  - compose/$HOSTNAME/netbox.yml
+  # - compose/$HOSTNAME/netbox.yml
   # - compose/$HOSTNAME/adguardhome.yml
   # MEDIA
   # - compose/$HOSTNAME/plex.yml

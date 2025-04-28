@@ -51,6 +51,17 @@ services:
       SUPERUSER_NAME: ${SUPERUSER_NAME}
       SUPERUSER_PASSWORD: ${SUPERUSER_PASSWORD}
       WEBHOOKS_ENABLED: "true"
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.netbox-rtr.entrypoints=websecure"
+      - "traefik.http.routers.netbox-rtr.rule=Host(`netbox.${DOMAIN1}.net`)"
+      # - "traefik.http.routers.netbox-rtr.tls=true"
+      # Middlewares
+      # - "traefik.http.routers.netbox-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.netbox-rtr.service=netbox-svc"
+      - "traefik.http.services.netbox-svc.loadbalancer.server.port=8080"  
     # user: "unit:root"
     healthcheck:
       test: curl -f http://localhost:8080/login/ || exit 1
