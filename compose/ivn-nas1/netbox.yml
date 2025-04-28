@@ -141,13 +141,13 @@ services:
     command:
       - sh
       - -c # this is to evaluate the $REDIS_PASSWORD from the env
-      - valkey-server --requirepass $$REDIS_CACHE_PASSWORD ## $$ because of docker-compose
+      - valkey-server --requirepass $$REDIS_PASSWORD ## $$ because of docker-compose
     healthcheck: *redis-healthcheck
     # env_file: env/redis-cache.env
     networks:
       bond0.1140:
         ipv4_address: ${VLAN_1140}.240
     environment:
-      REDIS_CACHE_PASSWORD: ${REDIS_CACHE_PASSWORD}
+      REDIS_PASSWORD: ${REDIS_CACHE_PASSWORD}
     volumes:
       - ${DOCKERDIR}/appdata/netbox/netbox-redis-cache-data:/data
