@@ -148,4 +148,4 @@ services:
     environment:
       REDIS_CACHE_PASSWORD: ${REDIS_CACHE_PASSWORD}
     volumes:
-      - netbox-redis-cache-data:/data
+      - ${DOCKERDIR}/appdata/netbox/netbox-redis-cache-data:/data
