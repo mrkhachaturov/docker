@@ -9,6 +9,8 @@ services:
     networks:
       bond0.1140:
         ipv4_address: ${VLAN_1140}.246
+    ports:
+    - 8000:8080    
     environment:
       TZ: ${TZ}
       PUID: ${PUID}
