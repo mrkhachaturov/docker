@@ -14,7 +14,7 @@ networks:
     ipam:
       config:
         - subnet: ${VLAN_1140}.0/24
-          ip_range: ${VLAN_1140}.240/28
+          ip_range: ${VLAN_1140}.224/27
           gateway: ${VLAN_1140}.1
 
 ########################### SECRETS
@@ -45,7 +45,7 @@ include:
   # SECRET MANAGEMENT
   - compose/$HOSTNAME/onepassword.yml
   # NETWORK
-  # - compose/$HOSTNAME/zerotier.yml
+  - compose/$HOSTNAME/netbox.yml
   # - compose/$HOSTNAME/adguardhome.yml
   # MEDIA
   # - compose/$HOSTNAME/plex.yml
