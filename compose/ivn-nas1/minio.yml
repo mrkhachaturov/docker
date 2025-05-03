@@ -37,7 +37,7 @@ services:
     labels:
       - "traefik.enable=true"
       # - "traefik.http.routers.s3-rtr.rule=Host(`s3.${DOMAIN1}.net`) || HostRegexp(`^.+\\.s3\\.${DOMAIN1}\\.net$`)"
-      - "traefik.http.routers.s3-rtr.rule=Host(`s3.${DOMAIN1}.net`) || Host(`snp.s3.${DOMAIN1}.net`) || Host(`backup.s3.${DOMAIN1}.net || Host(`nocodb.s3.${DOMAIN1}.net`)"
+      - "traefik.http.routers.s3-rtr.rule=Host(`s3.${DOMAIN1}.net`) || Host(`snp.s3.${DOMAIN1}.net`) || Host(`backup.s3.${DOMAIN1}.net) || Host(`nocodb.s3.${DOMAIN1}.net`)"
       - "traefik.http.routers.s3-rtr.service=s3-svc"
       - "traefik.http.routers.s3-rtr.entrypoints=websecure"
       - "traefik.http.services.s3-svc.loadbalancer.server.port=9000"
