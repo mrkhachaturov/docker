@@ -32,6 +32,7 @@ include:
 
   # CORE
   # - compose/${HOSTNAME}/traefik.yml
+  - compose/${HOSTNAME}/npmplus.yml
   - compose/${HOSTNAME}/socket-proxy.yml
   # - compose/$HOSTNAME/oauth.yml
   # - compose/$HOSTNAME/portainer.yml
