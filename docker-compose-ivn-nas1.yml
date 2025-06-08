@@ -8,9 +8,10 @@
 networks:
   bond0.1140:
     name: bond0.1140
-    driver: macvlan
+    driver: ipvlan
     driver_opts:
-      parent: bond0.1140 #vlan 1140 
+      parent: bond0.1140 #vlan 1140
+      ipvlan_mode: l2 
     ipam:
       config:
         - subnet: ${VLAN_1140}.0/24
