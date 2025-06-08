@@ -8,11 +8,9 @@
 !.bash_aliases.example
 !.env.example
 
-!docker-compose-hs.yml
-!docker-compose-mds.yml
+
 !docker-compose-ivn-nas1.yml
-!docker-compose-ws.yml
-!docker-compose-dns.yml
+!docker-compose-mrk-nas1.yml
 
 !.github
 .github/*
