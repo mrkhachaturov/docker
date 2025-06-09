@@ -20,12 +20,6 @@ networks:
   #   ipam:
   #     config:
   #       - subnet: 192.168.90.0/24
-  nginx_proxy:
-    name: nginx_proxy
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.92.0/24
 
 ########################### SECRETS
 # secrets:
