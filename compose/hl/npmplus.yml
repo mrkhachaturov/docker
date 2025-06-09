@@ -3,9 +3,7 @@ services:
     container_name: npmplus
     image: docker.io/zoeyvid/npmplus:latest # or ghcr.io/zoeyvid/npmplus:latest
     restart: always
-    networks:
-      nginx_proxy:
-        ipv4_address: 192.168.92.254
+    network_mode: host
 #    ipc: service:openappsec-agent # required when you want to use the openappsec attachment module
 #    privileged: true # required if you set NGINX_QUIC_BPF to true
     volumes:
