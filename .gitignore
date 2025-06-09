@@ -11,6 +11,7 @@
 
 !docker-compose-ivn-nas1.yml
 !docker-compose-mrk-nas1.yml
+!docker-compose-hl.yml
 
 !.github
 .github/*
