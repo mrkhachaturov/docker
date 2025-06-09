@@ -7,10 +7,10 @@
 ########################### NETWORKS
 networks:
   bond0.1125:
-    name: ovs_bond0.1125
+    name: ovs_eth1124
     driver: macvlan
     driver_opts:
-      parent: ovs_bond0.1125
+      parent: ovs_eth1124
     ipam:
       config:
         - subnet: ${VLAN_1125}.0/24
