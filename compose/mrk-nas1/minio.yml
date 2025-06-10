@@ -1,0 +1,34 @@
+services:
+  # Minio 
+  minio-local:
+    image: quay.io/minio/minio
+    container_name: minio-local
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    networks:
+      - default
+    ports:
+      - "3001:3001"
+    volumes:
+      - ${DOCKERDIR}/appdata/minio-local/config:/app/data
+      - /volume1/s3data:/data  
+    command: server /data --console-address ":9001"  
+    environment:
+      TZ: ${TZ}
+      PUID: ${PUID}
+      PGID: ${PGID}
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+      MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN1}.am
+      # MINIO_DOMAIN: s3.${DOMAIN1}.am
+      MINIO_SERVER_URL: https://s3.${DOMAIN1}.am
+      # ## ENTRA ID
+      # MINIO_IDENTITY_OPENID_CONFIG_URL: "https://login.microsoftonline.com/${ENTRA_TENANT_ID}/v2.0/.well-known/openid-configuration"
+      # MINIO_IDENTITY_OPENID_CLIENT_ID: ${MINIO_ENTRA_CLIENT_ID}
+      # MINIO_IDENTITY_OPENID_CLIENT_SECRET: ${MINIO_ENTRA_SECRET_ID}
+      # MINIO_IDENTITY_OPENID_SCOPES: "profile openid email"
+      # MINIO_IDENTITY_OPENID_CLAIM_NAME: "groups"
+      # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${DOMAIN1}.net/oauth_callback"
+      # MINIO_IDENTITY_OPENID_DISPLAY_NAME: "EntraID"
+      # MINIO_IDENTITY_OPENID_COMMENT: "EntraID"
