@@ -7,8 +7,8 @@ services:
       - no-new-privileges:true
     restart: unless-stopped
     network_mode: host
-    ports:
-      - "3001:3001"
+    # ports:
+    #   - "9001:9001"
     volumes:
       - ${DOCKERDIR}/appdata/minio-local/config:/app/data
       - /volume1/s3data:/data  
