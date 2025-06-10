@@ -1,7 +1,7 @@
 services:
   # Minio 
   minio-local:
-    image: serversideup/minio-user-init:v0.2.1
+    image: quay.io/minio/minio@sha256:1df91be8d6a6146001cd6be2569a12785a8ece583b511f56ebed08f1e65d3611
     container_name: minio-local
     security_opt:
       - no-new-privileges:true
@@ -10,7 +10,7 @@ services:
     # ports:
     #   - "9001:9001"
     volumes:
-      # - ${DOCKERDIR}/appdata/minio-local/config:/app/data
+      - ${DOCKERDIR}/appdata/minio-local/config:/app/data
       - /volume1/s3data:/data  
     command: server /data --console-address ":9001"  
     environment:
@@ -19,7 +19,6 @@ services:
       PGID: ${PGID}
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-      MINIO_DEFAULT_BUCKETS: homelab
       MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN1}.am
       # MINIO_DOMAIN: s3.${DOMAIN1}.am
       MINIO_SERVER_URL: https://s3.${DOMAIN1}.am
