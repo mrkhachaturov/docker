@@ -32,19 +32,19 @@ include:
 
   # CORE
   # - compose/${HOSTNAME}/traefik.yml
-  - compose/${HOSTNAME}/npmplus.yml
+  # - compose/${HOSTNAME}/npmplus.yml
   - compose/${HOSTNAME}/socket-proxy.yml
   # - compose/$HOSTNAME/oauth.yml
   # - compose/$HOSTNAME/portainer.yml
-  ## DATA
-  # - compose/$HOSTNAME/minio.yml
+  # DATA
+  - compose/$HOSTNAME/minio.yml
   ## DB
   # - compose/$HOSTNAME/mysql.yml
   # - compose/$HOSTNAME/autobase.yml
   # CA AUTHORITY
   # - compose/$HOSTNAME/smallstep.yml
   # SECRET MANAGEMENT
-  - compose/$HOSTNAME/onepassword.yml
+  # - compose/$HOSTNAME/onepassword.yml
   # NETWORK
   # - compose/$HOSTNAME/netbox.yml
   # - compose/$HOSTNAME/adguardhome.yml
