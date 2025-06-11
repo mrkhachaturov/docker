@@ -33,9 +33,9 @@ services:
       # MINIO_IDENTITY_OPENID_COMMENT: "EntraID"
 
   minio-local-browser:
-    image: ghcr.io/astrateam-net/object-browser:2.0.1
+    image: ghcr.io/astrateam-net/object-browser:1.7.6
     container_name: minio-local-browser
     restart: unless-stopped
     network_mode: host
     environment:
-      CONSOLE_MINIO_SERVER: http://10.0.120.10:9000 
+      CONSOLE_MINIO_SERVER: http://10.0.120.10:9000
