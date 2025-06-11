@@ -33,7 +33,7 @@ services:
       # MINIO_IDENTITY_OPENID_COMMENT: "EntraID"
 
   minio-local-browser:
-    image: ghcr.io/astrateam-net/object-browser@sha256:ac5b92e81e16595d2ce2b8c834b8b0ac87c1417e7a06445f39f7e75d4da59725@sha256:cc24debe009fb15b8beb8946fa807ddde7b86ce13a4409c6d905684ad59cfa79
+    image: ghcr.io/astrateam-net/object-browser:2.0.1
     container_name: minio-local-browser
     restart: unless-stopped
     network_mode: host
