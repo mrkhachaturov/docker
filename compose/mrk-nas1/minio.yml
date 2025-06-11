@@ -19,7 +19,7 @@ services:
       PGID: ${PGID}
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-      MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN1}.am
+      # MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN1}.am
       # MINIO_DOMAIN: s3.${DOMAIN1}.am
       MINIO_SERVER_URL: https://s3.${DOMAIN1}.am
       # ## ENTRA ID
@@ -31,3 +31,11 @@ services:
       # MINIO_IDENTITY_OPENID_REDIRECT_URI: "https://minio.${DOMAIN1}.net/oauth_callback"
       # MINIO_IDENTITY_OPENID_DISPLAY_NAME: "EntraID"
       # MINIO_IDENTITY_OPENID_COMMENT: "EntraID"
+
+  minio-local-browser:
+    image: ghcr.io/astrateam-net/object-browser@sha256:ac5b92e81e16595d2ce2b8c834b8b0ac87c1417e7a06445f39f7e75d4da59725@sha256:cc24debe009fb15b8beb8946fa807ddde7b86ce13a4409c6d905684ad59cfa79
+    container_name: minio-local-browser
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      CONSOLE_MINIO_SERVER=http://10.0.120.10:9000 ./console server 
