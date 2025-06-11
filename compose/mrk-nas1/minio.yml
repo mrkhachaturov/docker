@@ -37,6 +37,6 @@ services:
     container_name: minio-local-browser
     restart: unless-stopped
     network_mode: host
-    command: ./console server
+    command: ./console server --port 8080
     environment:
       CONSOLE_MINIO_SERVER: http://10.0.120.10:9000
