@@ -37,4 +37,6 @@ services:
     container_name: minio-local-browser
     restart: unless-stopped
     network_mode: host
-    command: CONSOLE_MINIO_SERVER=http://10.0.120.10:9000 ./console server
+    command: ./console server
+    environment:
+      CONSOLE_MINIO_SERVER: http://10.0.120.10:9000
