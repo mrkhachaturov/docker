@@ -44,7 +44,7 @@ alias dp777='sudo chown -R $USER:$USER $HOME/docker/secrets ; sudo chmod -R 777 
 #       alias dcrun='sudo docker compose --profile all -f $HOME/docker/docker-compose-$HOSTNAME.yml'
 #       ;;
 # esac
-
+alias dcrun='sudo docker compose --profile all -f $HOME/docker/docker-compose-$HOSTNAME.yml'
 alias dclogs='dcrun logs -tf --tail="50" ' # usage: dclogs container_name
 alias dcup='dcrun up -d --build --remove-orphans' # up the stack
 alias dcdown='dcrun down --remove-orphans' # down the stack
