@@ -1,0 +1,72 @@
+########################### THIS COMPOSE FILE
+# - Synology (mrk-nas01) - Synology DS220
+# - Prefix/suffix "mrk-nas01" refers to the above host
+# - Docker version 20.10.23, build 876964a
+# - Docker Compose version v2.23.3
+
+########################### NETWORKS
+networks:
+  default:
+    driver: bridge
+  socket_proxy:
+    name: socket_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.91.0/24
+  # t2_proxy:
+  #   name: t2_proxy
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 192.168.90.0/24
+
+########################### SECRETS
+# secrets:
+#   basic_auth_credentials:
+#     file: ${SECRETSDIR}/basic_auth_credentials
+#   stepca_init_password:
+#     file: ${SECRETSDIR}/stepca_init_password
+
+# Docker Compose v2.20 or greater required to use "include"
+include:
+  ########################### SERVICES
+  # PREFIX mrk-nas01 = Synology DS221+ NAS
+  # HOSTNAME=mrk-nas01 - defined in .env
+
+  # CORE
+  # - compose/${HOSTNAME}/traefik.yml
+  - compose/${HOSTNAME}/npmplus.yml
+  - compose/${HOSTNAME}/socket-proxy.yml
+  # - compose/$HOSTNAME/oauth.yml
+  # - compose/$HOSTNAME/portainer.yml
+  ## DATA
+  # - compose/$HOSTNAME/minio.yml
+  ## DB
+  # - compose/$HOSTNAME/mysql.yml
+  # - compose/$HOSTNAME/autobase.yml
+  # CA AUTHORITY
+  # - compose/$HOSTNAME/smallstep.yml
+  # SECRET MANAGEMENT
+  - compose/$HOSTNAME/onepassword.yml
+  # NETWORK
+  # - compose/$HOSTNAME/netbox.yml
+  # - compose/$HOSTNAME/adguardhome.yml
+  # MEDIA
+  # - compose/$HOSTNAME/plex.yml
+  # - compose/$HOSTNAME/plex-sync.yml
+  # - compose/$HOSTNAME/tdarr.yml
+  # FILE MANAGEMENT
+  # - compose/$HOSTNAME/rclone-gdrive.yml
+  # - compose/$HOSTNAME/rclone-gcrypt.yml
+  # - compose/$HOSTNAME/mergerfs.yml
+  # - compose/$HOSTNAME/syncthing.yml
+  # - compose/$HOSTNAME/vscode.yml
+  # MONITORING
+  # - compose/$HOSTNAME/glances.yml
+  # - compose/$HOSTNAME/qdirstat.yml
+  # - compose/${HOSTNAME}/uptime-kuma.yml
+  # MAINTENANCE
+  # - compose/$HOSTNAME/docker-gc.yml
+  # - compose/$HOSTNAME/ddns-updater.yml
+  # - compose/$HOSTNAME/certdumper.yml
