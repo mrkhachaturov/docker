@@ -8,10 +8,10 @@ services:
     restart: unless-stopped
     # profiles: ["core", "all"]
     networks:
-      - traefik_proxy
+      # - npm_proxy
       - socket_proxy
-    command: -H unix:///var/run/docker.sock # # Use Docker Socket Proxy instead for improved security
-    # command: -H tcp://socket-proxy:2375
+    # command: -H unix:///var/run/docker.sock # # Use Docker Socket Proxy instead for improved security
+    command: -H tcp://socket-proxy:2375
     ports:
       - "9000:9000"
     volumes:

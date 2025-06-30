@@ -14,12 +14,12 @@ networks:
     ipam:
       config:
         - subnet: 192.168.91.0/24
-  # t2_proxy:
-  #   name: t2_proxy
-  #   driver: bridge
-  #   ipam:
-  #     config:
-  #       - subnet: 192.168.90.0/24
+  npm_proxy:
+    name: npm_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.90.0/24
 
 ########################### SECRETS
 # secrets:
@@ -39,7 +39,7 @@ include:
   - compose/${HOSTNAME}/npmplus.yml
   - compose/${HOSTNAME}/socket-proxy.yml
   # - compose/$HOSTNAME/oauth.yml
-  # - compose/$HOSTNAME/portainer.yml
+  - compose/$HOSTNAME/portainer.yml
   ## DATA
   # - compose/$HOSTNAME/minio.yml
   ## DB
