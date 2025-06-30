@@ -32,15 +32,18 @@ alias dips="sudo docker ps -q | xargs -n 1 sudo docker inspect -f '{{.Name}}%tab
 alias dp600='sudo chown -R root:root $HOME/docker/secrets ; sudo chmod -R 600 $HOME/docker/secrets ; sudo chown -R root:root $HOME/docker/.env ; sudo chmod -R 600 $HOME/docker/.env' # re-lock permissions
 alias dp777='sudo chown -R $USER:$USER $HOME/docker/secrets ; sudo chmod -R 777 $HOME/docker/secrets ; sudo chown -R $USER:$USER $HOME/docker/.env ; sudo chmod -R 777 $HOME/docker/.env' # open permissions for editing
 
+
+## NOT ACTUAL -  SYNOLOGY UPDATED DOCKER VERSION - 2025-06-30
+
 # DOCKER COMPOSE TRAEFIK 3 - All docker-compose commands start with "dc" 
-case $HOSTNAME in
-    ivn-nas1) # synology at this point uses an old version of docker. Therefore, 'docker-compose' instead of 'docker compose'
-      alias dcrun='sudo docker-compose -f $HOME/docker/docker-compose-$HOSTNAME.yml' # /volume1/docker symlinked to /var/services/homes/user/docker
-      ;;
-    *)
-      alias dcrun='sudo docker compose --profile all -f $HOME/docker/docker-compose-$HOSTNAME.yml'
-      ;;
-esac
+# case $HOSTNAME in
+#     ivn-nas1) # synology at this point uses an old version of docker. Therefore, 'docker-compose' instead of 'docker compose'
+#       alias dcrun='sudo docker-compose -f $HOME/docker/docker-compose-$HOSTNAME.yml' # /volume1/docker symlinked to /var/services/homes/user/docker
+#       ;;
+#     *)
+#       alias dcrun='sudo docker compose --profile all -f $HOME/docker/docker-compose-$HOSTNAME.yml'
+#       ;;
+# esac
 
 alias dclogs='dcrun logs -tf --tail="50" ' # usage: dclogs container_name
 alias dcup='dcrun up -d --build --remove-orphans' # up the stack
