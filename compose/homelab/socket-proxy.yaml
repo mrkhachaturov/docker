@@ -2,21 +2,23 @@ services:
   # Docker Socket Proxy - Security Enchanced Proxy for Docker Socket
   socket-proxy:
     container_name: socket-proxy
-    image: tecnativa/docker-socket-proxy:edge
+    image: tecnativa/docker-socket-proxy
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
+    profiles: ["core", "all"]
     networks:
       socket_proxy:
-        ipv4_address: 192.168.91.254 # You can specify a static IPFalse for unprivileged LXC container.
+        ipv4_address: 192.168.91.254 # You can specify a static IP
+    # privileged: true # true for VM. False for unprivileged LXC container.
     ports:
-    # - "$ZEROTIER_IP_SYNOLOGY:2375:2375" # Port 2375 should only ever get exposed to the internal network. When possible use this line.
+    #  - "$ZEROTIER_IP_CLOUDSERVER:2375:2375" # Port 2375 should only ever get exposed to the internal network. When possible use this line.
     # I use the next line instead, as I want portainer to manage multiple docker endpoints within my home network.
-      - "2375:2375"
+      - "2375:2375" # Do not expose this to the internet with port forwarding
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
-      - LOG_LEVEL=warning # debug,info,notice,warning,err,crit,alert,emerg
+      - LOG_LEVEL=info # debug,info,notice,warning,err,crit,alert,emerg
       ## Variables match the URL prefix (i.e. AUTH blocks access to /auth/* parts of the API, etc.).
       # 0 to revoke access.
       # 1 to grant access.
