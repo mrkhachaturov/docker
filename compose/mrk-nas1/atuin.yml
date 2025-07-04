@@ -6,7 +6,7 @@ services:
     restart: unless-stopped    
     network_mode: host
     image: ghcr.io/szinn/atuin:v18.6.1-sqlite-5@sha256:192389b6b6da30fbf81c6fee8f978a7262d8683657056cf021983481b41162c5
-    command: ["atuin", "server", "start"]
+    command: ["server", "start"]
     volumes:
       - ${DOCKERDIR}/appdata/atuin/config:/config
     # ports:
