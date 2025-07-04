@@ -31,7 +31,7 @@ networks:
         - subnet: 192.168.90.0/24
 
 ########################### SECRETS
-secrets:
+# secrets:
   # basic_auth_credentials:
   #   file: $DOCKERDIR/secrets/basic_auth_credentials
   # cf_dns_api_token:
