@@ -1,0 +1,15 @@
+services:
+  atuin:
+    restart: always
+    image: ghcr.io/szinn/atuin:v18.6.1-sqlite-5@sha256:192389b6b6da30fbf81c6fee8f978a7262d8683657056cf021983481b41162c5
+    command: atuin server start
+    volumes:
+      - "./config:/config"
+    ports:
+      - 8888:8888
+    environment:
+      ATUIN_HOST: "0.0.0.0"
+      ATUIN_PORT: 8088
+      ATUIN_DB_URI: sqlite:///config/atuin.db
+      TZ: Europe/Moscow
+      RUST_LOG: info,atuin_server=debug

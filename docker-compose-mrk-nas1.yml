@@ -31,3 +31,4 @@ include:
   # HOSTNAME=mrk-nas01 - defined in .env
   - compose/$HOSTNAME/minio.yml
   - compose/$HOSTNAME/onepassword.yml
+  - compose/$HOSTNAME/atuin.yml
