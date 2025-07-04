@@ -17,3 +17,4 @@ services:
       ATUIN_DB_URI: sqlite:///config/atuin.db
       ATUIN_OPEN_REGISTRATION: "true"
       TZ: Europe/Moscow
+      RUST_LOG: info,atuin_server=debug
