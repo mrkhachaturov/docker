@@ -72,8 +72,8 @@ include:
   # HOSTNAME=hs - defined in .env
 
   # CORE
-  # - compose/$HOSTNAME/traefik-ext.yaml
-  - compose/$HOSTNAME/traefik-int.yaml
+  - compose/$HOSTNAME/traefik-ext.yaml
+  # - compose/$HOSTNAME/traefik-int.yaml
   - compose/$HOSTNAME/socket-proxy.yaml
   - compose/$HOSTNAME/cloudflared-mr.yaml
   # - compose/$HOSTNAME/oauth.yml
