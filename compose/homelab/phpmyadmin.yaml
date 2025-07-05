@@ -12,7 +12,7 @@ services:
     environment:
       - PMA_HOST=$MARIADB_HOST
       - PMA_PORT=$MARIADB_PORT
-      #- PMA_ARBITRARY=1
+      - PMA_ARBITRARY=1
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mariadb_admin_password
     secrets:
       - mariadb_admin_password
