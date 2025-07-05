@@ -12,7 +12,7 @@ services:
       - DOMAINNAME_HL
       - DOMAINNAME_MR
       - API_TOKEN_FILE=/run/secrets/cf_dns_api_token
-      - DOCKER_HOST=tcp://socket-proxy:2375
+      #- DOCKER_HOST=tcp://socket-proxy:2375
       - PROJECT_LABEL=external-dns
       - INSTANCE_ID=homelab
       - EXECUTION_FREQUENCY_SECONDS=120
@@ -21,6 +21,7 @@ services:
       - CLOUDFLARE_MR_TUNNEL_ID
     secrets:
       - cf_dns_api_token
+    command: sh -c "DOCKER_HOST=tcp://socket-proxy:2375 node main.js"
 
   # other-service:
   #   image: 'busybox:latest'
