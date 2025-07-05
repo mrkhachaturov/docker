@@ -1,6 +1,6 @@
 services:
   cloudflared-mr:
-    image: docker.io/cloudflare/cloudflared:2025.5.0
+    image: ghcr.io/astrateam-net/cloudflared:2025.7.0
     container_name: cloudflared-mr
     restart: no
     security_opt:
@@ -14,8 +14,8 @@ services:
       - TUNNEL_ORIGIN_ENABLE_HTTP2=true
       - TUNNEL_POST_QUANTUM=true
       - TUNNEL_TRANSPORT_PROTOCOL=quic
-      - DOMAINNAME_MR
-      - CLOUDFLARE_MR_TUNNEL_ID
+      - HOSTNAME_1=$DOMAINNAME_MR
+      - CLOUDFLARE_TUNNEL_ID=$CLOUDFLARE_MR_TUNNEL_ID
     command: tunnel -config /etc/cloudflared/config.yaml run
     volumes:
       - $DOCKERDIR/appdata/cloudflared/mr:/etc/cloudflared

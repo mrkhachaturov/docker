@@ -1,5 +1,5 @@
 ---
-tunnel: $CLOUDFLARE_MR_TUNNEL_ID
+tunnel: ${CLOUDFLARE_TUNNEL_ID}
 credentials-file: /etc/cloudflared/cloudflare-tunnel.json
 # originRequest:
 #   originServerName: external.$DOMAINNAME_MR
@@ -7,13 +7,13 @@ originRequest: # Top-level configuration
   connectTimeout: 30s
 
 ingress:
-  - hostname: ${DOMAINNAME_MR}
+  - hostname: ${HOSTNAME_1}
     service: https://traefik-external
     originRequest:
-      originServerName: ${DOMAINNAME_MR}  
+      originServerName: ${HOSTNAME_1}  
   # - hostname: "*.$DOMAINNAME_MR"
   #   service: https://traefik-external
   # Example of a request mapping to the Hello World test server:
-  - hostname: "test1.${DOMAINNAME_MR}"
+  - hostname: "test1.${HOSTNAME_1}"
     service: hello_world
   - service: http_status:404
