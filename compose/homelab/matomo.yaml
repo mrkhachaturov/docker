@@ -1,4 +1,13 @@
-# PGAdmin - PostgreSQL Management
+# Matomo - Web Analytics
+# Follow these steps on the host:
+# sudo mkdir $DOCKERDIR/appdata/matomo
+# sudo mkdir $DOCKERDIR/appdata/matomo/config
+# sudo mkdir $DOCKERDIR/appdata/matomo/misc
+# sudo mkdir $DOCKERDIR/appdata/matomo/tmp
+# sudo mkdir $DOCKERDIR/appdata/matomo/lang
+# sudo chown -R www-data:www-data $DOCKERDIR/appdata/matomo/
+# sudo chown -R www-data:www-data $DOCKERDIR/appdata/matomo/
+
 services:
   app:
     image: matomo:fpm-alpine

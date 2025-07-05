@@ -1,4 +1,8 @@
 # PGAdmin - PostgreSQL Management
+# Follow these steps on the host:
+# sudo mkdir $DOCKERDIR/appdata/pgadmin
+# sudo chown -R 5050:5050 $DOCKERDIR/appdata/pgadmin/
+
 services:
   app:
     image: dpage/pgadmin4
