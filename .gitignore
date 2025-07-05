@@ -87,6 +87,13 @@ appdata/traefik3/rules/ivn-nas1/*
 !appdata/traefik3/rules/ivn-nas1/middlewares-*.yml
 !appdata/traefik3/rules/ivn-nas1/chain-*.yml
 !appdata/traefik3/rules/ivn-nas1/app-*.yml
+!appdata/traefik3/rules/homelab
+appdata/traefik3/rules/homelab/*
+!appdata/traefik3/rules/homelab/*.example
+!appdata/traefik3/rules/homelab/tls-opts.yml
+!appdata/traefik3/rules/homelab/middlewares-*.yml
+!appdata/traefik3/rules/homelab/chain-*.yml
+!appdata/traefik3/rules/homelab/app-*.yml
 !appdata/traefik3/rules/hs
 appdata/traefik3/rules/hs/*
 !appdata/traefik3/rules/hs/*.example
