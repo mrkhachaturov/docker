@@ -9,4 +9,7 @@ ingress:
     service: https://traefik-external
   - hostname: "*.$DOMAINNAME_MR"
     service: https://traefik-external
+  # Example of a request mapping to the Hello World test server:
+  - hostname: "test1.$DOMAINNAME_MR"
+    service: https://traefik-external
   - service: http_status:404

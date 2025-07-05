@@ -128,6 +128,7 @@ services:
       - "traefik.http.routers.traefik-ext-rtr.service=api@internal"
       # External DNS
       - 'external-dns:homelab=[{ "type": "CNAME", "name": "external.$DOMAINNAME_MR", "target": "$CLOUDFLARE_MR_TUNNEL_ID.cfargotunnel.com", "proxy": true }]'
+      - 'external-dns:homelab=[{ "type": "CNAME", "name": "test1.$DOMAINNAME_MR", "target": "$CLOUDFLARE_MR_TUNNEL_ID.cfargotunnel.com", "proxy": true }]'      
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
