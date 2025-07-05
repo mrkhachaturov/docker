@@ -31,15 +31,15 @@ networks:
         - subnet: 192.168.90.0/24
 
 ########################### SECRETS
-# secrets:
+secrets:
   # basic_auth_credentials:
   #   file: $DOCKERDIR/secrets/basic_auth_credentials
-  # cf_dns_api_token:
-  #   file: $DOCKERDIR/secrets/cf_dns_api_token
+  cf_dns_api_token:
+    file: $DOCKERDIR/secrets/cf_dns_api_token
   # traefik_forward_auth:
   #   file: $DOCKERDIR/secrets/traefik_forward_auth
-  # mysql_root_password:
-  #   file: $DOCKERDIR/secrets/mysql_root_password
+  mariadb_admin_password:
+    file: $DOCKERDIR/secrets/mariadb_admin_password
   # authelia_jwt_secret:
   #   file: $DOCKERDIR/secrets/authelia_jwt_secret
   # authelia_session_secret:
@@ -77,7 +77,7 @@ include:
   # FRONTEND
   # - compose/$HOSTNAME/autoindex.yml
   # - compose/$HOSTNAME/homepage.yml
-  # - compose/$HOSTNAME/phpmyadmin.yml
+  - compose/$HOSTNAME/phpmyadmin.yaml
   # - compose/$HOSTNAME/sitespeed.yml
   - compose/$HOSTNAME/whoami.yaml
   # DOWNLOADERS

@@ -98,13 +98,13 @@ services:
       - $DOCKERDIR/logs/$HOSTNAME/traefik:/logs # Traefik logs
     environment:
       - TZ=$TZ
-      #- CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
-      - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
+      - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
+      # - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
       #- HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAINNAME_HL # Passing the domain name to traefik container to be able to use the variable in rules. 
       - DOMAINNAME_MRK # Additional Domain variable passthrough to container
-    # secrets:
-      #- cf_dns_api_token
+    secrets:
+      - cf_dns_api_token
       #- basic_auth_credentials
     labels:
       #- "autoheal=true"
