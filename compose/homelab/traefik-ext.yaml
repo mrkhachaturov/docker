@@ -112,6 +112,7 @@ services:
       #- HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAINNAME_HL # Passing the domain name to traefik container to be able to use the variable in rules. 
       - DOMAINNAME_MRK # Additional Domain variable passthrough to container
+      - CLOUDFLARE_MR_TUNNEL_ID
     secrets:
       - cf_dns_api_token
       #- basic_auth_credentials
@@ -125,6 +126,8 @@ services:
       - "traefik.http.routers.traefik-ext-rtr.rule=Host(`external.$DOMAINNAME_HL`) || Host(`external.$DOMAINNAME_MR`)"
       # Services - API
       - "traefik.http.routers.traefik-ext-rtr.service=api@internal"
+      # External DNS
+      - 'external-dns:homelab=[{ "type": "CNAME", "name": "external.$DOMAINNAME_MR", "target": "$CLOUDFLARE_MR_TUNNEL_ID.cfargotunnel.com", "proxy": true }]'
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
