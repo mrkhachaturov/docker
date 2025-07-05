@@ -14,6 +14,7 @@ services:
       # HTTP Routers
       - "traefik.http.routers.whoami-rtr.entrypoints=websecure"
       - "traefik.http.routers.whoami-rtr.rule=Host(`whoami.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.whoami-rtr.tls.certresolver=letsencrypt"
       # Middlewares
       #- "traefik.http.routers.whoami-rtr.middlewares=chain-oauth@file"
       # HTTP Services

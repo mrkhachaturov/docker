@@ -32,4 +32,5 @@ services:
       - "traefik.http.routers.pgadmin-int-rtr.service=pgadmin-svc"
       - "traefik.http.services.pgadmin-svc.loadbalancer.server.port=80"
       - "traefik.docker.network=trf_int"
+      - "traefik.http.routers.pgadmin-int-rtr.tls.certresolver=zerossl"
 

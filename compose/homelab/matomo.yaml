@@ -42,4 +42,5 @@ services:
       - "traefik.http.routers.matomo-int-rtr.service=matomo-svc"
       - "traefik.http.services.matomo-svc.loadbalancer.server.port=80"
       - "traefik.docker.network=trf_int"
+      - "traefik.http.routers.matomo-int-rtr.tls.certresolver=zerossl"
 
