@@ -118,5 +118,5 @@ include:
   # # NETWORK
   # - compose/$HOSTNAME/gluetun.yml
   # # MAINTENANCE
-  # - compose/$HOSTNAME/docker-gc.yml
+  - compose/$HOSTNAME/docker-gc.yaml
   # - compose/$HOSTNAME/deunhealth.yml
