@@ -9,7 +9,9 @@ services:
     profiles: ["core", "all"]
     networks:
       trf_ext:
-        ipv4_address: 10.2.125.254 # You can specify a static IP
+        ipv4_address: 10.2.125.254
+      socket_proxy:
+        
     command: # CLI arguments
       - --global.checkNewVersion=true
       - --global.sendAnonymousUsage=true
