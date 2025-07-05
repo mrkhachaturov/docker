@@ -1,0 +1,30 @@
+# PGAdmin - PostgreSQL Management
+services:
+  app:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    profiles: ["apps", "all"]    
+    volumes:
+      - /etc/hosts:/etc/hosts
+      - $DOCKERDIR/appdata/pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: $PGADMIN_DEFAULT_EMAIL
+      PGADMIN_DEFAULT_PASSWORD_FILE: /run/secrets/pgadmin_default_password
+    secrets:
+      - pgadmin_default_password
+    networks:
+      - t3_proxy
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.pgadmin-rtr.entrypoints=websecure"
+      - "traefik.http.routers.pgadmin-rtr.rule=Host(`pgadmin.$DOMAINNAME_HL`)"
+      # Middlewares
+      #- "traefik.http.routers.pgadmin-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.pgadmin-rtr.service=pgadmin-svc"
+      - "traefik.http.services.pgadmin-svc.loadbalancer.server.port=80"
+

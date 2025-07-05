@@ -40,6 +40,8 @@ secrets:
   #   file: $DOCKERDIR/secrets/traefik_forward_auth
   mariadb_admin_password:
     file: $DOCKERDIR/secrets/mariadb_admin_password
+  pgadmin_default_password:
+    file: $DOCKERDIR/secrets/pgadmin_default_password
   # authelia_jwt_secret:
   #   file: $DOCKERDIR/secrets/authelia_jwt_secret
   # authelia_session_secret:
@@ -78,6 +80,7 @@ include:
   # - compose/$HOSTNAME/autoindex.yml
   # - compose/$HOSTNAME/homepage.yml
   - compose/$HOSTNAME/phpmyadmin.yaml
+  - compose/$HOSTNAME/pgadmin.yaml
   # - compose/$HOSTNAME/sitespeed.yml
   - compose/$HOSTNAME/whoami.yaml
   # DOWNLOADERS
