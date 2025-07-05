@@ -9,7 +9,7 @@
 # sudo chown -R www-data:www-data $DOCKERDIR/appdata/matomo/
 
 services:
-  app:
+  matomo:
     image: matomo:fpm-alpine
     container_name: matomo
     security_opt:

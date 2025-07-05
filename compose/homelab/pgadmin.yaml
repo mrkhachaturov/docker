@@ -4,7 +4,7 @@
 # sudo chown -R 5050:5050 $DOCKERDIR/appdata/pgadmin/
 
 services:
-  app:
+  pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
     security_opt:
