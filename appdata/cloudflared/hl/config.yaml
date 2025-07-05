@@ -1,4 +1,7 @@
 ---
+tunnel: $CLOUDFLARE_HL_TUNNEL_ID
+credentialsFile: /etc/cloudflared/cloudflare-tunnel.json
+
 originRequest:
   originServerName: external.${DOMAINNAME_HL}
 

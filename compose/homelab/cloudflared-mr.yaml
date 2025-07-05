@@ -15,7 +15,8 @@ services:
       - TUNNEL_POST_QUANTUM=true
       - TUNNEL_TRANSPORT_PROTOCOL=quic
       - DOMAINNAME_MR
-    command: tunnel run
+      - CLOUDFLARE_MR_TUNNEL_ID
+    command: tunnel -config /etc/cloudflared/config.yml run
     volumes:
       - $DOCKERDIR/appdata/cloudflared/mr:/etc/cloudflared
     ports:
