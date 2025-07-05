@@ -2,11 +2,11 @@
 tunnel: $CLOUDFLARE_MR_TUNNEL_ID
 credentials-file: /etc/cloudflared/cloudflare-tunnel.json
 originRequest:
-  originServerName: external.${DOMAINNAME_MR}
+  originServerName: external.$DOMAINNAME_MR
   
 ingress:
-  - hostname: ${DOMAINNAME_MR}
+  - hostname: $DOMAINNAME_MR
     service: https://traefik-external
-  - hostname: "*.${DOMAINNAME_MR}"
+  - hostname: "*.$DOMAINNAME_MR"
     service: https://traefik-external
   - service: http_status:404
