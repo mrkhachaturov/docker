@@ -55,11 +55,6 @@ services:
       # - --entrypoints.websecure.http.tls.domains[2].sans=*.$DOMAINNAME_2 # Pulls wildcard cert for third domain
       - --providers.file.directory=/rules # Load dynamic configuration from one or more .toml or .yml files in a directory
       - --providers.file.watch=true # Only works on top level files in the rules folder
-      # - --certificatesResolvers.dns-cloudflare.acme.caServer=https://acme-staging-v02.api.letsencrypt.org/directory # LetsEncrypt Staging Server - uncomment when testing
-      - --certificatesResolvers.dns-cloudflare.acme.storage=/acme.json
-      - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.provider=cloudflare
-      - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.resolvers=1.1.1.1:53,1.0.0.1:53
-      - --certificatesResolvers.dns-cloudflare.acme.dnsChallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
       # - --metrics.prometheus=true
       # - --metrics.prometheus.buckets=0.1,0.3,1.2,5.0
       # - --metrics.prometheus.addEntryPointsLabels=true
@@ -75,6 +70,14 @@ services:
       # - --metrics.influxdb2.addServicesLabels=true
       # - --metrics.influxdb2.pushInterval=30s
       # - --metrics.influxdb2.additionallabels.host=$DOMAINNAME_HS
+      - --certificatesresolvers.zerossl.acme.caserver=https://acme.zerossl.com/v2/DV90
+      - --certificatesresolvers.zerossl.acme.email=$ZEROSSL_EMAIL
+      - --certificatesresolvers.zerossl.acme.storage=/acme.json
+      - --certificatesresolvers.zerossl.acme.dnschallenge.provider=cloudflare
+      - --certificatesresolvers.zerossl.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
+      - --certificatesresolvers.zerossl.acme.dnschallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
+      - --certificatesresolvers.zerossl.acme.eab.kid=$ZEROSSL_KID
+      - --certificatesresolvers.zerossl.acme.eab.hmacencoded=$ZEROSSL_HMAC
     #healthcheck:
     #  test: ["CMD", "traefik", "healthcheck", "--ping"]
     #  interval: 5s
@@ -99,8 +102,8 @@ services:
     volumes:
       - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME:/rules # Dynamic File Provider directory
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
-      - $DOCKERDIR/appdata/traefik3/acme/acme.json:/acme.json # Certs File 
-      - $DOCKERDIR/logs/$HOSTNAME/traefik:/logs # Traefik logs
+      - $DOCKERDIR/appdata/traefik3/zerossl/acme.json:/acme.json # Certs File 
+      - $DOCKERDIR/logs/$HOSTNAME/traefik-int:/logs # Traefik logs
     environment:
       - TZ=$TZ
       - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
@@ -116,7 +119,7 @@ services:
       - "traefik.enable=true"
       # HTTP Routers
       - "traefik.http.routers.traefik-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-rtr.rule=Host(`trf-ext.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.traefik-rtr.rule=Host(`internal.$DOMAINNAME_HL`) || Host(`internal.$DOMAINNAME_MR`)"
       # Services - API
       - "traefik.http.routers.traefik-rtr.service=api@internal"
       # Healthcheck/ping
