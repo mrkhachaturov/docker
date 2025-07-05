@@ -2,8 +2,7 @@
 
 services:
   ghost:
-    image: ghcr.io/astrateam-net/ghost
-    tag: 5.123.0@sha256:6d7ae4b4a52f3e33f14f5c88792a2f723c9392034550dd28804f7b61a9d2b963
+    image: ghcr.io/astrateam-net/ghost:5.123.0
     container_name: ghost
     security_opt:
       - no-new-privileges:true
