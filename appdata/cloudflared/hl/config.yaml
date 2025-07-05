@@ -1,0 +1,10 @@
+---
+originRequest:
+  originServerName: external.${DOMAINNAME_HL}
+
+ingress:
+  - hostname: ${DOMAINNAME_HL}
+    service: https://traefik
+  - hostname: "*.${DOMAINNAME_HL}"
+    service: https://traefik
+  - service: http_status:404
