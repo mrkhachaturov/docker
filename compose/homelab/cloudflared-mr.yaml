@@ -1,6 +1,6 @@
 services:
   cloudflared-mr:
-    image: ghcr.io/astrateam-net/cloudflared:2025.7.0:sha256:25e50d2889322448ad3fd653a53748645e0bc9a117a7a5abe0de4bd003bd892c
+    image: ghcr.io/astrateam-net/cloudflared:2025.7.0
     container_name: cloudflared-mr
     restart: no
     security_opt:
