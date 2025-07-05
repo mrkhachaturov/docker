@@ -126,3 +126,5 @@ include:
   # # MAINTENANCE
   - compose/$HOSTNAME/docker-gc.yaml
   # - compose/$HOSTNAME/deunhealth.yml
+  # # Blog
+  - compose/$HOSTNAME/ghost.yaml

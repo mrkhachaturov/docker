@@ -1,7 +1,4 @@
 # Ghost - Blogging Platform
-# Follow these steps on the host:
-# sudo mkdir $DOCKERDIR/appdata/ghost
-# sudo chown -R 1000:1000 $DOCKERDIR/appdata/ghost/
 
 services:
   ghost:
@@ -10,21 +7,39 @@ services:
     container_name: ghost
     security_opt:
       - no-new-privileges:true
+    profiles: ["apps", "all"]
+    networks:
+      - t3_proxy
     environment:
       - TZ=Europe/Moscow
       - url=https://$DOMAINNAME_MR
       - NODE_ENV=development
       - admin__url=https://blog-admin.$DOMAINNAME_MR
       - database__client=mysql
-      - database__connection__host=
-      - database__connection__user=ghost
-      - database__connection__password=ghost
-      - database__connection__database=ghost
-      - database__connection__port=3306
-      - database__connection__ssl=false
-      - database__connection__pool=true
-      - database__connection__max=10
+      - database__connection__host=$MYSQL_HOST
+      - database__connection__user=$MYSQL_GHOST_USER
+      - database__connection__password=$MYSQL_GHOST_PASSWORD
+      - database__connection__database=$MYSQL_GHOST_DATABASE
+      - database__connection__port=$MYSQL_PORT
+      - mail__transport=SMTP
+      - mail__from=$MAIL_FROM
+      - mail__options__service=Mailgun
+      - mail__options__host=smtp.eu.mailgun.org
+      - mail__options__port=465
+      - mail__options__secure=true
+      - mail__options__auth__user=$MAIL_USER
+      - mail__options__auth__pass=$MAIL_PASSWORD
     ports:
       - 2368:2368
     volumes:
       - $DOCKERDIR/appdata/ghost:/var/lib/ghost/content
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.ghost-rtr.entrypoints=websecure"
+      - "traefik.http.routers.ghost-rtr.rule=Host(`$DOMAINNAME_MR`) || Host(`blog-admin.$DOMAINNAME_MR`)"
+      # Middlewares
+      #- "traefik.http.routers.ghost-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.ghost-rtr.service=ghost-svc"
+      - "traefik.http.services.ghost-svc.loadbalancer.server.port=2368"
