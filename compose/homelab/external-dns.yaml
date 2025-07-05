@@ -22,9 +22,12 @@ services:
     secrets:
       - cf_dns_api_token
 
-  # other-service:
-  #   image: 'busybox:latest'
-  #   command: 'sleep 3600'
-  #   labels:
+  other-service:
+    image: 'busybox:latest'
+    command: 'sleep 3600'
+    networks:
+      - trf_ext    
+    labels:
+      - 'external-dns:homelab=[{ "type": "CNAME", "name": "test1.$DOMAINNAME_MR", "target": "$CLOUDFLARE_MR_TUNNEL_ID.cfargotunnel.com", "proxy": true }]'     
   #     - 'external-dns:homelab=[{ "type": "CNAME", "name": "project.example.com", "target": "example.com", "proxy": true }]'
     
