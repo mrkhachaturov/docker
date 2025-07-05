@@ -10,7 +10,7 @@
 
 services:
   matomo:
-    image: matomo:fpm-alpine
+    image: matomo
     container_name: matomo
     security_opt:
       - no-new-privileges:true
@@ -18,16 +18,17 @@ services:
     profiles: ["apps", "all"]    
     networks:
       - t3_proxy    
-    environment:
-      - MATOMO_DB_HOST=$MARIADB_HOST
-      - MATOMO_DB_USER=$MATOMO_DB_USER
-      - MATOMO_DB_PASSWORD_FILE=/run/secrets/mariadb_matomo_password
-      - MATOMO_DB_NAME=$MATOMO_DB_NAME
-      - MATOMO_DB_PREFIX=matomo_
-      - MATOMO_DB_PORT=$MARIADB_PORT
-      - MATOMO_DB_TABLE_PREFIX=matomo_
-    secrets:
-      - mariadb_matomo_password
+    # environment:
+    #   - MATOMO_DB_HOST=$MARIADB_HOST
+    #   - MATOMO_DB_USER=$MATOMO_DB_USER
+    #   - MATOMO_DB_PASSWORD_FILE=/run/secrets/mariadb_matomo_password
+    #   - MATOMO_DB_NAME=$MATOMO_DB_NAME
+    #   - MATOMO_DB_PREFIX=matomo_
+    #   - MATOMO_DB_PORT=$MARIADB_PORT
+    #   - MATOMO_DB_TABLE_PREFIX=matomo_
+    #   - MARIADB_AUTO_UPGRADE=1
+    # secrets:
+    #   - mariadb_matomo_password
     volumes:
       - /etc/hosts:/etc/hosts
       - $DOCKERDIR/appdata/matomo/config:/var/www/html/config
