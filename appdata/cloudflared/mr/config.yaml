@@ -1,6 +1,6 @@
 ---
 tunnel: $CLOUDFLARE_MR_TUNNEL_ID
-credentialsFile: /etc/cloudflared/cloudflare-tunnel.json
+credentials-file: /etc/cloudflared/cloudflare-tunnel.json
 originRequest:
   originServerName: external.${DOMAINNAME_MR}
   
