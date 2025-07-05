@@ -7,13 +7,13 @@ originRequest: # Top-level configuration
   connectTimeout: 30s
 
 ingress:
-  - hostname: $DOMAINNAME_MR
+  - hostname: ${DOMAINNAME_MR}
     service: https://traefik-external
     originRequest:
-      originServerName: $DOMAINNAME_MR  
+      originServerName: ${DOMAINNAME_MR}  
   # - hostname: "*.$DOMAINNAME_MR"
   #   service: https://traefik-external
   # Example of a request mapping to the Hello World test server:
-  - hostname: "test1.$DOMAINNAME_MR"
+  - hostname: "test1.${DOMAINNAME_MR}"
     service: hello_world
   - service: http_status:404
