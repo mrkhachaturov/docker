@@ -69,7 +69,7 @@ include:
   - compose/$HOSTNAME/socket-proxy.yaml
   # - compose/$HOSTNAME/oauth.yml
   # - compose/$HOSTNAME/authelia.yml
-  - compose/$HOSTNAME/portainer.yml
+  - compose/$HOSTNAME/portainer.yaml
   # - compose/$HOSTNAME/dockge.yml
   # SECURITY
   # - compose/$HOSTNAME/crowdsec.yml
