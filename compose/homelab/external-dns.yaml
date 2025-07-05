@@ -1,0 +1,30 @@
+services:
+  external-dns:
+    image: external-dns-test:latest
+    container_name: external-dns
+    restart: unless-stopped
+    profiles: ["core", "all"]
+    networks:
+      - trf_ext
+      - socket_proxy
+    environment:
+      - TZ=$TZ
+      - DOMAINNAME_HL
+      - DOMAINNAME_MR
+      - API_TOKEN_FILE=/run/secrets/cf_dns_api_token
+      - DOCKER_HOST=tcp://socket-proxy:2375
+      - PROJECT_LABEL=external-dns
+      - INSTANCE_ID=homelab
+      - EXECUTION_FREQUENCY_SECONDS=120
+      - LOG_LEVEL=info
+      - PRESERVE_STOPPED=true
+      - CLOUDFLARE_MR_TUNNEL_ID
+    secrets:
+      - cf_dns_api_token
+
+  # other-service:
+  #   image: 'busybox:latest'
+  #   command: 'sleep 3600'
+  #   labels:
+  #     - 'external-dns:homelab=[{ "type": "CNAME", "name": "project.example.com", "target": "example.com", "proxy": true }]'
+    
