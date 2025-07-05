@@ -79,6 +79,7 @@ services:
       - --certificatesresolvers.zerossl.acme.dnschallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
       - --certificatesresolvers.zerossl.acme.eab.kid=$ZEROSSL_KID
       - --certificatesresolvers.zerossl.acme.eab.hmacencoded=$ZEROSSL_HMAC
+      - --providers.docker.constraints=Label(`traefik.group`, `internal`)
     #healthcheck:
     #  test: ["CMD", "traefik", "healthcheck", "--ping"]
     #  interval: 5s

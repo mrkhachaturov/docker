@@ -21,6 +21,7 @@ services:
       - TZ=$TZ
     labels:
       - "traefik.enable=true"
+      - "traefik.group=internal"
       # HTTP Routers
       - "traefik.http.routers.portainer-rtr.entrypoints=websecure"
       - "traefik.http.routers.portainer-rtr.rule=Host(`portainer.$DOMAINNAME_HL`)"

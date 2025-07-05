@@ -34,6 +34,7 @@ services:
       - $DOCKERDIR/appdata/ghost:/var/lib/ghost/content
     labels:
       - "traefik.enable=true"
+      - "traefik.group=external"
       # HTTP Routers
       - "traefik.http.routers.ghost-rtr.entrypoints=websecure"
       - "traefik.http.routers.ghost-rtr.rule=Host(`$DOMAINNAME_MR`) || Host(`blog-admin.$DOMAINNAME_MR`)"

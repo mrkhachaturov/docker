@@ -23,6 +23,7 @@ services:
       - pgadmin_default_password
     labels:
       - "traefik.enable=true"
+      - "traefik.group=internal"
       # HTTP Routers
       - "traefik.http.routers.pgadmin-int-rtr.entrypoints=websecure"
       - "traefik.http.routers.pgadmin-int-rtr.rule=Host(`pgadmin.$DOMAINNAME_HL`)"

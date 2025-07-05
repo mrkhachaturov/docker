@@ -18,6 +18,7 @@ services:
       - mariadb_admin_password
     labels:
       - "traefik.enable=true"
+      - "traefik.group=internal"
       # HTTP Routers
       - "traefik.http.routers.phpmyadmin-int-rtr.entrypoints=websecure"
       - "traefik.http.routers.phpmyadmin-int-rtr.rule=Host(`pma.$DOMAINNAME_HL`)"

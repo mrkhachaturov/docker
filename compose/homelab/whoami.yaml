@@ -11,6 +11,7 @@ services:
       - trf_ext
     labels:
       - "traefik.enable=true"
+      - "traefik.group=external"
       # HTTP Routers
       - "traefik.http.routers.whoami-ext-rtr.entrypoints=websecure"
       - "traefik.http.routers.whoami-ext-rtr.rule=Host(`whoami-ext.$DOMAINNAME_HL`)"
@@ -33,6 +34,7 @@ services:
       - trf_int
     labels:
       - "traefik.enable=true"
+      - "traefik.group=internal"
       # HTTP Routers
       - "traefik.http.routers.whoami-int-rtr.entrypoints=websecure"
       - "traefik.http.routers.whoami-int-rtr.rule=Host(`whoami-int.$DOMAINNAME_HL`)"

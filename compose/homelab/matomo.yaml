@@ -37,6 +37,7 @@ services:
       - $DOCKERDIR/appdata/matomo/lang:/var/www/html/lang
     labels:
       - "traefik.enable=true"
+      - "traefik.group=internal"
       - "traefik.http.routers.matomo-int-rtr.entrypoints=websecure"
       - "traefik.http.routers.matomo-int-rtr.rule=Host(`matomo.$DOMAINNAME_HL`)"
       - "traefik.http.routers.matomo-int-rtr.service=matomo-svc"
