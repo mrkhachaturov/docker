@@ -1,0 +1,21 @@
+services:
+  cloudflared-mr:
+    image: docker.io/cloudflare/cloudflared:2025.5.0
+    container_name: cloudflared-mr
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    profiles: ["core", "all"]
+    networks:
+      - trf_ext
+    environment:
+      - NO_AUTOUPDATE=true
+      - TUNNEL_METRICS=0.0.0.0:8080
+      - TUNNEL_ORIGIN_ENABLE_HTTP2=true
+      - TUNNEL_POST_QUANTUM=true
+      - TUNNEL_TRANSPORT_PROTOCOL=quic
+    command: tunnel run
+    volumes:
+      - $DOCKERDIR/appdata/cloudflared/mr:/etc/cloudflared
+    ports:
+      - 8080:8080 # For metrics, optional

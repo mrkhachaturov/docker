@@ -17,7 +17,7 @@ services:
     restart: unless-stopped
     profiles: ["apps", "all"]    
     networks:
-      - t3_proxy    
+      - trf_ext    
     # environment:
     #   - MATOMO_DB_HOST=$MARIADB_HOST
     #   - MATOMO_DB_USER=$MATOMO_DB_USER

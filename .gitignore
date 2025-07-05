@@ -111,6 +111,10 @@ appdata/traefik3/rules/ws/*
 appdata/authelia/*
 !appdata/authelia/*.example
 
+!appdata/cloudflared
+appdata/cloudflared/*
+!appdata/cloudflared/config.yaml
+
 !appdata/rclone
 appdata/rclone/*
 !appdata/rclone/*.example

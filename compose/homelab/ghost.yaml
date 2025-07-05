@@ -8,7 +8,7 @@ services:
       - no-new-privileges:true
     profiles: ["apps", "all"]
     networks:
-      - t3_proxy
+      - trf_ext
     environment:
       - TZ=Europe/Moscow
       - url=https://$DOMAINNAME_MR

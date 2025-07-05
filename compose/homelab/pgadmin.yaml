@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
     profiles: ["apps", "all"]    
     networks:
-      - t3_proxy    
+      - trf_ext    
     volumes:
       - /etc/hosts:/etc/hosts
       - $DOCKERDIR/appdata/pgadmin:/var/lib/pgadmin

@@ -1,16 +1,15 @@
 services:
   # Traefik 3 - Reverse Proxy
-  traefik:
-    container_name: traefik
+  traefik-internal:
+    container_name: traefik-internal
     image: traefik:3.0
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
     profiles: ["core", "all"]
     networks:
-      t3_proxy:
-        ipv4_address: 192.168.90.254 # You can specify a static IP
-      socket_proxy:
+      trf_int:
+        ipv4_address: 10.2.130.254 # You can specify a static IP
     command: # CLI arguments
       - --global.checkNewVersion=true
       - --global.sendAnonymousUsage=true
@@ -41,7 +40,7 @@ services:
       # - --providers.docker.endpoint=unix:///var/run/docker.sock # Disable for Socket Proxy. Enable otherwise.
       - --providers.docker.endpoint=tcp://socket-proxy:2375 # Enable for Socket Proxy. Disable otherwise.
       - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=t3_proxy 
+      - --providers.docker.network=trf_ext 
       # - --providers.docker.swarmMode=false # Traefik v2 Swarm
       # - --providers.swarm.endpoint=tcp://127.0.0.1:2377 # Traefik v3 Swarm
       - --entrypoints.websecure.http.tls=true
@@ -117,7 +116,7 @@ services:
       - "traefik.enable=true"
       # HTTP Routers
       - "traefik.http.routers.traefik-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-rtr.rule=Host(`traefik.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.traefik-rtr.rule=Host(`trf-ext.$DOMAINNAME_HL`)"
       # Services - API
       - "traefik.http.routers.traefik-rtr.service=api@internal"
       # Healthcheck/ping
