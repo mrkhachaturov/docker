@@ -40,6 +40,8 @@ secrets:
   #   file: $DOCKERDIR/secrets/traefik_forward_auth
   mariadb_admin_password:
     file: $DOCKERDIR/secrets/mariadb_admin_password
+  mariadb_matomo_password:
+    file: $DOCKERDIR/secrets/mariadb_matomo_password
   pgadmin_default_password:
     file: $DOCKERDIR/secrets/pgadmin_default_password
   # authelia_jwt_secret:
@@ -97,6 +99,7 @@ include:
   # - compose/$HOSTNAME/bazarr.yml
   # - compose/$HOSTNAME/picard.yml
   # MONITORING
+  - compose/$HOSTNAME/matomo.yaml
   # - compose/$HOSTNAME/grafana.yml
   # - compose/$HOSTNAME/uptime-kuma.yml
   # - compose/$HOSTNAME/dozzle.yml

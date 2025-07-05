@@ -1,0 +1,38 @@
+# PGAdmin - PostgreSQL Management
+services:
+  app:
+    image: matomo:fpm-alpine
+    container_name: matomo
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+    profiles: ["apps", "all"]    
+    networks:
+      - t3_proxy    
+    environment:
+      - MATOMO_DB_HOST=$MARIADB_HOST
+      - MATOMO_DB_USER=$MATOMO_DB_USER
+      - MATOMO_DB_PASSWORD_FILE=/run/secrets/mariadb_matomo_password
+      - MATOMO_DB_NAME=$MATOMO_DB_NAME
+      - MATOMO_DB_PREFIX=matomo_
+      - MATOMO_DB_PORT=$MARIADB_PORT
+      - MATOMO_DB_TABLE_PREFIX=matomo_
+    secrets:
+      - mariadb_matomo_password
+    volumes:
+      - /etc/hosts:/etc/hosts
+      - $DOCKERDIR/appdata/matomo/config:/var/www/html/config
+      - $DOCKERDIR/appdata/matomo/misc:/var/www/html/misc
+      - $DOCKERDIR/appdata/matomo/tmp:/var/www/html/tmp
+      - $DOCKERDIR/appdata/matomo/lang:/var/www/html/lang
+    labels:
+      - "traefik.enable=true"
+      # HTTP Routers
+      - "traefik.http.routers.matomo-rtr.entrypoints=websecure"
+      - "traefik.http.routers.matomo-rtr.rule=Host(`matomo.$DOMAINNAME_HL`)"
+      # Middlewares
+      #- "traefik.http.routers.pgadmin-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.matomo-rtr.service=matomo-svc"
+      - "traefik.http.services.matomo-svc.loadbalancer.server.port=80"
+
