@@ -43,4 +43,4 @@ services:
       - "traefik.http.routers.ghost-rtr.service=ghost-svc"
       - "traefik.http.services.ghost-svc.loadbalancer.server.port=2368"
       - "traefik.docker.network=trf_ext"
-      - "traefik.http.routers.ghost-rtr.tls.certresolver=dns-cloudflare"
+      #- "traefik.http.routers.ghost-rtr.tls.certresolver=dns-cloudflare"
