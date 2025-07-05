@@ -42,7 +42,8 @@ services:
       # - --providers.docker.endpoint=unix:///var/run/docker.sock # Disable for Socket Proxy. Enable otherwise.
       - --providers.docker.endpoint=tcp://socket-proxy:2375 # Enable for Socket Proxy. Disable otherwise.
       - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=trf_ext 
+      - --providers.docker.network=trf_ext
+      - --providers.docker.constraints=Label(`traefik.group`, `external`) 
       # - --providers.docker.swarmMode=false # Traefik v2 Swarm
       # - --providers.swarm.endpoint=tcp://127.0.0.1:2377 # Traefik v3 Swarm
       - --entrypoints.websecure.http.tls=true
@@ -117,12 +118,13 @@ services:
     labels:
       #- "autoheal=true"
       - "traefik.enable=true"
+      - "traefik.group=external"
+      - "traefik.docker.network=trf_ext"      
       # HTTP Routers
       - "traefik.http.routers.traefik-ext-rtr.entrypoints=websecure"
       - "traefik.http.routers.traefik-ext-rtr.rule=Host(`external.$DOMAINNAME_HL`) || Host(`external.$DOMAINNAME_MR`)"
       # Services - API
       - "traefik.http.routers.traefik-ext-rtr.service=api@internal"
-      - "traefik.docker.network=trf_ext"
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
@@ -132,6 +134,3 @@ services:
       #- "traefik.http.routers.traefik-rtr.middlewares=chain-basic-auth@file" # For Basic HTTP Authentication
       #- "traefik.http.routers.traefik-rtr.middlewares=chain-oauth@file" # For Google OAuth
       #- "traefik.http.routers.traefik-rtr.middlewares=chain-authelia@file" # For Authelia Authentication
-      - "traefik.group=external"
-      - "traefik.docker.network=trf_ext"
-      - "traefik.docker.constraints=Label(`traefik.group`, `external`)"

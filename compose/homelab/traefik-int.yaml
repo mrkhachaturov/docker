@@ -56,6 +56,7 @@ services:
       # - --entrypoints.websecure.http.tls.domains[2].sans=*.$DOMAINNAME_2 # Pulls wildcard cert for third domain
       - --providers.file.directory=/rules # Load dynamic configuration from one or more .toml or .yml files in a directory
       - --providers.file.watch=true # Only works on top level files in the rules folder
+      - --providers.docker.constraints=Label(`traefik.group`, `internal`)      
       # - --metrics.prometheus=true
       # - --metrics.prometheus.buckets=0.1,0.3,1.2,5.0
       # - --metrics.prometheus.addEntryPointsLabels=true
@@ -79,7 +80,7 @@ services:
       - --certificatesresolvers.zerossl.acme.dnschallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
       - --certificatesresolvers.zerossl.acme.eab.kid=$ZEROSSL_KID
       - --certificatesresolvers.zerossl.acme.eab.hmacencoded=$ZEROSSL_HMAC
-      - --providers.docker.constraints=Label(`traefik.group`, `internal`)
+
     #healthcheck:
     #  test: ["CMD", "traefik", "healthcheck", "--ping"]
     #  interval: 5s
@@ -117,13 +118,13 @@ services:
     labels:
       #- "autoheal=true"
       - "traefik.enable=true"
+      - "traefik.docker.network=trf_int"
+      - "traefik.group=internal"      
       # HTTP Routers
       - "traefik.http.routers.traefik-int-rtr.entrypoints=websecure"
       - "traefik.http.routers.traefik-int-rtr.rule=Host(`internal.$DOMAINNAME_HL`) || Host(`internal.$DOMAINNAME_MR`)"
       # Services - API
       - "traefik.http.routers.traefik-int-rtr.service=api@internal"
-      - "traefik.docker.network=trf_int"
-      - "traefik.group=internal"
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
