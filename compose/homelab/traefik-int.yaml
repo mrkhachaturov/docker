@@ -121,6 +121,7 @@ services:
       - "traefik.http.routers.traefik-int-rtr.rule=Host(`internal.$DOMAINNAME_HL`) || Host(`internal.$DOMAINNAME_MR`)"
       # Services - API
       - "traefik.http.routers.traefik-int-rtr.service=api@internal"
+      - "traefik.docker.network=trf_int"
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
