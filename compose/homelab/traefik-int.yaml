@@ -10,6 +10,7 @@ services:
     networks:
       trf_int:
         ipv4_address: 10.2.130.254 # You can specify a static IP
+      socket_proxy:  
     command: # CLI arguments
       - --global.checkNewVersion=true
       - --global.sendAnonymousUsage=true
