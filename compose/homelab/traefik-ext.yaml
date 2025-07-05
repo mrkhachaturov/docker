@@ -118,10 +118,10 @@ services:
       #- "autoheal=true"
       - "traefik.enable=true"
       # HTTP Routers
-      - "traefik.http.routers.traefik-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-rtr.rule=Host(`external.$DOMAINNAME_HL`) || Host(`external.$DOMAINNAME_MR`)"
+      - "traefik.http.routers.traefik-ext-rtr.entrypoints=websecure"
+      - "traefik.http.routers.traefik-ext-rtr.rule=Host(`external.$DOMAINNAME_HL`) || Host(`external.$DOMAINNAME_MR`)"
       # Services - API
-      - "traefik.http.routers.traefik-rtr.service=api@internal"
+      - "traefik.http.routers.traefik-ext-rtr.service=api@internal"
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"

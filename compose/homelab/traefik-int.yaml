@@ -41,13 +41,13 @@ services:
       # - --providers.docker.endpoint=unix:///var/run/docker.sock # Disable for Socket Proxy. Enable otherwise.
       - --providers.docker.endpoint=tcp://socket-proxy:2375 # Enable for Socket Proxy. Disable otherwise.
       - --providers.docker.exposedByDefault=false
-      - --providers.docker.network=trf_ext 
+      - --providers.docker.network=trf_int
       # - --providers.docker.swarmMode=false # Traefik v2 Swarm
       # - --providers.swarm.endpoint=tcp://127.0.0.1:2377 # Traefik v3 Swarm
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.options=tls-opts@file
       # Add dns-cloudflare as default certresolver for all services. Also enables TLS and no need to specify on individual services
-      - --entrypoints.websecure.http.tls.certresolver=dns-cloudflare
+      - --entrypoints.websecure.http.tls.certresolver=zerossl
       - --entrypoints.websecure.http.tls.domains[0].main=$DOMAINNAME_HL
       - --entrypoints.websecure.http.tls.domains[0].sans=*.$DOMAINNAME_HL
       - --entrypoints.websecure.http.tls.domains[1].main=$DOMAINNAME_MR
@@ -117,10 +117,10 @@ services:
       #- "autoheal=true"
       - "traefik.enable=true"
       # HTTP Routers
-      - "traefik.http.routers.traefik-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-rtr.rule=Host(`internal.$DOMAINNAME_HL`) || Host(`internal.$DOMAINNAME_MR`)"
+      - "traefik.http.routers.traefik-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.traefik-int-rtr.rule=Host(`internal.$DOMAINNAME_HL`) || Host(`internal.$DOMAINNAME_MR`)"
       # Services - API
-      - "traefik.http.routers.traefik-rtr.service=api@internal"
+      - "traefik.http.routers.traefik-int-rtr.service=api@internal"
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
