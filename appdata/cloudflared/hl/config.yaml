@@ -4,7 +4,7 @@ originRequest:
 
 ingress:
   - hostname: ${DOMAINNAME_HL}
-    service: https://traefik
+    service: https://traefik-ext
   - hostname: "*.${DOMAINNAME_HL}"
-    service: https://traefik
+    service: https://traefik-ext
   - service: http_status:404
