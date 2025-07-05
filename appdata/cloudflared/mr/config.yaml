@@ -3,8 +3,8 @@ originRequest:
   originServerName: external.${DOMAINNAME_MR}
   
 ingress:
-  - hostname: ${DOMAINNAME_HL}
-    service: https://traefik
-  - hostname: "*.${DOMAINNAME_HL}"
-    service: https://traefik
+  - hostname: ${DOMAINNAME_MR}
+    service: https://traefik-ext
+  - hostname: "*.${DOMAINNAME_MR}"
+    service: https://traefik-ext
   - service: http_status:404

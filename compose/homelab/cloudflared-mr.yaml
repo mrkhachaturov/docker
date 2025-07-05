@@ -14,7 +14,7 @@ services:
       - TUNNEL_ORIGIN_ENABLE_HTTP2=true
       - TUNNEL_POST_QUANTUM=true
       - TUNNEL_TRANSPORT_PROTOCOL=quic
-      - DOMAINNAME_HL
+      - DOMAINNAME_MR
     command: tunnel run
     volumes:
       - $DOCKERDIR/appdata/cloudflared/mr:/etc/cloudflared
