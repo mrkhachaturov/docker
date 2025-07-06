@@ -28,7 +28,7 @@ networks:
       config:
         - subnet: 10.2.130.0/24
           gateway: 10.2.130.1
-          ip_range: 10.2.130.224/27
+          ip_range: 10.2.130.192/26
 
 ########################### SECRETS
 secrets:
