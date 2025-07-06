@@ -1,4 +1,3 @@
-
 networks:
   default:
     driver: bridge
@@ -11,10 +10,9 @@ networks:
 
   trf_ext:
     name: trf_ext
-    driver: ipvlan
+    driver: macvlan
     driver_opts:
-      parent: eth0.1125
-      ipvlan_mode: l2
+      parent: enp6s19
     ipam:
       config:
         - subnet: 10.2.125.0/24
@@ -23,10 +21,9 @@ networks:
 
   trf_int:
     name: trf_int
-    driver: ipvlan
+    driver: macvlan
     driver_opts:
-      parent: eth0.1130
-      ipvlan_mode: l2
+      parent: enp6s20
     ipam:
       config:
         - subnet: 10.2.130.0/24
