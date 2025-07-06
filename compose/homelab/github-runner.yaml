@@ -9,10 +9,10 @@ services:
     environment:
       - REPO_URL=https://github.com/mrkhachaturov/flair
       - RUNNER_NAME=flair-runner
-      #- RUNNER_TOKEN=$GITHUB_RUNNER_TOKEN
-      - APP_ID=$GITHUB_APP_ID
-      - APP_PRIVATE_KEY=$GITHUB_APP_PRIVATE_KEY
-      - APP_LOGIN=$GITHUB_APP_LOGIN
+      - RUNNER_TOKEN=$GITHUB_RUNNER_TOKEN
+      # - APP_ID=$GITHUB_APP_ID
+      # - APP_PRIVATE_KEY=$GITHUB_APP_PRIVATE_KEY
+      # - APP_LOGIN=$GITHUB_APP_LOGIN
       - DOCKER_HOST=tcp://socket-proxy:2375
       - RUNNER_WORKDIR=/tmp/runner/work
       - CONFIGURED_ACTIONS_RUNNER_FILES_DIR=/runner/data # Required for persistence
