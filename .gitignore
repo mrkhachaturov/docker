@@ -111,14 +111,6 @@ appdata/traefik3/rules/ws/*
 appdata/authelia/*
 !appdata/authelia/*.example
 
-!appdata/cloudflared
-appdata/cloudflared/*
-!appdata/cloudflared/mr
-appdata/cloudflared/mr/*
-!appdata/cloudflared/mr/config.yaml
-!appdata/cloudflared/hl
-appdata/cloudflared/hl/*
-!appdata/cloudflared/hl/config.yaml
 
 
 !appdata/rclone
