@@ -10,10 +10,9 @@ networks:
 
   trf_ext:
     name: trf_ext
-    driver: ipvlan
+    driver: macvlan
     driver_opts:
       parent: enp6s19
-      ipvlan_mode: l2
     ipam:
       config:
         - subnet: 10.2.125.0/24
@@ -22,10 +21,9 @@ networks:
 
   trf_int:
     name: trf_int
-    driver: ipvlan
+    driver: macvlan
     driver_opts:
       parent: enp6s20
-      ipvlan_mode: l2
     ipam:
       config:
         - subnet: 10.2.130.0/24
