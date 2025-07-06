@@ -106,6 +106,8 @@ appdata/traefik3/rules/ws/*
 !appdata/traefik3/rules/ws/tls-opts.yml
 !appdata/traefik3/rules/ws/middlewares-*.yml
 !appdata/traefik3/rules/ws/chain-*.yml
+!appdata/cloudflared/mr/config.yaml
+!appdata/cloudflared/hl/config.yaml
 
 !appdata/authelia
 appdata/authelia/*
