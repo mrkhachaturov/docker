@@ -4,9 +4,9 @@ http:
       rule: "Host(`netbox.{{env "DOMAINNAME_HL"}}`)" 
       entryPoints:
         - websecure
-      middlewares:
-        - chain-no-auth
-        - unset-x-forwarded-host
+      # middlewares:
+      #   - chain-no-auth
+      #   - unset-x-forwarded-host
       service: netbox-svc
       tls:
         certResolver: zerossl
