@@ -6,7 +6,6 @@ services:
     profiles: ["apps", "all"]
     networks:
       - trf_int
-
     ports:
       - 5678:5678
     volumes:
