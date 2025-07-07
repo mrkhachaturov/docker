@@ -1,0 +1,47 @@
+services:
+  n8n:
+    image: n8nio/n8n:1.98.0
+    container_name: n8n
+    restart: unless-stopped
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
+    volumes:
+      - $DOCKERDIR/appdata/n8n/data:/home/node/.n8n
+    environment:
+      - DB_TYPE=postgresdb
+      - EXECUTIONS_DATA_PRUNE=true
+      - EXECUTIONS_DATA_MAX_AGE=7
+      - EXECUTIONS_DATA_PRUNE_MAX_COUNT=50000
+      - GENERIC_TIMEZONE=Europe/Moscow
+      - N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=false
+      - N8N_PROTOCOL=https
+      - N8N_DIAGNOSTICS_ENABLED=false
+      - N8N_PORT=8080
+      - N8N_HOST=n8n.{{env "DOMAINNAME_HL"}}
+      - WEBHOOK_URL=https://n8n.{{env "DOMAINNAME_HL"}}/
+      - N8N_LOG_LEVEL=info
+      - N8N_LOG_OUTPUT=console
+      - N8N_RUNNERS_ENABLED=true
+      - NODE_FUNCTION_ALLOW_BUILTIN=*
+      - N8N_LICENSE_ACTIVATION_KEY=$N8N_LICENSE_ACTIVATION_KEY
+      - N8N_ENCRYPTION_KEY=$N8N_ENCRYPTION_KEY
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=$N8N_DB_POSTGRESDB_HOST
+      - DB_POSTGRESDB_PORT=$N8N_DB_POSTGRESDB_PORT
+      - DB_POSTGRESDB_USER=$N8N_DB_POSTGRESDB_USER
+      - DB_POSTGRESDB_PASSWORD=$N8N_DB_POSTGRESDB_PASSWORD
+      - DB_POSTGRESDB_DATABASE=$N8N_DB_POSTGRESDB_DATABASE
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      # HTTP Routers
+      - "traefik.http.routers.n8n-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.n8n-int-rtr.rule=Host(`n8n.$DOMAINNAME_HL`)"
+      # Middlewares
+      #- "traefik.http.routers.n8n-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.n8n-int-rtr.service=n8n-svc"
+      - "traefik.services.n8n-svc.loadbalancer.server.port=8080"
+      - "traefik.docker.network=trf_int"
+      #- "traefik.http.routers.n8n-int-rtr.tls.certresolver=zerossl"

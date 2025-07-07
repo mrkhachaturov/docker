@@ -87,6 +87,7 @@ include:
   # - compose/$HOSTNAME/homepage.yml
   - compose/$HOSTNAME/phpmyadmin.yaml
   - compose/$HOSTNAME/pgadmin.yaml
+  - compose/$HOSTNAME/n8n.yaml
   # - compose/$HOSTNAME/sitespeed.yml
   - compose/$HOSTNAME/whoami.yaml
   # DOWNLOADERS
