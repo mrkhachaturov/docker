@@ -13,4 +13,4 @@ http:
     netbox-svc:
       loadBalancer:
         servers:
-          - url: "https://10.2.120.15"  # or whatever your external host's IP:port is 
+          - url: "http://10.2.120.15:8001"  # or whatever your external host's IP:port is 
