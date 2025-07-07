@@ -15,3 +15,6 @@ http:
       loadBalancer:
         servers:
           - url: "https://10.2.120.15"  # or whatever your external host's IP:port is 
+  serversTransports:
+    netbox:
+      insecureSkipVerify: true
