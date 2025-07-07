@@ -13,6 +13,8 @@ http:
   services:
     netbox-svc:
       loadBalancer:
+        passHostHeader: true
+        serversTransport: netbox
         servers:
           - url: "https://10.2.120.15"  # or whatever your external host's IP:port is 
   serversTransports:
