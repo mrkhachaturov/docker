@@ -54,7 +54,7 @@ services:
       - --entrypoints.websecure.http.tls.domains[1].sans=*.$DOMAINNAME_MR
       # - --entrypoints.websecure.http.tls.domains[2].main=$DOMAINNAME_2 # Pulls main cert for third domain
       # - --entrypoints.websecure.http.tls.domains[2].sans=*.$DOMAINNAME_2 # Pulls wildcard cert for third domain
-      - --providers.file.directory=/global-rules,/internal-rules # Load dynamic configuration from one or more .toml or .yml files in a directory
+      - --providers.file.directory=/rules # Load dynamic configuration from one or more .toml or .yml files in a directory
       - --providers.file.watch=true # Only works on top level files in the rules folder
       - --providers.docker.constraints=Label(`traefik.group`, `internal`)      
       # - --metrics.prometheus=true
@@ -101,8 +101,7 @@ services:
       #   protocol: tcp
       #   mode: host
     volumes:
-      - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME/global-rules:/global-rules # Dynamic File Provider directory
-      - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME/internal-rules:/internal-rules # Dynamic File Provider directory
+      - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME/internal-rules:/rules # Dynamic File Provider directory
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
       - $DOCKERDIR/appdata/traefik3/zerossl/acme.json:/acme.json # Certs File 
       - $DOCKERDIR/logs/$HOSTNAME/traefik-int:/logs # Traefik logs
