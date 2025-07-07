@@ -1,0 +1,6 @@
+http:
+  middlewares:
+    unset-x-forwarded-host:
+      headers:
+        customRequestHeaders:
+          X-Forwarded-Host: ""

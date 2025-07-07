@@ -6,6 +6,7 @@ http:
         - websecure
       middlewares:
         - chain-no-auth
+        - unset-x-forwarded-host
       service: netbox-svc
       tls:
         certResolver: zerossl
@@ -13,4 +14,4 @@ http:
     netbox-svc:
       loadBalancer:
         servers:
-          - url: "http://10.2.120.15:8001"  # or whatever your external host's IP:port is 
+          - url: "https://10.2.120.15"  # or whatever your external host's IP:port is 
