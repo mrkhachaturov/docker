@@ -18,8 +18,8 @@ services:
       - N8N_PROTOCOL=https
       - N8N_DIAGNOSTICS_ENABLED=false
       - N8N_PORT=8080
-      - N8N_HOST=n8n.{{env "DOMAINNAME_HL"}}
-      - WEBHOOK_URL=https://n8n.{{env "DOMAINNAME_HL"}}/
+      - N8N_HOST=n8n.$DOMAINNAME_HL
+      - WEBHOOK_URL=https://n8n.$DOMAINNAME_HL/
       - N8N_LOG_LEVEL=info
       - N8N_LOG_OUTPUT=console
       - N8N_RUNNERS_ENABLED=true
