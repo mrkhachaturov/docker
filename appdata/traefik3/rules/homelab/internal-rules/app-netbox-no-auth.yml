@@ -1,0 +1,16 @@
+http:
+  routers:
+    netbox-rtr:
+      rule: "Host(`netbox.{{env "DOMAINNAME_HL"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: netbox-svc
+      tls:
+        certResolver: zerossl
+  services:
+    netbox-svc:
+      loadBalancer:
+        servers:
+          - url: "https://10.2.120.15"  # or whatever your external host's IP:port is 
