@@ -37,6 +37,6 @@ services:
     container_name: minio-console
     restart: unless-stopped
     network_mode: host
-    command: ./console server
+    command: console server
     environment:
       CONSOLE_MINIO_SERVER: http://10.2.120.10:9000
