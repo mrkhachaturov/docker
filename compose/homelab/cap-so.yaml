@@ -8,8 +8,8 @@ services:
       - trf_ext
     environment:
       - DATABASE_URL=$CAP_DATABASE_URL
-      - WEB_URL=http://localhost:3000
-      - NEXTAUTH_URL=http://localhost:3000
+      - WEB_URL=https://cap.$DOMAINNAME_MR
+      - NEXTAUTH_URL=https://cap.$DOMAINNAME_MR
       # CHANGE THESE TO YOUR OWN VALUES
       - DATABASE_ENCRYPTION_KEY=$CAP_DATABASE_ENCRYPTION_KEY
       - NEXTAUTH_SECRET=$CAP_NEXTAUTH_SECRET
