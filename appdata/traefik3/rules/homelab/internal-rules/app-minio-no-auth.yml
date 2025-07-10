@@ -9,9 +9,22 @@ http:
       service: minio-console-svc
       tls:
         certResolver: zerossl
+    minio-s3-rtr:
+      rule: "Host(`s3.{{env "DOMAINNAME_HL"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: minio-s3-svc
+      tls:
+        certResolver: zerossl
         
   services:
     minio-console-svc:
       loadBalancer:
         servers:
           - url: "http://10.2.120.10:9090"  # or whatever your external host's IP:port is 
+    minio-s3-svc:
+      loadBalancer:
+        servers:
+          - url: "http://10.2.120.10:9000"  # or whatever your external host's IP:port is 
