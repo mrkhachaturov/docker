@@ -9,8 +9,8 @@ services:
         ipv4_address: 10.2.125.227
     environment:
       - DATABASE_URL=$CAP_DATABASE_URL
-      - WEB_URL=https://cap.$DOMAINNAME_MR
-      - NEXTAUTH_URL=https://cap.$DOMAINNAME_MR
+      - WEB_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://localhost:3000
       # CHANGE THESE TO YOUR OWN VALUES
       - DATABASE_ENCRYPTION_KEY=$CAP_DATABASE_ENCRYPTION_KEY
       - NEXTAUTH_SECRET=$CAP_NEXTAUTH_SECRET
@@ -31,5 +31,5 @@ services:
       - "traefik.docker.network=trf_ext"
       # External DNS
       - 'external-dns:homelab=[{ "type": "CNAME", "name": "cap.$DOMAINNAME_MR", "target": "external.$DOMAINNAME_MR", "proxy": true }]'      
-    extra_hosts:
-      - "cap.$DOMAINNAME_MR:10.2.125.227"  # Replace with the correct IP
+    # extra_hosts:
+    #   - "cap.$DOMAINNAME_MR:10.2.125.227"  # Replace with the correct IP
