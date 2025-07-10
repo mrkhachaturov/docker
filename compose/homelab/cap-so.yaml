@@ -5,7 +5,8 @@ services:
     restart: unless-stopped
     profiles: ["apps", "all"]    
     networks:
-      - trf_ext
+      trf_ext:
+        ipv4_address: 10.2.125.227
     environment:
       - DATABASE_URL=$CAP_DATABASE_URL
       - WEB_URL=https://cap.$DOMAINNAME_MR
@@ -30,3 +31,5 @@ services:
       - "traefik.docker.network=trf_ext"
       # External DNS
       - 'external-dns:homelab=[{ "type": "CNAME", "name": "cap.$DOMAINNAME_MR", "target": "external.$DOMAINNAME_MR", "proxy": true }]'      
+    extra_hosts:
+      - "cap.$DOMAINNAME_MR:10.2.125.227"  # Replace with the correct IP
