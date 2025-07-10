@@ -1,16 +1,17 @@
 http:
   routers:
-    minio-rtr:
+    minio-console-rtr:
       rule: "Host(`minio.{{env "DOMAINNAME_HL"}}`)" 
       entryPoints:
         - websecure
       middlewares:
         - chain-no-auth
-      service: minio-svc
+      service: minio-console-svc
       tls:
         certResolver: zerossl
+        
   services:
-    minio-svc:
+    minio-console-svc:
       loadBalancer:
         servers:
           - url: "http://10.2.120.10:9090"  # or whatever your external host's IP:port is 

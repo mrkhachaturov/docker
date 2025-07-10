@@ -16,10 +16,10 @@ services:
       # CHANGE THESE TO MATCH YOUR MINIO or S3 STORAGE SETUP
       - CAP_AWS_ACCESS_KEY=$CAP_AWS_ACCESS_KEY
       - CAP_AWS_SECRET_KEY=$CAP_AWS_SECRET_KEY
-      - CAP_AWS_BUCKET=$CAP_AWS_BUCKET
-      - CAP_AWS_REGION=$CAP_AWS_REGION
-      - S3_PUBLIC_ENDPOINT=http://localhost:3902
-      - S3_INTERNAL_ENDPOINT=http://minio:3902
+      - CAP_AWS_BUCKET=capso
+      - CAP_AWS_REGION=us-east-1
+      - S3_PUBLIC_ENDPOINT=https://s3.${DOMAINNAME_HL}
+      - S3_INTERNAL_ENDPOINT=http://10.2.120.10:9090
     ports:
       - 3000:3000
     volumes:
@@ -28,6 +28,6 @@ services:
       - "traefik.enable=true"
       - "traefik.group=internal"
       - "traefik.http.routers.cap-web-rtr.entrypoints=websecure"
-      - "traefik.http.routers.cap-web-rtr.rule=Host(`cap-so.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.cap-web-rtr.rule=Host(`cap.$DOMAINNAME_HL`)"
       - "traefik.http.routers.cap-web-rtr.service=cap-web-svc"
       - "traefik.http.services.cap-web-svc.loadbalancer.server.port=3000"
