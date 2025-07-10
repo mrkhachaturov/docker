@@ -5,8 +5,7 @@ services:
     restart: unless-stopped
     profiles: ["apps", "all"]    
     networks:
-      trf_ext:
-        ipv4_address: 10.2.125.227
+      - trf_ext
     environment:
       - DATABASE_URL=$CAP_DATABASE_URL
       - WEB_URL=http://localhost:3000
