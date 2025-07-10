@@ -8,8 +8,8 @@ services:
       - trf_int
     environment:
       - DATABASE_URL=$CAP_DATABASE_URL
-      - WEB_URL=http://localhost:3000
-      - NEXTAUTH_URL=http://localhost:3000
+      - WEB_URL=https://cap.$DOMAINNAME_HL
+      - NEXTAUTH_URL=https://cap.$DOMAINNAME_HL
       # CHANGE THESE TO YOUR OWN VALUES
       - DATABASE_ENCRYPTION_KEY=$CAP_DATABASE_ENCRYPTION_KEY
       - NEXTAUTH_SECRET=$CAP_NEXTAUTH_SECRET
@@ -18,7 +18,7 @@ services:
       - CAP_AWS_SECRET_KEY=$CAP_AWS_SECRET_KEY
       - CAP_AWS_BUCKET=capso
       - CAP_AWS_REGION=us-east-1
-      - S3_PUBLIC_ENDPOINT=https://s3.${DOMAINNAME_HL}
+      - S3_PUBLIC_ENDPOINT=https://s3.$DOMAINNAME_HL
       - S3_INTERNAL_ENDPOINT=http://10.2.120.10:9090
     ports:
       - 3000:3000
