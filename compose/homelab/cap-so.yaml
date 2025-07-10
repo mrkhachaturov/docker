@@ -20,10 +20,6 @@ services:
       - CAP_AWS_REGION=us-east-1
       - S3_PUBLIC_ENDPOINT=https://s3.$DOMAINNAME_HL
       - S3_INTERNAL_ENDPOINT=http://10.2.120.10:9090
-    ports:
-      - 3000:3000
-    volumes:
-      - $DOCKERDIR/appdata/cap-so/data:/data
     labels:
       - "traefik.enable=true"
       - "traefik.group=external"
