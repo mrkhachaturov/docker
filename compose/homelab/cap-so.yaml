@@ -1,0 +1,33 @@
+services:
+  cap-web:
+    container_name: cap-web
+    image: ghcr.io/capsoftware/cap-web:latest
+    restart: unless-stopped
+    profiles: ["apps", "all"]    
+    networks:
+      - trf_int
+    environment:
+      - DATABASE_URL=$CAP_DATABASE_URL
+      - WEB_URL=http://localhost:3000
+      - NEXTAUTH_URL=http://localhost:3000
+      # CHANGE THESE TO YOUR OWN VALUES
+      - DATABASE_ENCRYPTION_KEY=$CAP_DATABASE_ENCRYPTION_KEY
+      - NEXTAUTH_SECRET=$CAP_NEXTAUTH_SECRET
+      # CHANGE THESE TO MATCH YOUR MINIO or S3 STORAGE SETUP
+      - CAP_AWS_ACCESS_KEY=$CAP_AWS_ACCESS_KEY
+      - CAP_AWS_SECRET_KEY=$CAP_AWS_SECRET_KEY
+      - CAP_AWS_BUCKET=$CAP_AWS_BUCKET
+      - CAP_AWS_REGION=$CAP_AWS_REGION
+      - S3_PUBLIC_ENDPOINT=http://localhost:3902
+      - S3_INTERNAL_ENDPOINT=http://minio:3902
+    ports:
+      - 3000:3000
+    volumes:
+      - $DOCKERDIR/appdata/cap-so/data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.cap-web-rtr.entrypoints=websecure"
+      - "traefik.http.routers.cap-web-rtr.rule=Host(`cap-so.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.cap-web-rtr.service=cap-web-svc"
+      - "traefik.http.services.cap-web-svc.loadbalancer.server.port=3000"

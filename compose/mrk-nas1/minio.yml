@@ -1,8 +1,8 @@
 services:
   # Minio 
-  minio-local:
-    image: quay.io/minio/minio
-    container_name: minio-local
+  minio-s3:
+    image: quay.io/minio/minio:RELEASE.2025-06-13T11-33-47Z
+    container_name: minio-s3
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
@@ -32,11 +32,11 @@ services:
       # MINIO_IDENTITY_OPENID_DISPLAY_NAME: "EntraID"
       # MINIO_IDENTITY_OPENID_COMMENT: "EntraID"
 
-  minio-local-browser:
-    image: ghcr.io/astrateam-net/minio-browser:1.7.6
-    container_name: minio-local-browser
+  minio-console:
+    image: ghcr.io/huncrys/minio-console:v1.8.1
+    container_name: minio-console
     restart: unless-stopped
     network_mode: host
     command: ./console server
     environment:
-      CONSOLE_MINIO_SERVER: http://10.0.120.10:9000
+      CONSOLE_MINIO_SERVER: http://10.2.120.10:9000

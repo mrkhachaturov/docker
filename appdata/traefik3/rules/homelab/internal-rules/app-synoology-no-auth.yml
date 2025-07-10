@@ -1,0 +1,22 @@
+http:
+  routers:
+    synology-rtr:
+      rule: "Host(`nas.{{env "DOMAINNAME_HL"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      #   - unset-x-forwarded-host
+      service: synology-svc
+      tls:
+        certResolver: zerossl
+  services:
+    synology-svc:
+      loadBalancer:
+        passHostHeader: true
+        serversTransport: synology
+        servers:
+          - url: "https://10.2.120.10:6061"  # or whatever your external host's IP:port is 
+  serversTransports:
+    synology:
+      insecureSkipVerify: true
