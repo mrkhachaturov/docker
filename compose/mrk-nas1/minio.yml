@@ -19,7 +19,7 @@ services:
       PGID: ${PGID}
       MINIO_ROOT_USER: ${MINIO_ROOT_USER}
       MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
-      # MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN1}.am
+      MINIO_BROWSER_REDIRECT_URL: https://minio.${DOMAIN1}.am
       # MINIO_DOMAIN: s3.${DOMAIN1}.am
       MINIO_SERVER_URL: https://s3.${DOMAIN1}.am
       # ## ENTRA ID
