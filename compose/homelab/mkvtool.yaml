@@ -1,0 +1,33 @@
+services:
+  mkvtoolnix:
+    image: jlesage/mkvtoolnix
+    restart: unless-stopped
+    profiles: ["apps", "all"]    
+    networks:
+      - trf_int
+    volumes:
+      - $DOCKERDIR/appdata/mkvtoolnix/config:/config:rw
+      - $DOCKERDIR/appdata/mkvtoolnix/data:/storage:rw
+    environment:
+      - USER_ID=$PUID
+      - GROUP_ID=$PGID
+      - TZ=$TZ
+      - DARK_MODE=1
+      - WEB_FILE_MANAGER=1
+      - WEB_LISTENING_PORT=5800
+      - WEB_ENABLE_HTTPS=1
+      - VNC_LISTENING_PORT=5900
+      - VNC_PASSWORD=$VNC_PASSWORD
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      # HTTP Routers
+      - "traefik.http.routers.mkvtoolnix-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.mkvtoolnix-int-rtr.rule=Host(`mkv.$DOMAINNAME_HL`)"
+      # Middlewares
+      #- "traefik.http.routers.n8n-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.mkvtoolnix-int-rtr.service=mkvtoolnix-svc"
+      - "traefik.http.services.mkvtoolnix-svc.loadbalancer.server.port=5800"
+      - "traefik.docker.network=trf_int"
+      #- "traefik.http.routers.mkvtoolnix-int-rtr.tls.certresolver=zerossl"  
