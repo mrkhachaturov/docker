@@ -5,7 +5,8 @@ http:
       entryPoints:
         - websecure
       middlewares:
-        - chain-no-auth
+        - obsidiansync-cors
+        - middlewares-rate-limit
       service: couchdb-svc
       tls:
         certResolver: dns-cloudflare

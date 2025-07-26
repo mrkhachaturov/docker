@@ -1,0 +1,24 @@
+http:
+  middlewares:
+    obsidiansync-cors:
+      headers:
+        accessControlAllowMethods:
+          - GET
+          - PUT
+          - POST
+          - HEAD
+          - DELETE
+        accessControlAllowHeaders:
+          - accept
+          - authorization
+          - content-type
+          - origin
+          - referer
+        accessControlAllowOriginList:
+          - app://obsidian.md
+          - capacitor://localhost
+          - http://localhost
+          - https://obsidian-livesync.{{env "DOMAINNAME_MR"}}  # Add your domain for external browser/app access
+        accessControlMaxAge: 3600
+        addVaryHeader: true
+        accessControlAllowCredentials: true
