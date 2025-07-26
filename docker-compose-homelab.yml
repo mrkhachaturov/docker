@@ -91,6 +91,7 @@ include:
   # - compose/$HOSTNAME/sitespeed.yml
   - compose/$HOSTNAME/whoami.yaml
   - compose/$HOSTNAME/mkvtool.yaml
+  - compose/$HOSTNAME/gitlab.yaml
   # DOWNLOADERS
   # - compose/$HOSTNAME/jdownloader.yml
   # - compose/$HOSTNAME/qbittorrent.yml
