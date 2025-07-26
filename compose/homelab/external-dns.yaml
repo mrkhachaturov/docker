@@ -28,6 +28,6 @@ services:
     networks:
       - trf_ext    
     labels:
-      - 'external-dns:homelab=[{ "type": "CNAME", "name": "obsidian-livesync.$DOMAINNAME_MR", "target": "$CLOUDFLARE_MR_TUNNEL_ID.cfargotunnel.com", "proxy": true }]'     
+      - 'external-dns:homelab=[{ "type": "CNAME", "name": "obsidian-livesync.$DOMAINNAME_MR", "target": "external.$DOMAINNAME_MR", "proxy": true }]'     
   #     - 'external-dns:homelab=[{ "type": "CNAME", "name": "project.example.com", "target": "example.com", "proxy": true }]'
     
