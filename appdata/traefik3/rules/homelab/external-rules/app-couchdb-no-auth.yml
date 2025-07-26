@@ -1,0 +1,17 @@
+http:
+  routers:
+    couchdb-rtr:
+      rule: "Host(`obsidian-livesync.{{env "DOMAINNAME_MR"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: couchdb-svc
+      tls:
+        certResolver: dns-cloudflare
+        options: tls-opts@file
+  services:
+    couchdb-svc:
+      loadBalancer:
+        servers:
+          - url: "http://10.2.120.25:5984"  # or whatever your external host's IP:port is 
