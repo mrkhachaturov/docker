@@ -111,7 +111,7 @@ services:
       # - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
       #- HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
       - DOMAINNAME_HL # Passing the domain name to traefik container to be able to use the variable in rules. 
-      - DOMAINNAME_MRK # Additional Domain variable passthrough to container
+      - DOMAINNAME_MR # Additional Domain variable passthrough to container
       - CLOUDFLARE_MR_TUNNEL_ID
     secrets:
       - cf_dns_api_token
