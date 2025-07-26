@@ -6,7 +6,7 @@ http:
         - websecure
       middlewares:
         - obsidiansync-cors
-        - middlewares-rate-limit
+        - chain-no-auth
       service: couchdb-svc
       tls:
         certResolver: dns-cloudflare
