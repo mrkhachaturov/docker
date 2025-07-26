@@ -18,6 +18,7 @@ services:
       - --entrypoints.websecure.address=:443
       # Enable HTTP/3 on the websecure entrypoint
       - --entrypoints.websecure.http3=true
+      - --entrypoints.ssh.address=:2424
       - --entrypoints.traefik.address=:8080
       # - --entrypoints.ping.address=:8081
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
