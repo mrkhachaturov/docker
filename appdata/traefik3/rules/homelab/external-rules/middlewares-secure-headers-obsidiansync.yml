@@ -1,6 +1,6 @@
 http:
   middlewares:
-    obsidiansync-cors:
+    obsidiansync-cors:  # Your CORS middleware with recommended additions
       headers:
         accessControlAllowMethods:
           - GET
@@ -8,17 +8,20 @@ http:
           - POST
           - HEAD
           - DELETE
+          - OPTIONS  # Added for preflight requests
+          - COPY    # Added for full CouchDB support (optional but useful)
         accessControlAllowHeaders:
           - accept
           - authorization
           - content-type
           - origin
           - referer
+          - x-csrf-token  # Added for CouchDB CSRF (optional)
         accessControlAllowOriginList:
           - app://obsidian.md
           - capacitor://localhost
           - http://localhost
-          - https://obsidian-livesync.{{env "DOMAINNAME_MR"}}  # Add your domain for external browser/app access
+          - https://obsidian-livesync.{{env "DOMAINNAME_MR"}}
         accessControlMaxAge: 3600
         addVaryHeader: true
         accessControlAllowCredentials: true
