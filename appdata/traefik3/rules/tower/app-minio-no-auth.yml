@@ -23,8 +23,8 @@ http:
     minio-console-svc:
       loadBalancer:
         servers:
-          - url: "http://10.1.120.10:9090"  # or whatever your external host's IP:port is 
+          - url: "http://10.1.120.25:9090"  # or whatever your external host's IP:port is 
     minio-s3-svc:
       loadBalancer:
         servers:
-          - url: "http://10.1.120.10:9000"  # or whatever your external host's IP:port is 
+          - url: "http://10.1.120.25:9000"  # or whatever your external host's IP:port is 
