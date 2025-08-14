@@ -14,15 +14,21 @@ networks:
     ipam:
       config:
         - subnet: 192.168.91.0/24
-  npm_proxy:
-    name: npm_proxy
-    driver: bridge
+  trf_proxy:
+    name: trf_proxy
+    driver: macvlan
+    driver_opts:
+      parent: enp0s18
     ipam:
       config:
-        - subnet: 192.168.90.0/24
+        - subnet: 10.1.140.0/24
+          gateway: 10.1.140.1
+          ip_range: 10.1.140.224/27
 
 ########################### SECRETS
-# secrets:
+secrets:
+  cf_dns_api_token:
+    file: $DOCKERDIR/secrets/cf_dns_api_token
 #   basic_auth_credentials:
 #     file: ${SECRETSDIR}/basic_auth_credentials
 #   stepca_init_password:
@@ -35,38 +41,7 @@ include:
   # HOSTNAME=mrk-nas01 - defined in .env
 
   # CORE
-  # - compose/${HOSTNAME}/traefik.yml
-  - compose/${HOSTNAME}/npmplus.yml
+  - compose/${HOSTNAME}/traefik.yml
   - compose/${HOSTNAME}/socket-proxy.yml
   # - compose/$HOSTNAME/oauth.yml
   - compose/$HOSTNAME/portainer.yml
-  ## DATA
-  # - compose/$HOSTNAME/minio.yml
-  ## DB
-  # - compose/$HOSTNAME/mysql.yml
-  # - compose/$HOSTNAME/autobase.yml
-  # CA AUTHORITY
-  # - compose/$HOSTNAME/smallstep.yml
-  # SECRET MANAGEMENT
-  - compose/$HOSTNAME/onepassword.yml
-  # NETWORK
-  # - compose/$HOSTNAME/netbox.yml
-  # - compose/$HOSTNAME/adguardhome.yml
-  # MEDIA
-  # - compose/$HOSTNAME/plex.yml
-  # - compose/$HOSTNAME/plex-sync.yml
-  # - compose/$HOSTNAME/tdarr.yml
-  # FILE MANAGEMENT
-  # - compose/$HOSTNAME/rclone-gdrive.yml
-  # - compose/$HOSTNAME/rclone-gcrypt.yml
-  # - compose/$HOSTNAME/mergerfs.yml
-  # - compose/$HOSTNAME/syncthing.yml
-  # - compose/$HOSTNAME/vscode.yml
-  # MONITORING
-  # - compose/$HOSTNAME/glances.yml
-  # - compose/$HOSTNAME/qdirstat.yml
-  # - compose/${HOSTNAME}/uptime-kuma.yml
-  # MAINTENANCE
-  # - compose/$HOSTNAME/docker-gc.yml
-  # - compose/$HOSTNAME/ddns-updater.yml
-  # - compose/$HOSTNAME/certdumper.yml
