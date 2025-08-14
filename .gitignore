@@ -128,6 +128,15 @@ appdata/traefik3/rules/ws/*
 !appdata/traefik3/rules/ws/tls-opts.yml
 !appdata/traefik3/rules/ws/middlewares-*.yml
 !appdata/traefik3/rules/ws/chain-*.yml
+
+!appdata/traefik3/rules/tower
+appdata/traefik3/rules/tower/*
+!appdata/traefik3/rules/tower/*.example
+!appdata/traefik3/rules/tower/tls-opts.yml
+!appdata/traefik3/rules/tower/middlewares-*.yml
+!appdata/traefik3/rules/tower/chain-*.yml
+!appdata/traefik3/rules/tower/app-*.yml
+
 !appdata/cloudflared/mr/config.yaml
 !appdata/cloudflared/hl/config.yaml
 
