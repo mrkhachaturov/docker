@@ -102,7 +102,7 @@ services:
       #   protocol: tcp
       #   mode: host
     volumes:
-      - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME/internal-rules:/rules # Dynamic File Provider directory
+      - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME:/rules # Dynamic File Provider directory
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
       - $DOCKERDIR/appdata/traefik3/tls/acme.json:/acme.json # Certs File 
       - $DOCKERDIR/logs/$HOSTNAME/traefik-int:/logs # Traefik logs
