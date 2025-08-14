@@ -41,7 +41,7 @@ include:
   # HOSTNAME=mrk-nas01 - defined in .env
 
   # CORE
-  - compose/${HOSTNAME}/traefik.yml
-  - compose/${HOSTNAME}/socket-proxy.yml
+  - compose/${HOSTNAME}/traefik.yaml
+  - compose/${HOSTNAME}/socket-proxy.yaml
   # - compose/$HOSTNAME/oauth.yml
-  - compose/$HOSTNAME/portainer.yml
+  - compose/$HOSTNAME/portainer.yaml
