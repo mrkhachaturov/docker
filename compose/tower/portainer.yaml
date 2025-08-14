@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     # profiles: ["core", "all"]
     networks:
-      # - npm_proxy
+      - trf_proxy
       - socket_proxy
     # command: -H unix:///var/run/docker.sock # # Use Docker Socket Proxy instead for improved security
     command: -H tcp://socket-proxy:2375
