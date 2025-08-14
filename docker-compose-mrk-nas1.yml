@@ -5,8 +5,6 @@
 # - Docker Compose version v2.23.3
 
 ########################### NETWORKS
-########################### NETWORKS
-########################### NETWORKS
 networks:
   default:
     driver: bridge

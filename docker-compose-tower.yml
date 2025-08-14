@@ -1,8 +1,8 @@
 ########################### THIS COMPOSE FILE
 # - Synology (mrk-nas01) - Synology DS220
 # - Prefix/suffix "mrk-nas01" refers to the above host
-# - Docker version 20.10.23, build 876964a
-# - Docker Compose version v2.23.3
+# - Docker version 28.3.3, build 980b856
+# - Docker Compose version v2.39.1
 
 ########################### NETWORKS
 networks:
