@@ -18,7 +18,7 @@ networks:
     name: trf_proxy
     driver: macvlan
     driver_opts:
-      parent: enp0s18
+      parent: ens18
     ipam:
       config:
         - subnet: 10.1.140.0/24
