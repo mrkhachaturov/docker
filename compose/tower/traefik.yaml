@@ -51,8 +51,8 @@ services:
       - --entrypoints.websecure.http.tls.certresolver=zerossl
       - --entrypoints.websecure.http.tls.domains[0].main=$DOMAIN1
       - --entrypoints.websecure.http.tls.domains[0].sans=*.$DOMAIN1
-      - --entrypoints.websecure.http.tls.domains[1].main=$DOMAIN2
-      - --entrypoints.websecure.http.tls.domains[1].sans=*.$DOMAIN2
+      # - --entrypoints.websecure.http.tls.domains[1].main=$DOMAIN2
+      # - --entrypoints.websecure.http.tls.domains[1].sans=*.$DOMAIN2
       # - --entrypoints.websecure.http.tls.domains[2].main=$DOMAINNAME_2 # Pulls main cert for third domain
       # - --entrypoints.websecure.http.tls.domains[2].sans=*.$DOMAINNAME_2 # Pulls wildcard cert for third domain
       - --providers.file.directory=/rules # Load dynamic configuration from one or more .toml or .yml files in a directory
@@ -123,7 +123,7 @@ services:
       - "traefik.group=internal"      
       # HTTP Routers
       - "traefik.http.routers.traefik-int-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-int-rtr.rule=Host(`traefik.$DOMAIN1`) || Host(`traefik.$DOMAIN2`)"
+      - "traefik.http.routers.traefik-int-rtr.rule=Host(`traefik.$DOMAIN1`)"
       # Services - API
       - "traefik.http.routers.traefik-int-rtr.service=api@internal"
       # Healthcheck/ping
