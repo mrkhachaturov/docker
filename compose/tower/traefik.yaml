@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     profiles: ["core", "all"]
     networks:
-      trf_int:
+      trf_proxy:
         ipv4_address: 10.1.140.254 # You can specify a static IP
       socket_proxy:  
     command: # CLI arguments
@@ -49,10 +49,10 @@ services:
       - --entrypoints.websecure.http.tls.options=tls-opts@file
       # Add dns-cloudflare as default certresolver for all services. Also enables TLS and no need to specify on individual services
       - --entrypoints.websecure.http.tls.certresolver=zerossl
-      - --entrypoints.websecure.http.tls.domains[0].main=$DOMAINNAME_HL
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.$DOMAINNAME_HL
-      - --entrypoints.websecure.http.tls.domains[1].main=$DOMAINNAME_MR
-      - --entrypoints.websecure.http.tls.domains[1].sans=*.$DOMAINNAME_MR
+      - --entrypoints.websecure.http.tls.domains[0].main=$DOMAI1
+      - --entrypoints.websecure.http.tls.domains[0].sans=*.$DOMAIN1
+      - --entrypoints.websecure.http.tls.domains[1].main=$DOMAIN2
+      - --entrypoints.websecure.http.tls.domains[1].sans=*.$DOMAIN2
       # - --entrypoints.websecure.http.tls.domains[2].main=$DOMAINNAME_2 # Pulls main cert for third domain
       # - --entrypoints.websecure.http.tls.domains[2].sans=*.$DOMAINNAME_2 # Pulls wildcard cert for third domain
       - --providers.file.directory=/rules # Load dynamic configuration from one or more .toml or .yml files in a directory
@@ -104,26 +104,26 @@ services:
     volumes:
       - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME/internal-rules:/rules # Dynamic File Provider directory
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
-      - $DOCKERDIR/appdata/traefik3/zerossl/acme.json:/acme.json # Certs File 
+      - $DOCKERDIR/appdata/traefik3/tls/acme.json:/acme.json # Certs File 
       - $DOCKERDIR/logs/$HOSTNAME/traefik-int:/logs # Traefik logs
     environment:
       - TZ=$TZ
       - CF_DNS_API_TOKEN_FILE=/run/secrets/cf_dns_api_token   
       # - CF_DNS_API_TOKEN=$CF_DNS_API_TOKEN
       #- HTPASSWD_FILE=/run/secrets/basic_auth_credentials # HTTP Basic Auth Credentials
-      - DOMAINNAME_HL # Passing the domain name to traefik container to be able to use the variable in rules. 
-      - DOMAINNAME_MR # Additional Domain variable passthrough to container
+      - DOMAIN1 # Passing the domain name to traefik container to be able to use the variable in rules. 
+      - DOMAIN2 # Additional Domain variable passthrough to container
     secrets:
       - cf_dns_api_token
       #- basic_auth_credentials
     labels:
       #- "autoheal=true"
       - "traefik.enable=true"
-      - "traefik.docker.network=trf_int"
+      - "traefik.docker.network=trf_proxy"
       - "traefik.group=internal"      
       # HTTP Routers
       - "traefik.http.routers.traefik-int-rtr.entrypoints=websecure"
-      - "traefik.http.routers.traefik-int-rtr.rule=Host(`internal.$DOMAINNAME_HL`) || Host(`internal.$DOMAINNAME_MR`)"
+      - "traefik.http.routers.traefik-int-rtr.rule=Host(`traefik.$DOMAIN1`) || Host(`traefik.$DOMAIN2`)"
       # Services - API
       - "traefik.http.routers.traefik-int-rtr.service=api@internal"
       # Healthcheck/ping
