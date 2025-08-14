@@ -19,13 +19,16 @@ services:
       - $DOCKERDIR/appdata/portainer/data:/data # Change to local directory if you want to save/transfer config locally
     environment:
       - TZ=$TZ
-    # labels:
-    #   - "traefik.enable=true"
-    #   # HTTP Routers
-    #   - "traefik.http.routers.portainer-rtr.entrypoints=https"
-    #   - "traefik.http.routers.portainer-rtr.rule=Host(`portainer.$DOMAINNAME_DS918`)"
-    #   # Middlewares
-    #   - "traefik.http.routers.portainer-rtr.middlewares=chain-oauth@file"
-    #   # HTTP Services
-    #   - "traefik.http.routers.portainer-rtr.service=portainer-svc"
-    #   - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      # HTTP Routers
+      - "traefik.http.routers.portainer-rtr.entrypoints=websecure"
+      - "traefik.http.routers.portainer-rtr.rule=Host(`portainer.$DOMAIN1`)"
+      #- "traefik.http.routers.portainer-rtr.tls.certresolver=zerossl"
+      # Middlewares
+      #- "traefik.http.routers.portainer-rtr.middlewares=chain-oauth@file"
+      # HTTP Services
+      - "traefik.http.routers.portainer-rtr.service=portainer-svc"
+      - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
+      - "traefik.docker.network=trf_proxy"
