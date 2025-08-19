@@ -16,6 +16,8 @@ services:
       - TZ=$TZ
       - PUID=$PUID
       - PGID=$PGID
+      - DOCKER_MODS=linuxserver/mods:universal-package-install
+      - INSTALL_PACKAGES=bash
     shm_size: "5gb"
     # devices:
     #   - /dev/dri:/dev/dri #optional
