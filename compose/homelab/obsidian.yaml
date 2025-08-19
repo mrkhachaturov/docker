@@ -17,7 +17,7 @@ services:
       - PUID=$PUID
       - PGID=$PGID
       - DOCKER_MODS=linuxserver/mods:universal-package-install
-      - INSTALL_PACKAGES=iputils-ping|net-tools|curl|wget|vim
+      - INSTALL_PACKAGES=iputils-ping|net-tools|curl|wget|vim|dnsutils
     shm_size: "5gb"
     # devices:
     #   - /dev/dri:/dev/dri #optional
