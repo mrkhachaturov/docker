@@ -2,18 +2,21 @@ services:
   obsidian:
     image: linuxserver/obsidian:1.9.10
     container_name: obsidian
-    restart: unless-stopped
+    restart: unless-
+    security_opt:
+      - no-new-privileges:false
+      - seccomp:unconfined
     profiles: ["apps", "all"]
     networks:
       - trf_int
     volumes:
-      - $DOCKERDIR/appdata/obsidian/config:/config
-      - $DOCKERDIR/appdata/obsidian/data:/data
+      - $DOCKERDIR/appdata/obsidian/config:/config:rw
+      # - $DOCKERDIR/appdata/obsidian/data:/data
     environment: 
       - TZ=$TZ
       - PUID=$PUID
       - PGID=$PGID
-    shm_size: "1gb"
+    shm_size: "5gb"
     # devices:
     #   - /dev/dri:/dev/dri #optional
     labels:
