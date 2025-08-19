@@ -27,10 +27,14 @@ services:
       # HTTP Routers
       - "traefik.http.routers.obsidian-rtr.entrypoints=websecure"
       - "traefik.http.routers.obsidian-rtr.rule=Host(`notes.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.obsidian-api-rtr.entrypoints=websecure"
+      - "traefik.http.routers.obsidian-api-rtr.rule=Host(`obsidian-api.$DOMAINNAME_HL`)"
       #- "traefik.http.routers.portainer-rtr.tls.certresolver=zerossl"
       # Middlewares
       #- "traefik.http.routers.portainer-rtr.middlewares=chain-oauth@file"
       # HTTP Services
       - "traefik.http.routers.obsidian-rtr.service=obsidian-svc"
       - "traefik.http.services.obsidian-svc.loadbalancer.server.port=3000"
+      - "traefik.http.routers.obsidian-api-rtr.service=obsidian-api-svc"
+      - "traefik.http.services.obsidian-api-svc.loadbalancer.server.port=3023"
       - "traefik.docker.network=trf_int"      
