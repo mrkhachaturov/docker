@@ -93,6 +93,7 @@ include:
   - compose/$HOSTNAME/whoami.yaml
   - compose/$HOSTNAME/mkvtool.yaml
   - compose/$HOSTNAME/gitlab.yaml
+  - compose/$HOSTNAME/obsidian.yaml
   # DOWNLOADERS
   # - compose/$HOSTNAME/jdownloader.yml
   # - compose/$HOSTNAME/qbittorrent.yml
