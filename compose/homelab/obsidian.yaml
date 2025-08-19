@@ -8,6 +8,7 @@ services:
       - trf_int
     volumes:
       - $DOCKERDIR/appdata/obsidian/config:/config
+      - $DOCKERDIR/appdata/obsidian/data:/data
     environment: 
       - TZ=$TZ
       - PUID=$PUID
