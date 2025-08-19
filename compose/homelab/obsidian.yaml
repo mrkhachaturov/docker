@@ -14,8 +14,8 @@ services:
       - PUID=$PUID
       - PGID=$PGID
     shm_size: "1gb"
-    devices:
-      - /dev/dri:/dev/dri #optional
+    # devices:
+    #   - /dev/dri:/dev/dri #optional
     labels:
       - "traefik.enable=true"
       - "traefik.group=internal"
