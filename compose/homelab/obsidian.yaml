@@ -2,7 +2,7 @@ services:
   obsidian:
     image: linuxserver/obsidian:1.9.10
     container_name: obsidian
-    restart: unless-
+    restart: unless-stopped
     security_opt:
       - no-new-privileges:false
       - seccomp:unconfined
