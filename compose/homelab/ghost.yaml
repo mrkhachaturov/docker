@@ -2,7 +2,7 @@
 
 services:
   ghost:
-    image: ghcr.io/astrateam-net/ghost:5.129.0
+    image: ghcr.io/astrateam-net/ghost:6.0
     container_name: ghost
     security_opt:
       - no-new-privileges:true
