@@ -3,7 +3,7 @@ services:
     image: ghcr.io/kingmo888/rustdesk-api-server:latest
     restart: unless-stopped
     profiles: ["apps", "all"]      
-    network_mode:
+    networks:
       - trf_int
     container_name: rustdesk-api-server
     environment:
