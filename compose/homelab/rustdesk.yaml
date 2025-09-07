@@ -9,7 +9,8 @@ services:
     environment:
       - HOST=0.0.0.0
       - TZ=$TZ
-      - CSRF_TRUSTED_ORIGINS=https://$DOMAINNAME_HL,http://10.2.130.192:21114
+      - CSRF_TRUSTED_ORIGINS=https://rustdesk.$DOMAINNAME_HL
+      - ID_SERVER=$ID_SERVER
     volumes:
       - $DOCKERDIR/appdata/rustdesk-api-server/db:/rustdesk-api-server/db
       - /etc/timezone:/etc/timezone:ro
