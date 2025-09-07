@@ -9,7 +9,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - TZ=$TZ
-      - CSRF_TRUSTED_ORIGINS=https://rustdesk.$DOMAINNAME_HL
+      #- CSRF_TRUSTED_ORIGINS=https://rustdesk.$DOMAINNAME_HL
       - ID_SERVER=$ID_SERVER
     volumes:
       - $DOCKERDIR/appdata/rustdesk-api-server/db:/rustdesk-api-server/db
