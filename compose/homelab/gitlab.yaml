@@ -12,7 +12,15 @@ services:
       - $DOCKERDIR/appdata/gitlab/data:/var/opt/gitlab
       - $DOCKERDIR/appdata/gitlab/logs:/var/log/gitlab
       - $DOCKERDIR/appdata/gitlab/config:/etc/gitlab
-    shm_size: '256m'  
+      - /mnt/synology-gitlab-backups:/mnt/backups
+    shm_size: '256m'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['backup_upload_connection'] = {
+          :provider => 'Local',
+          :local_root => '/mnt/backups'
+        }
+        gitlab_rails['backup_upload_remote_directory'] = 'gitlab_backups'  
     labels:
       - "traefik.enable=true"
       - "traefik.group=internal"

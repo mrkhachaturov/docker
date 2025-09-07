@@ -79,6 +79,7 @@ include:
   # - compose/$HOSTNAME/oauth.yml
   # - compose/$HOSTNAME/authelia.yml
   - compose/$HOSTNAME/portainer.yaml
+  - compose/$HOSTNAME/rustdesk.yaml
   # - compose/$HOSTNAME/dockge.yml
   # SECURITY
   # - compose/$HOSTNAME/crowdsec.yml

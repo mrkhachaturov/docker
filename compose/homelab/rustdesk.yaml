@@ -1,0 +1,28 @@
+services:
+  rustdesk-api-server:
+    image: ghcr.io/kingmo888/rustdesk-api-server:latest
+    restart: unless-stopped
+    profiles: ["apps", "all"]      
+    network_mode:
+      - trf_int
+    container_name: rustdesk-api-server
+    environment:
+      - HOST=0.0.0.0
+      - TZ=$TZ
+      - CSRF_TRUSTED_ORIGINS=https://rustdesk.$DOMAINNAME_HL
+    volumes:
+      - $DOCKERDIR/appdata/rustdesk-api-server/db:/rustdesk-api-server/db
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "21114:21114"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      # HTTP Routers
+      - "traefik.http.routers.rustdesk-api-server-rtr.entrypoints=websecure"
+      - "traefik.http.routers.rustdesk-api-server-rtr.rule=Host(`rustdesk.$DOMAINNAME_HL`)"
+      # HTTP Services
+      - "traefik.http.routers.rustdesk-api-server-rtr.service=rustdesk-server-svc"
+      - "traefik.http.services.rustdesk-api-server-svc.loadbalancer.server.port=21114"
+      - "traefik.docker.network=trf_int"
