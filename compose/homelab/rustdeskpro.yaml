@@ -1,0 +1,26 @@
+services:
+  rustdesk-api-server-pro:
+    image: ghcr.io/lantongxue/rustdesk-api-server-pro:latest
+    restart: unless-stopped
+    profiles: ["apps", "all"]      
+    networks:
+      - trf_int
+    container_name: rustdesk-api-server-pro
+    environment:
+      - TZ=$TZ
+      - ADMIN_USER=$RUSTDESK_ADMIN_USER
+      - ADMIN_PASS=$RUSTDESK_ADMIN_PASS
+    volumes:
+      - $DOCKERDIR/appdata/rustdesk-pro/server.yaml:/app/server.yaml
+    ports:
+      - "21114:21114"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      # HTTP Routers
+      - "traefik.http.routers.rustdesk-pro-server-rtr.entrypoints=websecure"
+      - "traefik.http.routers.rustdesk-pro-server-rtr.rule=Host(`rustdesk-pro.$DOMAINNAME_HL`)"
+      # HTTP Services
+      - "traefik.http.routers.rustdesk-pro-server-rtr.service=rustdesk-pro-svc"
+      - "traefik.http.services.rustdesk-pro-svc.loadbalancer.server.port=8080"
+      - "traefik.docker.network=trf_int"
