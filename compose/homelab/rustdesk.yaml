@@ -23,6 +23,6 @@ services:
       - "traefik.http.routers.rustdesk-api-server-rtr.entrypoints=websecure"
       - "traefik.http.routers.rustdesk-api-server-rtr.rule=Host(`rustdesk.$DOMAINNAME_HL`)"
       # HTTP Services
-      - "traefik.http.routers.rustdesk-api-server-rtr.service=rustdesk-server-svc"
-      - "traefik.http.services.rustdesk-server-svc.loadbalancer.server.port=21114"
+      - "traefik.http.routers.rustdesk-api-server-rtr.service=rustdesk-svc"
+      - "traefik.http.services.rustdesk-svc.loadbalancer.server.port=21114"
       - "traefik.docker.network=trf_int"
