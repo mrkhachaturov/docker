@@ -1,0 +1,38 @@
+services:
+  stirling-pdf:
+    image: docker.stirlingpdf.com/stirlingtools/stirling-pdf:latest
+    container_name: Stirling-PDF
+    restart: unless-stopped
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/v1/info/status | grep -q 'UP' && curl -fL http://localhost:8080/ | grep -qv 'Please sign in'"]
+      interval: 5s
+      timeout: 10s
+      retries: 16
+    ports:
+      - "8080:8080"
+    volumes:
+      - $DOCKERDIR/appdata/stirling-pdf/data:/usr/share/tessdata:rw
+      - $DOCKERDIR/appdata/stirling-pdf/config:/configs:rw
+      - $DOCKERDIR/appdata/stirling-pdf/logs:/logs:rw          
+    environment:
+      SECURITY_ENABLELOGIN: "false"
+      LANGS: "en_GB,en_US,ar_AR,de_DE,fr_FR,es_ES,zh_CN,zh_TW,ca_CA,it_IT,sv_SE,pl_PL,ro_RO,ko_KR,pt_BR,ru_RU,el_GR,hi_IN,hu_HU,tr_TR,id_ID"
+      SYSTEM_DEFAULTLOCALE: en-US
+      UI_APPNAME: Stirling-PDF
+      UI_HOMEDESCRIPTION: Demo site for Stirling-PDF Latest
+      UI_APPNAMENAVBAR: Stirling-PDF Latest
+      SYSTEM_MAXFILESIZE: "100"
+      METRICS_ENABLED: "true"
+      SYSTEM_GOOGLEVISIBILITY: "true"
+      SHOW_SURVEY: "true"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.stirling-pdf-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.stirling-pdf-int-rtr.rule=Host(`pdf.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.stirling-pdf-int-rtr.service=stirling-pdf-svc"
+      - "traefik.http.services.stirling-pdf-svc.loadbalancer.server.port=8080"
+      - "traefik.docker.network=trf_int"
