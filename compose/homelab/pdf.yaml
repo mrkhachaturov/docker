@@ -6,11 +6,11 @@ services:
     profiles: ["apps", "all"]
     networks:
       - trf_int
-    # healthcheck:
-    #   test: ["CMD-SHELL", "curl -f http://localhost:8080/api/v1/info/status | grep -q 'UP' && curl -fL http://localhost:8080/ | grep -qv 'Please sign in'"]
-    #   interval: 5s
-    #   timeout: 10s
-    #   retries: 16
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/api/v1/info/status | grep -q 'UP' && curl -fL http://localhost:8080/ | grep -qv 'Please sign in'"]
+      interval: 5s
+      timeout: 10s
+      retries: 16
     ports:
       - "8080:8080"
     volumes:
@@ -21,11 +21,11 @@ services:
       SECURITY_ENABLELOGIN: "false"
       LANGS: "en_US,ru_RU"
       SYSTEM_DEFAULTLOCALE: ru_RU
-      UI_APPNAME: Stirling-PDF
+      UI_APPNAME: PDF-tools
       UI_HOMEDESCRIPTION: Demo site for Stirling-PDF Latest
-      UI_APPNAMENAVBAR: Stirling-PDF Latest
+      UI_APPNAMENAVBAR: Homelab PDF tools
       SYSTEM_MAXFILESIZE: "100"
-      METRICS_ENABLED: "true"
+      METRICS_ENABLED: "false"
       SYSTEM_GOOGLEVISIBILITY: "true"
       SHOW_SURVEY: "true"
     labels:
