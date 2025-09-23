@@ -21,7 +21,6 @@
   assignees: [],
   reviewers: [],
   branchPrefix: 'renovate/',
-  commitMessagePrefix: 'chore(deps):',
   semanticCommits: 'enabled',
   packageRules: [
     {
