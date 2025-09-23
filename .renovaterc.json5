@@ -167,8 +167,7 @@
   ],
   "docker": {
     "pinDigests": true,
-    "separateMajorMinor": true,
-    "separatePatch": false
+    "separateMajorMinor": true
   },
   "dockerfile": {
     "pinDigests": true
@@ -203,6 +202,10 @@
   "rangeStrategy": "bump",
   "bumpVersion": "patch",
   "commitBody": "This PR contains the following updates:\n\n{{#each upgrades}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/each}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}",
-  "prTitle": "{{#if isGroup}}chore(deps): {{groupName}}{{else}}chore(deps): {{#if displayFrom}}{{displayFrom}} -> {{/if}}{{displayTo}}{{/if}}",
+  "commitMessage": {
+    "prefix": "chore(deps):",
+    "suffix": "",
+    "include": "scope"
+  },
   "prBody": "This PR contains the following updates:\n\n{{#if isGroup}}\n{{#each groupSlugs}}\n- {{this}}\n{{/each}}\n{{else}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/if}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}"
 }
