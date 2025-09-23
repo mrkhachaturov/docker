@@ -4,8 +4,7 @@
     "config:best-practices",
     "docker:enableMajor",
     "group:monorepos",
-    "group:recommended",
-    "group:securityUpdates"
+    "group:recommended"
   ],
   "automerge": false,
   "automergeType": "pr",
