@@ -1,7 +1,7 @@
 services:
   # WhoAmI - For Testing and Troubleshooting
   whoami-ext:
-    image: traefik/whoami
+    image: traefik/whoami@sha256:200689790a0a0ea48ca45992e0450bc26ccab5307375b41c84dfc4f2475937ab
     container_name: whoami-ext
     security_opt:
       - no-new-privileges:true
@@ -24,7 +24,7 @@ services:
       - "traefik.docker.network=trf_ext"
 
   whoami-int:
-    image: traefik/whoami
+    image: traefik/whoami@sha256:200689790a0a0ea48ca45992e0450bc26ccab5307375b41c84dfc4f2475937ab
     container_name: whoami-int
     security_opt:
       - no-new-privileges:true

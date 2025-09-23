@@ -1,7 +1,7 @@
 services:
   # qDirStat - Directory Statistics
   qdirstat:
-    image: jlesage/qdirstat:latest
+    image: jlesage/qdirstat:latest@sha256:82f74f0a3e387b76ce1f5afbb29a0499c4ef49ea3a1530a2cfb0ccb79cb7b0c1
     container_name: qdirstat
     security_opt:
       - no-new-privileges:true

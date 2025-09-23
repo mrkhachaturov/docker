@@ -2,7 +2,7 @@ services:
   # Portainer - WebUI for Containers
   portainer:
     container_name: portainer
-    image: portainer/portainer-ee:latest # Use portainer-ce if you do no have a Business Edition license key
+    image: portainer/portainer-ee:latest@sha256:5c1a782e9cfe0bfb41522b9c2af334289d19cb7f164426c0bfb9ce3b454b69e7 # Use portainer-ce if you do no have a Business Edition license key
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped

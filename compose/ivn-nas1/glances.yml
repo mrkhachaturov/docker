@@ -1,7 +1,7 @@
 services:
   # Glances - System Information
   glances:
-    image: nicolargo/glances:latest-full
+    image: nicolargo/glances:latest-full@sha256:f560d87fc1985fad6bc8acc672714ee7d4ad736f8bfcb54a31b83e8134f7b38c
     container_name: glances
     security_opt:
       - no-new-privileges:true

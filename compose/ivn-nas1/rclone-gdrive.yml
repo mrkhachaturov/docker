@@ -5,7 +5,7 @@ services:
   # https://hub.docker.com/r/d2dyno/rclone-gui
   gdrive:
     container_name: gdrive
-    image: rclone/rclone:latest
+    image: rclone/rclone:latest@sha256:fd635aecd9667ee3c3bf920d14118090d4f2a83a080c1fa77e0bafbd4587ca87
     security_opt:
       - no-new-privileges:true
       - apparmor:unconfined
