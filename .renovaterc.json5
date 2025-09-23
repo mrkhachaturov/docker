@@ -1,0 +1,214 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:best-practices",
+    "docker:enableMajor",
+    "group:monorepos",
+    "group:recommended",
+    "group:securityUpdates"
+  ],
+  "automerge": false,
+  "automergeType": "pr",
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 2,
+  "schedule": ["before 6am on monday"],
+  "timezone": "Europe/Moscow",
+  "labels": ["dependencies", "renovate"],
+  "assignees": [],
+  "reviewers": [],
+  "branchPrefix": "renovate/",
+  "commitMessagePrefix": "chore(deps):",
+  "semanticCommits": "enabled",
+  "packageRules": [
+    {
+      "description": "Group Docker Compose updates together",
+      "matchFileNames": ["**/docker-compose*.yml", "**/docker-compose*.yaml"],
+      "groupName": "Docker Compose files",
+      "groupSlug": "docker-compose"
+    },
+    {
+      "description": "Group individual compose service files",
+      "matchFileNames": ["compose/**/*.yml", "compose/**/*.yaml"],
+      "groupName": "Docker services",
+      "groupSlug": "docker-services"
+    },
+    {
+      "description": "Group Traefik updates separately",
+      "matchPackageNames": ["traefik"],
+      "groupName": "Traefik",
+      "groupSlug": "traefik"
+    },
+    {
+      "description": "Group Portainer updates separately", 
+      "matchPackageNames": ["portainer/portainer-ee", "portainer/portainer-ce"],
+      "groupName": "Portainer",
+      "groupSlug": "portainer"
+    },
+    {
+      "description": "Group MinIO updates separately",
+      "matchPackageNames": ["quay.io/minio/minio", "ghcr.io/huncrys/minio-console"],
+      "groupName": "MinIO",
+      "groupSlug": "minio"
+    },
+    {
+      "description": "Group monitoring tools",
+      "matchPackageNames": ["matomo", "uptime-kuma", "grafana", "prometheus"],
+      "groupName": "Monitoring tools",
+      "groupSlug": "monitoring"
+    },
+    {
+      "description": "Group database tools",
+      "matchPackageNames": ["phpmyadmin", "pgadmin", "mysql", "mariadb", "postgres"],
+      "groupName": "Database tools",
+      "groupSlug": "database"
+    },
+    {
+      "description": "Group development tools",
+      "matchPackageNames": ["n8n", "obsidian", "vscode", "gitlab"],
+      "groupName": "Development tools", 
+      "groupSlug": "development"
+    },
+    {
+      "description": "Group security tools",
+      "matchPackageNames": ["authelia", "crowdsec", "oauth"],
+      "groupName": "Security tools",
+      "groupSlug": "security"
+    },
+    {
+      "description": "Ignore specific images that should be updated manually",
+      "matchPackageNames": ["socket-proxy"],
+      "enabled": false
+    },
+    {
+      "description": "Pin major versions for critical infrastructure",
+      "matchPackageNames": ["traefik"],
+      "pin": {
+        "major": true
+      }
+    },
+    {
+      "description": "Use latest tag for development tools",
+      "matchPackageNames": ["portainer/portainer-ee", "portainer/portainer-ce"],
+      "followTag": "latest"
+    },
+    {
+      "description": "Security updates should be merged automatically",
+      "matchPackageNames": ["*"],
+      "vulnerabilityAlerts": true,
+      "automerge": true,
+      "automergeType": "pr",
+      "labels": ["security", "dependencies", "renovate"]
+    },
+    {
+      "description": "Group LinuxServer.io images together",
+      "matchPackageNames": ["lscr.io/linuxserver/*"],
+      "groupName": "LinuxServer.io images",
+      "groupSlug": "linuxserver"
+    },
+    {
+      "description": "Group 1Password Connect images",
+      "matchPackageNames": ["docker.io/1password/connect-api", "docker.io/1password/connect-sync"],
+      "groupName": "1Password Connect",
+      "groupSlug": "1password-connect"
+    },
+    {
+      "description": "Group database images",
+      "matchPackageNames": ["mysql", "postgres", "mariadb", "docker.io/postgres", "docker.io/valkey/valkey"],
+      "groupName": "Database engines",
+      "groupSlug": "database-engines"
+    },
+    {
+      "description": "Group backup and sync tools",
+      "matchPackageNames": ["rclone/rclone", "lscr.io/linuxserver/syncthing"],
+      "groupName": "Backup & Sync tools",
+      "groupSlug": "backup-sync"
+    },
+    {
+      "description": "Pin major version for Traefik",
+      "matchPackageNames": ["traefik"],
+      "rangeStrategy": "pin"
+    },
+    {
+      "description": "Use latest tag for development tools",
+      "matchPackageNames": ["lscr.io/linuxserver/code-server", "ghcr.io/haveagitgat/tdarr"],
+      "followTag": "latest"
+    },
+    {
+      "description": "Use SemVer versioning for Python images",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["python"],
+      "versioning": "pep440"
+    },
+    {
+      "description": "Use SemVer versioning for Node.js images",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["node"],
+      "versioning": "node"
+    },
+    {
+      "description": "Use loose versioning for non-standard tagged images",
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["quay.io/minio/minio"],
+      "versioning": "loose"
+    },
+    {
+      "description": "Group all Traefik-related updates",
+      "matchPackageNames": ["traefik", "traefik:v*"],
+      "groupName": "Traefik ecosystem",
+      "groupSlug": "traefik-ecosystem"
+    },
+    {
+      "description": "Auto-merge patch updates for non-critical tools",
+      "matchPackageNames": ["lscr.io/linuxserver/*", "ghcr.io/haveagitgat/tdarr", "rclone/rclone"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    }
+  ],
+  "docker": {
+    "pinDigests": true,
+    "separateMajorMinor": true,
+    "separatePatch": false
+  },
+  "dockerfile": {
+    "pinDigests": true
+  },
+  "dockerCompose": {
+    "pinDigests": true,
+    "digest": {
+      "enabled": true
+    }
+  },
+  "ignorePaths": [
+    "**/secrets/**",
+    "**/secrets_example/**",
+    "**/*.example",
+    "**/appdata/**",
+    "**/shared/**",
+    "**/scripts/**"
+  ],
+  "ignoreDeps": [
+    "socket-proxy",
+    "tecnativa/docker-socket-proxy",
+    "autobase/console_api",
+    "autobase/console_ui", 
+    "autobase/console_db",
+    "databack/mysql-backup"
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "labels": ["security", "vulnerability"],
+    "assignees": []
+  },
+  "constraints": {
+    "docker": ">=20.10.0"
+  },
+  "rangeStrategy": "bump",
+  "bumpVersion": "patch",
+  "constraintsFiltering": "strict",
+  "binarySource": "install",
+  "dockerSidecarImage": "ghcr.io/containerbase/sidecar",
+  "commitBody": "This PR contains the following updates:\n\n{{#each upgrades}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/each}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}",
+  "prTitle": "{{#if isGroup}}chore(deps): {{groupName}}{{else}}chore(deps): {{#if displayFrom}}{{displayFrom}} -> {{/if}}{{displayTo}}{{/if}}",
+  "prBody": "This PR contains the following updates:\n\n{{#if isGroup}}\n{{#each groupSlugs}}\n- {{this}}\n{{/each}}\n{{else}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/if}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}"
+}
