@@ -40,87 +40,6 @@
       groupSlug: 'docker-compose',
     },
     {
-      description: 'Group individual compose service files',
-      matchFileNames: [
-        'compose/**/*.yml',
-        'compose/**/*.yaml',
-        '**/compose/**/*.yml',
-        '**/compose/**/*.yaml',
-      ],
-      groupName: 'Docker services',
-      groupSlug: 'docker-services',
-    },
-    {
-      description: 'Group Traefik updates separately',
-      matchPackageNames: [
-        'traefik',
-      ],
-      groupName: 'Traefik',
-      groupSlug: 'traefik',
-    },
-    {
-      description: 'Group Portainer updates separately',
-      matchPackageNames: [
-        'portainer/portainer-ee',
-        'portainer/portainer-ce',
-      ],
-      groupName: 'Portainer',
-      groupSlug: 'portainer',
-    },
-    {
-      description: 'Group MinIO updates separately',
-      matchPackageNames: [
-        'quay.io/minio/minio',
-        'ghcr.io/huncrys/minio-console',
-      ],
-      groupName: 'MinIO',
-      groupSlug: 'minio',
-    },
-    {
-      description: 'Group monitoring tools',
-      matchPackageNames: [
-        'matomo',
-        'uptime-kuma',
-        'grafana',
-        'prometheus',
-      ],
-      groupName: 'Monitoring tools',
-      groupSlug: 'monitoring',
-    },
-    {
-      description: 'Group database tools',
-      matchPackageNames: [
-        'phpmyadmin',
-        'pgadmin',
-        'mysql',
-        'mariadb',
-        'postgres',
-      ],
-      groupName: 'Database tools',
-      groupSlug: 'database',
-    },
-    {
-      description: 'Group development tools',
-      matchPackageNames: [
-        'n8n',
-        'obsidian',
-        'vscode',
-        'gitlab',
-      ],
-      groupName: 'Development tools',
-      groupSlug: 'development',
-    },
-    {
-      description: 'Group security tools',
-      matchPackageNames: [
-        'authelia',
-        'crowdsec',
-        'oauth',
-      ],
-      groupName: 'Security tools',
-      groupSlug: 'security',
-    },
-    {
       description: 'Ignore specific images that should be updated manually',
       matchPackageNames: [
         'socket-proxy',
@@ -161,44 +80,6 @@
         'dependencies',
         'renovate',
       ],
-    },
-    {
-      description: 'Group LinuxServer.io images together',
-      matchPackageNames: [
-        'lscr.io/linuxserver/*',
-      ],
-      groupName: 'LinuxServer.io images',
-      groupSlug: 'linuxserver',
-    },
-    {
-      description: 'Group 1Password Connect images',
-      matchPackageNames: [
-        'docker.io/1password/connect-api',
-        'docker.io/1password/connect-sync',
-      ],
-      groupName: '1Password Connect',
-      groupSlug: '1password-connect',
-    },
-    {
-      description: 'Group database images',
-      matchPackageNames: [
-        'mysql',
-        'postgres',
-        'mariadb',
-        'docker.io/postgres',
-        'docker.io/valkey/valkey',
-      ],
-      groupName: 'Database engines',
-      groupSlug: 'database-engines',
-    },
-    {
-      description: 'Group backup and sync tools',
-      matchPackageNames: [
-        'rclone/rclone',
-        'lscr.io/linuxserver/syncthing',
-      ],
-      groupName: 'Backup & Sync tools',
-      groupSlug: 'backup-sync',
     },
     {
       description: 'Pin major version for Traefik',
@@ -244,14 +125,6 @@
         'quay.io/minio/minio',
       ],
       versioning: 'loose',
-    },
-    {
-      description: 'Group all Traefik-related updates',
-      matchPackageNames: [
-        'traefik',
-      ],
-      groupName: 'Traefik ecosystem',
-      groupSlug: 'traefik-ecosystem',
     },
     {
       description: 'Auto-merge patch updates for non-critical tools',
@@ -308,7 +181,7 @@
   rangeStrategy: 'bump',
   bumpVersion: 'patch',
   commitBody: 'This PR contains the following updates:\n\n{{#each upgrades}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/each}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}',
-  commitMessagePrefix: 'chore(deps):',
+  commitMessagePrefix: 'chore(containers):',
   commitMessageSuffix: '{{#if isGroup}}{{groupName}}{{else}}{{#if displayFrom}}{{displayFrom}} -> {{/if}}{{displayTo}}{{/if}}',
   prBody: 'This PR contains the following updates:\n\n{{#if isGroup}}\n{{#each groupSlugs}}\n- {{this}}\n{{/each}}\n{{else}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/if}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}',
 }
