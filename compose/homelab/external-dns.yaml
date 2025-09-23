@@ -23,7 +23,7 @@ services:
       - cf_dns_api_token
 
   other-service:
-    image: 'busybox:latest'
+    image: 'busybox:latest@sha256:d82f458899c9696cb26a7c02d5568f81c8c8223f8661bb2a7988b269c8b9051e'
     command: 'sleep 3600'
     networks:
       - trf_ext    

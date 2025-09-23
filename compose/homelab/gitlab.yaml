@@ -1,6 +1,6 @@
 services:
   gitlab:
-    image: gitlab/gitlab-ce:18.2.1-ce.0
+    image: gitlab/gitlab-ce:18.4.0-ce.0@sha256:42d4f499ed8f055e91028d87772f8ea65ba4812bd71a54086cfc4aa84604ab7a
     container_name: gitlab
     restart: unless-stopped
     profiles: ["core", "all"]

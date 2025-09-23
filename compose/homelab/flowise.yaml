@@ -1,6 +1,6 @@
 services:
     redis:
-        image: redis:alpine
+        image: redis:alpine@sha256:987c376c727652f99625c7d205a1cba3cb2c53b92b0b62aade2bd48ee1593232
         container_name: flowise-redis
         ports:
             - '6379:6379'
@@ -11,7 +11,7 @@ services:
         restart: always
 
     flowise:
-        image: flowiseai/flowise:latest
+        image: flowiseai/flowise:latest@sha256:cf9b5e72f0728626a5613d0873b8e7283244c380778dff85befbc3afb935c08a
         container_name: flowise-main
         restart: always
         ports:
@@ -157,7 +157,7 @@ services:
             #- "traefik.http.routers.flowise-rtr.tls.certresolver=zerossl"
 
     flowise-worker:
-        image: flowiseai/flowise-worker:latest
+        image: flowiseai/flowise-worker:latest@sha256:37db0223694fc9811eed4c2f235e149f4948e94813790d79ba50d2178e802862
         container_name: flowise-worker
         restart: always
         volumes:

@@ -1,6 +1,6 @@
 services:
   rustdesk-api-server-pro:
-    image: ghcr.io/lantongxue/rustdesk-api-server-pro:latest
+    image: ghcr.io/lantongxue/rustdesk-api-server-pro:latest@sha256:a44ad6147ddbf94fdadb0f3ddc3311a6cb16d74786fea17f9d21552cf9b657aa
     restart: unless-stopped
     profiles: ["apps", "all"]      
     networks:

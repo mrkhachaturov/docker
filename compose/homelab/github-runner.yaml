@@ -1,6 +1,6 @@
 services:
   github-runner:
-    image: myoung34/github-runner:latest
+    image: myoung34/github-runner:latest@sha256:ec148162b4225f882382b0490b439d43bb3247a65cadaa30a385a44e3549d231
     container_name: github-runner
     restart: unless-stopped
     profiles: ["core", "all"]

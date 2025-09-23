@@ -1,6 +1,6 @@
 services:
   torrserver:
-    image: ghcr.io/yourok/torrserver
+    image: ghcr.io/yourok/torrserver@sha256:4459bd7a7493f8b60ae3a53e8867536f55540f55a5f01cf00685cc3577147afb
     container_name: torrserver
     restart: unless-stopped
     profiles: ["apps", "all"]      

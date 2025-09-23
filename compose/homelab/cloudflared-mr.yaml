@@ -1,6 +1,6 @@
 services:
   cloudflared-mr:
-    image: docker.io/cloudflare/cloudflared:2025.7.0
+    image: docker.io/cloudflare/cloudflared:2025.9.1@sha256:4604b477520dc8322af5427da68b44f0bf814938e9d2e4814f2249ee4b03ffdf
     container_name: cloudflared-mr
     restart: no
     security_opt:

@@ -1,6 +1,6 @@
 services:
   mkvtoolnix:
-    image: jlesage/mkvtoolnix
+    image: jlesage/mkvtoolnix@sha256:7c07ea194bbbde78765aaa3bc77a9674104459930efcf811774ce515effc5998
     restart: unless-stopped
     profiles: ["apps", "all"]    
     networks:
