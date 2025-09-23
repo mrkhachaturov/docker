@@ -10,7 +10,7 @@
 
 services:
   matomo:
-    image: matomo
+    image: matomo@sha256:bced7f6b05425cbf2bc26fd0226e0e84a530e7671dc6e293284670040b1c59da
     container_name: matomo
     security_opt:
       - no-new-privileges:true

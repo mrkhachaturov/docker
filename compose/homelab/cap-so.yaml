@@ -1,7 +1,7 @@
 services:
   cap-web:
     container_name: cap-web
-    image: ghcr.io/capsoftware/cap-web:latest
+    image: ghcr.io/capsoftware/cap-web:latest@sha256:0e16ba2afad559c4bc460167b88ef14dbc980371ad172e9fa6bd0e109e9feae2
     restart: unless-stopped
     profiles: ["apps", "all"]    
     networks:
