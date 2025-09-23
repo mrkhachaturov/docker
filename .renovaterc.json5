@@ -44,6 +44,8 @@
       matchFileNames: [
         'compose/**/*.yml',
         'compose/**/*.yaml',
+        '**/compose/**/*.yml',
+        '**/compose/**/*.yaml',
       ],
       groupName: 'Docker services',
       groupSlug: 'docker-services',
@@ -269,6 +271,12 @@
   },
   'docker-compose': {
     pinDigests: true,
+    managerFilePatterns: [
+      '**/docker-compose*.yml',
+      '**/docker-compose*.yaml',
+      'compose/**/*.yml',
+      'compose/**/*.yaml',
+    ],
   },
   ignorePaths: [
     '**/secrets/**',
