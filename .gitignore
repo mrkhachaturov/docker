@@ -8,7 +8,6 @@
 !.bash_aliases.example
 !.env.example
 !.renovaterc.json5
-!renovate.json
 
 
 !docker-compose-ivn-nas1.yml

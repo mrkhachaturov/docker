@@ -153,13 +153,13 @@
     },
     {
       "description": "Group all Traefik-related updates",
-      "matchPackageNames": ["traefik", "traefik:v*"],
+      "matchPackageNames": ["traefik"],
       "groupName": "Traefik ecosystem",
       "groupSlug": "traefik-ecosystem"
     },
     {
       "description": "Auto-merge patch updates for non-critical tools",
-      "matchPackageNames": ["lscr.io/linuxserver/*", "ghcr.io/haveagitgat/tdarr", "rclone/rclone"],
+      "matchPackageNames": ["ghcr.io/haveagitgat/tdarr", "rclone/rclone"],
       "matchUpdateTypes": ["patch"],
       "automerge": true,
       "automergeType": "pr"
@@ -173,11 +173,8 @@
   "dockerfile": {
     "pinDigests": true
   },
-  "dockerCompose": {
-    "pinDigests": true,
-    "digest": {
-      "enabled": true
-    }
+  "docker-compose": {
+    "pinDigests": true
   },
   "ignorePaths": [
     "**/secrets/**",
@@ -205,9 +202,6 @@
   },
   "rangeStrategy": "bump",
   "bumpVersion": "patch",
-  "constraintsFiltering": "strict",
-  "binarySource": "install",
-  "dockerSidecarImage": "ghcr.io/containerbase/sidecar",
   "commitBody": "This PR contains the following updates:\n\n{{#each upgrades}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/each}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}",
   "prTitle": "{{#if isGroup}}chore(deps): {{groupName}}{{else}}chore(deps): {{#if displayFrom}}{{displayFrom}} -> {{/if}}{{displayTo}}{{/if}}",
   "prBody": "This PR contains the following updates:\n\n{{#if isGroup}}\n{{#each groupSlugs}}\n- {{this}}\n{{/each}}\n{{else}}\n- {{#if displayFrom}}`{{displayFrom}}` -> {{/if}}`{{displayTo}}`{{#if repositoryUrl}} in {{repositoryUrl}}{{/if}}\n{{#if sourceUrl}}  - [{{sourceUrl}}]({{sourceUrl}})\n{{/if}}\n{{/if}}\n\n{{#if hasReleaseNotes}}\n---\n\n### Release Notes\n\n{{#each upgrades}}\n{{#if releases}}\n{{#each releases}}\n{{#if releaseNotes}}\n- {{#if title}}**{{title}}**{{/if}}{{#if tag}} ({{tag}}){{/if}}\n\n{{releaseNotes}}\n\n{{/if}}\n{{/each}}\n{{/if}}\n{{/each}}\n{{/if}}"
