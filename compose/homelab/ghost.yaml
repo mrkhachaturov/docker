@@ -37,7 +37,7 @@ services:
       - "traefik.group=external"
       # HTTP Routers
       - "traefik.http.routers.ghost-rtr.entrypoints=websecure"
-      - "traefik.http.routers.ghost-rtr.rule=Host(`$DOMAINNAME_MR`) || Host(`blog-admin.$DOMAINNAME_MR`)"
+      - "traefik.http.routers.ghost-rtr.rule=Host(`blog.$DOMAINNAME_MR`) || Host(`blog-admin.$DOMAINNAME_MR`)"
       # Middlewares
       #- "traefik.http.routers.ghost-rtr.middlewares=chain-oauth@file"
       # HTTP Services
@@ -46,4 +46,4 @@ services:
       - "traefik.docker.network=trf_ext"
       #- "traefik.http.routers.ghost-rtr.tls.certresolver=dns-cloudflare"
       # External DNS
-      - 'external-dns:homelab=[{ "type": "CNAME", "name": "$DOMAINNAME_MR", "target": "external.$DOMAINNAME_MR", "proxy": true }]'
+      - 'external-dns:homelab=[{ "type": "CNAME", "name": "blog.$DOMAINNAME_MR", "target": "external.$DOMAINNAME_MR", "proxy": true }]'
