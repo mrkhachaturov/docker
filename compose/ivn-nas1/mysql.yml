@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:9.2.0@sha256:0596fa224cdf3b3355ce3ddbfd7ce77be27ec9e51841dfc5d2e1c8b81eea69d2
+    image: mysql:9.4.0@sha256:91447968e66961302339ec4dc4d385f5e1a957d98e63c7d52ecf8b1de0907346
     container_name: mysql_local
     security_opt:
       - no-new-privileges:true
