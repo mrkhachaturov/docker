@@ -16,7 +16,7 @@ services:
       - PROJECT_LABEL=external-dns
       - INSTANCE_ID=homelab
       - EXECUTION_FREQUENCY_SECONDS=120
-      - LOG_LEVEL=info
+      - LOG_LEVEL=debug
       - PRESERVE_STOPPED=true
       - CLOUDFLARE_MR_TUNNEL_ID
       - CLOUDFLARE_HL_TUNNEL_ID
