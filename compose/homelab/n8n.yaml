@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     profiles: ["apps", "all"]
     networks:
-      - trf_int
+      - trf_ext
     # ports:
     #   - 5678:5678
     volumes:
@@ -21,7 +21,8 @@ services:
       - N8N_DIAGNOSTICS_ENABLED=false
       - N8N_PORT=5678
       - N8N_HOST=n8n.$DOMAINNAME_HL
-      - WEBHOOK_URL=https://n8n.$DOMAINNAME_HL/
+      - WEBHOOK_URL=https://n8n-webhook.$DOMAINNAME_HL/
+      - N8N_PROXY_HOPS=1
       - N8N_LOG_LEVEL=info
       - N8N_LOG_OUTPUT=console
       - N8N_RUNNERS_ENABLED=true
@@ -36,14 +37,16 @@ services:
       - DB_POSTGRESDB_DATABASE=$N8N_DB_POSTGRESDB_DATABASE
     labels:
       - "traefik.enable=true"
-      - "traefik.group=internal"
+      - "traefik.group=external"
       # HTTP Routers
-      - "traefik.http.routers.n8n-int-rtr.entrypoints=websecure"
-      - "traefik.http.routers.n8n-int-rtr.rule=Host(`n8n.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.n8n-ext-rtr.entrypoints=websecure"
+      - "traefik.http.routers.n8n-ext-rtr.rule=Host(`n8n.$DOMAINNAME_HL`) || Host(`n8n-webhook.$DOMAINNAME_HL`)"
       # Middlewares
       #- "traefik.http.routers.n8n-rtr.middlewares=chain-oauth@file"
       # HTTP Services
-      - "traefik.http.routers.n8n-int-rtr.service=n8n-svc"
+      - "traefik.http.routers.n8n-ext-rtr.service=n8n-svc"
       - "traefik.http.services.n8n-svc.loadbalancer.server.port=5678"
-      - "traefik.docker.network=trf_int"
+      - "traefik.docker.network=trf_ext"
       #- "traefik.http.routers.n8n-int-rtr.tls.certresolver=zerossl"  
+      # External DNS
+      - 'external-dns:homelab=[{ "type": "CNAME", "name": "n8n-webhook.$DOMAINNAME_HL", "target": "external.$DOMAINNAME_HL", "proxy": true }]'
