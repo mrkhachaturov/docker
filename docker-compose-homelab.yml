@@ -80,7 +80,7 @@ include:
   # - compose/$HOSTNAME/authelia.yml
   - compose/$HOSTNAME/portainer.yaml
   #- compose/$HOSTNAME/rustdesk.yaml
-  - compose/$HOSTNAME/rustdeskpro.yaml
+  # - compose/$HOSTNAME/rustdeskpro.yaml
   - compose/$HOSTNAME/pdf.yaml
   # - compose/$HOSTNAME/dockge.yml
   # SECURITY
@@ -112,7 +112,8 @@ include:
   # - compose/$HOSTNAME/picard.yml
   # MONITORING
   - compose/$HOSTNAME/matomo.yaml
-  - compose/$HOSTNAME/cap-so.yaml
+  # - compose/$HOSTNAME/cap-so.yaml
+  - compose/$HOSTNAME/paperless.yaml
   # - compose/$HOSTNAME/grafana.yml
   # - compose/$HOSTNAME/uptime-kuma.yml
   # - compose/$HOSTNAME/dozzle.yml
@@ -140,4 +141,4 @@ include:
   - compose/$HOSTNAME/docker-gc.yaml
   # - compose/$HOSTNAME/deunhealth.yml
   # # Blog
-  - compose/$HOSTNAME/ghost.yaml
+  # - compose/$HOSTNAME/ghost.yaml

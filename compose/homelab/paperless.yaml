@@ -1,0 +1,65 @@
+services:
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
+    restart: unless-stopped
+    depends_on:
+      - gotenberg
+      - tika
+    # ports:
+    #   - "8000:8000"
+    volumes:
+      - $DOCKERDIR/appdata/paperless/data:/usr/src/paperless/data
+      - $DOCKERDIR/appdata/paperless/media:/usr/src/paperless/media
+      - $DOCKERDIR/appdata/paperless/export:/usr/src/paperless/export
+      - $DOCKERDIR/appdata/paperless/consume:/usr/src/paperless/consume
+    environment:
+      PAPERLESS_REDIS: $PPR_REDIS_URL
+      PAPERLESS_REDIS_PREFIX: PPR
+
+      PAPERLESS_DBHOST: $PPR_DB_POSTGRESDB_HOST
+      PAPERLESS_DBPORT: $PPR_DB_POSTGRESDB_PORT
+      PAPERLESS_DBNAME: $PPR_DB_POSTGRESDB_DATABASE
+      PAPERLESS_DBUSER: $PPR_DB_POSTGRESDB_USER
+      PAPERLESS_DBPASSWORD: $PPR_DB_POSTGRESDB_PASSWORD
+      PAPERLESS_DBENGINE: postgres
+
+      PAPERLESS_OCR_SKIP_ARCHIVE_FILE: always
+      PAPERLESS_CONSUMPTION_DIR: /usr/src/paperless/consume
+      PAPERLESS_MEDIA_ROOT: /usr/src/paperless/media
+
+      PAPERLESS_TIME_ZONE: Europe/Moscow
+      PAPERLESS_URL: https://dms.$DOMAINNAME_HL
+      PAPERLESS_OCR_LANGUAGE: rus
+      PAPERLESS_TIKA_ENABLED: 1
+      PAPERLESS_CONSUMER_POLLING: 5
+      PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
+      PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      
+      PAPERLESS_SOCIAL_AUTO_SIGNUP: "false"
+      PAPERLESS_DISABLE_REGULAR_LOGIN: "false"
+      PAPERLESS_REDIRECT_LOGIN_TO_SSO: "false"
+      PAPERLESS_SECRET_KEY: $PPR_SECRET_KEY
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.paperless-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.paperless-int-rtr.rule=Host(`dms.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.paperless-int-rtr.service=paperless-svc"
+      - "traefik.http.services.paperless-svc.loadbalancer.server.port=8000"
+      - "traefik.docker.network=trf_int"
+  gotenberg:
+    image: ghcr.io/astrateam-net/gotenberg:8.21.1
+    restart: unless-stopped
+    # The gotenberg chromium route is used to convert .eml files. We do not
+    # want to allow external content like tracking pixels or even javascript.
+    command:
+      - "gotenberg"
+      - "--chromium-disable-javascript=true"
+      - "--chromium-allow-list=file:///tmp/.*"
+  tika:
+    image: ghcr.io/paperless-ngx/tika:2.9.1-full
+    restart: unless-stopped
