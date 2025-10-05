@@ -42,7 +42,7 @@ services:
       - "traefik.enable=true"
       - "traefik.group=internal"
       - "traefik.http.routers.paperless-gpt-int-rtr.entrypoints=websecure"
-      - "traefik.http.routers.paperless-gpt-int-rtr.rule=Host(`dms-gpt.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.paperless-gpt-int-rtr.rule=Host(`dms-ai.$DOMAINNAME_HL`)"
       - "traefik.http.routers.paperless-gpt-int-rtr.service=paperless-gpt-svc"
       - "traefik.http.services.paperless-gpt-svc.loadbalancer.server.port=8080"
       - "traefik.docker.network=trf_int"
