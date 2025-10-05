@@ -1,6 +1,7 @@
 services:
   paperless:
-    image: ghcr.io/astrateam-net/paperless-ngx:2.18.4
+    # image: ghcr.io/astrateam-net/paperless-ngx:2.18.4
+    image: paperless-dev:latest
     container_name: paperless
     profiles: ["apps", "all"]
     networks:
