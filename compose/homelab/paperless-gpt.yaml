@@ -7,11 +7,11 @@ services:
     networks:
       - trf_int
     environment:
-      - PAPERLESS_BASE_URL=http://paperless:8000
+      - PAPERLESS_BASE_URL=https://dms.$DOMAINNAME_HL
       - PAPERLESS_API_TOKEN=$PAPERLESS_API_TOKEN
       - PAPERLESS_PUBLIC_URL=https://dms.$DOMAINNAME_HL
-      - MANUAL_TAG=paperless-gpt
-      - AUTO_TAG=paperless-gpt-auto
+      # - MANUAL_TAG=paperless-gpt
+      # - AUTO_TAG=paperless-gpt-auto
       - LLM_PROVIDER=openai
       - LLM_MODEL=gpt-4o
       - OPENAI_API_KEY=$OPENAI_API_KEY
