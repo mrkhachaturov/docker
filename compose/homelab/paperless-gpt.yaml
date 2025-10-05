@@ -11,7 +11,7 @@ services:
       - PAPERLESS_API_TOKEN=$PAPERLESS_API_TOKEN
       - PAPERLESS_PUBLIC_URL=https://dms.$DOMAINNAME_HL
       - MANUAL_TAG=ai-metadata-manual
-      - AUTO_TAG=ai-metadata-auto
+      - AUTO_TAG=ai-metadata-autorun
       - LLM_PROVIDER=openai
       - LLM_MODEL=gpt-4o
       - LLM_LANGUAG=russian      
@@ -30,7 +30,7 @@ services:
       - PDF_COPY_METADATA=true
       - PDF_OCR_TAGGING=true
       - PDF_OCR_COMPLETE_TAG=ai-ocr-complete
-      - AUTO_OCR_TAG=ai-ocr-auto
+      - AUTO_OCR_TAG=ai-ocr-autorun
       - OCR_LIMIT_PAGES=0
       - LOG_LEVEL=info
 
