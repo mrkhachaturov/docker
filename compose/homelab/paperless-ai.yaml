@@ -27,8 +27,8 @@ services:
       - SCAN_INTERVAL: "*/30 * * * *"
       - OPENAI_API_KEY: $OPENAI_API_KEY
       - TAGS: AI
-    ports:
-      - "3000:${PAPERLESS_AI_PORT:-3000}"
+    # ports:
+    #   - "3000:${PAPERLESS_AI_PORT:-3000}"
     volumes:
       - $DOCKERDIR/appdata/paperless-ai/config:/app/config
     labels:
