@@ -25,6 +25,7 @@ services:
       - AI_PROVIDER: openai
       - OLLAMA_MODEL: gpt-4o-mini
       - SCAN_INTERVAL: "*/30 * * * *"
+      - OPENAI_API_KEY: $OPENAI_API_KEY
       - TAGS: AI
     ports:
       - "3000:${PAPERLESS_AI_PORT:-3000}"
