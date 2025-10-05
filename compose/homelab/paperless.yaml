@@ -30,7 +30,7 @@ services:
       PAPERLESS_OCR_SKIP_ARCHIVE_FILE: always
       PAPERLESS_CONSUMPTION_DIR: /usr/src/paperless/consume
       PAPERLESS_MEDIA_ROOT: /usr/src/paperless/media
-      # PAPERLESS_FILENAME_FORMAT: /docs/98_Необработанные
+      PAPERLESS_FILENAME_FORMAT: /docs/98_Необработанные/{{ title }}
 
       PAPERLESS_TIME_ZONE: Europe/Moscow
       PAPERLESS_URL: https://dms.$DOMAINNAME_HL
