@@ -24,13 +24,13 @@ services:
       - LOCAL_HOCR_PATH=/app/hocr
       - CREATE_LOCAL_PDF=false
       - LOCAL_PDF_PATH=/app/pdf
-      - PDF_UPLOAD=false
+      - PDF_UPLOAD=true
       - PDF_REPLACE=false
       - PDF_COPY_METADATA=true
       - PDF_OCR_TAGGING=true
       - PDF_OCR_COMPLETE_TAG=paperless-gpt-ocr-complete
       - AUTO_OCR_TAG=paperless-gpt-ocr-auto
-      - OCR_LIMIT_PAGES=5
+      - OCR_LIMIT_PAGES=0
       - LOG_LEVEL=info
     volumes:
       - $DOCKERDIR/appdata/paperless-gpt/prompts:/app/prompts
