@@ -30,7 +30,7 @@ services:
     # ports:
     #   - "3000:${PAPERLESS_AI_PORT:-3000}"
     volumes:
-      - $DOCKERDIR/appdata/paperless-ai/config:/app/config
+      - $DOCKERDIR/appdata/paperless-ai/data:/app/data
     labels:
       - "traefik.enable=true"
       - "traefik.group=internal"
