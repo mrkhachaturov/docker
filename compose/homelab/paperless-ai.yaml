@@ -11,22 +11,22 @@ services:
     security_opt:
       - no-new-privileges=true
     environment:
-      - PUID: $PUID
-      - PGID: $PGID
-      - PAPERLESS_AI_PORT: ${PAPERLESS_AI_PORT:-3000}
-      - RAG_SERVICE_URL: http://localhost:8000
-      - RAG_SERVICE_ENABLED: true
-      - PAPERLESS_API_TOKEN: $PAPERLESS_API_TOKEN
-      - PAPERLESS_API_URL: https://dms.$DOMAINNAME_HL/api/
-      - PAPERLESS_USERNAME: $PAPERLESS_USERNAME
-      - PAPERLESS_AI_INITIAL_SETUP: yes
-      - TZ: Europe/Moscow
-      - PROCESS_PREDEFINED_DOCUMENTS: true
-      - AI_PROVIDER: openai
-      - OLLAMA_MODEL: gpt-4o-mini
-      - SCAN_INTERVAL: "*/30 * * * *"
-      - OPENAI_API_KEY: $OPENAI_API_KEY
-      - TAGS: AI
+      - PUID=$PUID
+      - PGID=$PGID
+      - PAPERLESS_AI_PORT=${PAPERLESS_AI_PORT:-3000}
+      - RAG_SERVICE_URL=http://localhost:8000
+      - RAG_SERVICE_ENABLED=true
+      - PAPERLESS_API_TOKEN=$PAPERLESS_API_TOKEN
+      - PAPERLESS_API_URL=https://dms.$DOMAINNAME_HL/api/
+      - PAPERLESS_USERNAME=$PAPERLESS_USERNAME
+      - PAPERLESS_AI_INITIAL_SETUP=yes
+      - TZ=Europe/Moscow
+      - PROCESS_PREDEFINED_DOCUMENTS=true
+      - AI_PROVIDER=openai
+      - OLLAMA_MODEL=gpt-4o-mini
+      - SCAN_INTERVAL=*/30 * * * *
+      - OPENAI_API_KEY=$OPENAI_API_KEY
+      - TAGS=AI
     # ports:
     #   - "3000:${PAPERLESS_AI_PORT:-3000}"
     volumes:
