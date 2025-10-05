@@ -1,6 +1,11 @@
 services:
   paperless-gpt:
-    image: ghcr.io/icereed/paperless-gpt:latest  # GitHub Container Registry
+    image: ghcr.io/icereed/paperless-gpt:latest
+    container_name: paperless-gpt
+    restart: unless-stopped
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
     environment:
       - PAPERLESS_BASE_URL=http://paperless:8000
       - PAPERLESS_API_TOKEN=$PAPERLESS_API_TOKEN
