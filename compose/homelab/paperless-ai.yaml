@@ -1,0 +1,40 @@
+services:
+  paperless-ai:
+    image: clusterzx/paperless-ai
+    container_name: paperless-ai
+    restart: unless-stopped
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges=true
+    environment:
+      - PUID: $PUID
+      - PGID: $PGID
+      - PAPERLESS_AI_PORT=${PAPERLESS_AI_PORT:-3000}
+      - RAG_SERVICE_URL: http://localhost:8000
+      - RAG_SERVICE_ENABLED: true
+      - PAPERLESS_API_TOKEN: $PAPERLESS_API_TOKEN
+      - PAPERLESS_API_URL: https://dms.$DOMAINNAME_HL/api/
+      - PAPERLESS_USERNAME: $PAPERLESS_USERNAME
+      - PAPERLESS_AI_INITIAL_SETUP: yes
+      - TZ: Europe/Moscow
+      - PROCESS_PREDEFINED_DOCUMENTS: true
+      - AI_PROVIDER: openai
+      - OLLAMA_MODEL: gpt-4o-mini
+      - SCAN_INTERVAL: "*/30 * * * *"
+      - TAGS: AI
+    ports:
+      - "3000:${PAPERLESS_AI_PORT:-3000}"
+    volumes:
+      - $DOCKERDIR/appdata/paperless-ai/config:/app/config
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.paperless-ai-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.paperless-ai-int-rtr.rule=Host(`dms-ai.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.paperless-ai-int-rtr.service=paperless-ai-svc"
+      - "traefik.http.services.paperless-ai-svc.loadbalancer.server.port=3000"
+      - "traefik.docker.network=trf_int"

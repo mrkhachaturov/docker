@@ -114,6 +114,7 @@ include:
   - compose/$HOSTNAME/matomo.yaml
   # - compose/$HOSTNAME/cap-so.yaml
   - compose/$HOSTNAME/paperless.yaml
+  - compose/$HOSTNAME/paperless-ai.yaml
   # - compose/$HOSTNAME/grafana.yml
   # - compose/$HOSTNAME/uptime-kuma.yml
   # - compose/$HOSTNAME/dozzle.yml
