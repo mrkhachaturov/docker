@@ -1,0 +1,43 @@
+services:
+  paperless-gpt:
+    image: ghcr.io/icereed/paperless-gpt:latest  # GitHub Container Registry
+    environment:
+      PAPERLESS_BASE_URL=http://paperless:8000
+      PAPERLESS_API_TOKEN=$PAPERLESS_API_TOKEN
+      PAPERLESS_PUBLIC_URL=https://dms.$DOMAINNAME_HL
+      MANUAL_TAG=paperless-gpt
+      AUTO_TAG=paperless-gpt-auto
+      LLM_PROVIDER=openai
+      LLM_MODEL=gpt-4o
+      OPENAI_API_KEY=$OPENAI_API_KEY
+      OCR_PROVIDER=llm
+      VISION_LLM_PROVIDER=openai
+      VISION_LLM_MODEL=gpt-4o
+      OCR_PROCESS_MODE=image
+      PDF_SKIP_EXISTING_OCR=false
+      CREATE_LOCAL_HOCR=false
+      LOCAL_HOCR_PATH=/app/hocr
+      CREATE_LOCAL_PDF=false
+      LOCAL_PDF_PATH=/app/pdf
+      PDF_UPLOAD=false
+      PDF_REPLACE=false
+      PDF_COPY_METADATA=true
+      PDF_OCR_TAGGING=true
+      PDF_OCR_COMPLETE_TAG=paperless-gpt-ocr-complete
+      AUTO_OCR_TAG=paperless-gpt-ocr-auto
+      OCR_LIMIT_PAGES=5
+      LOG_LEVEL=info
+    volumes:
+      - $DOCKERDIR/appdata/paperless-gpt/prompts:/app/prompts
+      - $DOCKERDIR/appdata/paperless-gpt/hocr:/app/hocr
+      - $DOCKERDIR/appdata/paperless-gpt/pdf:/app/pdf
+    # ports:
+    #   - "8080:8080"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.paperless-gpt-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.paperless-gpt-int-rtr.rule=Host(`dms-gpt.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.paperless-gpt-int-rtr.service=paperless-gpt-svc"
+      - "traefik.http.services.paperless-gpt-svc.loadbalancer.server.port=8080"
+      - "traefik.docker.network=trf_int"
