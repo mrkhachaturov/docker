@@ -4,7 +4,7 @@ http:
 
     ##NODE01
     pve01-rtr:
-      rule: "Host(`pve01.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`pve01.{{env "DOMAIN1"}}`)"
       entryPoints:
         - websecure
       middlewares:
@@ -16,7 +16,7 @@ http:
 
     ##NODE02
     pve02-rtr:
-      rule: "Host(`pve02.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`pve02.{{env "DOMAIN1"}}`)"
       entryPoints:
         - websecure
       middlewares:
@@ -28,7 +28,7 @@ http:
 
     ##NODE03
     pve03-rtr:
-      rule: "Host(`pve03.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`pve03.{{env "DOMAIN1"}}`)"
       entryPoints:
         - websecure
       middlewares:
@@ -40,7 +40,7 @@ http:
 
     ##NODE04
     pve04-rtr:
-      rule: "Host(`pve04.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`pve04.{{env "DOMAIN1"}}`)"
       entryPoints:
         - websecure
       middlewares:
@@ -52,7 +52,7 @@ http:
 
     ##NODE05
     pve05-rtr:
-      rule: "Host(`pve05.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`pve05.{{env "DOMAIN1"}}`)"
       entryPoints:
         - websecure
       middlewares:
@@ -64,7 +64,7 @@ http:
 
     ##NODE06
     pve06-rtr:
-      rule: "Host(`pve06.{{env "DOMAIN1"}}.net`)"
+      rule: "Host(`pve06.{{env "DOMAIN1"}}`)"
       entryPoints:
         - websecure
       middlewares:
