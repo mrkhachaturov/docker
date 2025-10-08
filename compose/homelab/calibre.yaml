@@ -1,7 +1,7 @@
 ---
 services:
   calibre:
-    image: crocodilestick/calibre-web-automated:latest
+    image: ghcr.io/crocodilestick/calibre-web-automated:V3.1.4
     container_name: calibre
     restart: unless-stopped
     profiles: ["apps", "all"]
