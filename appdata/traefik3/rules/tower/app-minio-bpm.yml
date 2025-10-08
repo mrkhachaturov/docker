@@ -1,0 +1,17 @@
+http:
+  routers:
+    bpm-rtr:
+      rule: "Host(`bpm.{{env "DOMAIN1"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: bpm-svc
+      tls:
+        certResolver: zerossl
+        
+  services:
+    bpm-svc:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.130.61:8080"  # or whatever your external host's IP:port is 
