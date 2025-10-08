@@ -1,0 +1,40 @@
+---
+services:
+  calibre:
+    image: crocodilestick/calibre-web-automated:latest
+    container_name: calibre
+    restart: unless-stopped
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - HARDCOVER_TOKEN=$HARDCOVER_TOKEN
+      # If your library is on a network share (e.g., NFS/SMB), disable WAL to reduce locking issues
+      # Accepts: true/false (default: false)
+      - NETWORK_SHARE_MODE=true
+      # Override the default port (8083) for the web server.
+      # Accepts any valid port number.
+      - CWA_PORT_OVERRIDE=8083
+    volumes:
+      # CW users migrating should stop their existing CW instance, make a copy of the config folder, and bind that here to carry over all of their user settings ect.
+      - $DOCKERDIR/appdata/calibre/config:/config 
+      # This is an ingest dir, NOT a library one. Anything added here will be automatically added to your library according to the settings you have configured in CWA Settings page. All files placed here are REMOVED AFTER PROCESSING
+      - $DOCKERDIR/appdata/media/03_Library/97_ebook_upload:/cwa-book-ingest
+      # If you don't have an existing library, CWA will automatically create one at the bind provided here
+      - $DOCKERDIR/appdata/media/03_Library/01_Books:/calibre-library
+      # If you use calibre plugins, you can bind your plugins folder here to have CWA attempt to add them to its workflow (WIP)
+      # If you are starting with a fresh install, you also need to copy customize.py.json to the Calibre config volume above, in /path/to/config/folder/.config/calibre/customize.py.json, see the note below for more info
+      - $DOCKERDIR/appdata/calibre/plugins:/config/.config/calibre/plugins
+    # ports:
+    #   - 8083:8083
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.calibre-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.calibre-int-rtr.rule=Host(`books.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.calibre-int-rtr.service=calibre-svc"
+      - "traefik.http.services.calibre-svc.loadbalancer.server.port=8083"
+      - "traefik.docker.network=trf_int"
