@@ -14,7 +14,7 @@ services:
       - PASSWORD=$CALIBRE_PASSWORD
     volumes:
       - $DOCKERDIR/appdata/calibre-server/config:/config
-      # - $DOCKERDIR/appdata/calibre-server/data:/data
+      - $DOCKERDIR/appdata/media/03_Library/01_Books/Ebooks:/config/library
     # ports:
     #   - 8083:8083
     labels:
