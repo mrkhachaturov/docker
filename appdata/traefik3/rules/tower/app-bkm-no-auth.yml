@@ -1,0 +1,17 @@
+http:
+  routers:
+    bkm-rtr:
+      rule: "Host(`bkm.{{env "DOMAIN1"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: bkm-svc
+      tls:
+        certResolver: zerossl
+        
+  services:
+    bkm-svc:
+      loadBalancer:
+        servers:
+          - url: "http://10.1.130.62:8090"  # or whatever your external host's IP:port is 
