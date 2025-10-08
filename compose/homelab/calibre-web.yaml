@@ -27,7 +27,8 @@ services:
       - $DOCKERDIR/appdata/media/03_Library/01_Books/Ebooks:/calibre-library
       # If you use calibre plugins, you can bind your plugins folder here to have CWA attempt to add them to its workflow (WIP)
       # If you are starting with a fresh install, you also need to copy customize.py.json to the Calibre config volume above, in /path/to/config/folder/.config/calibre/customize.py.json, see the note below for more info
-      - $DOCKERDIR/appdata/calibre/plugins:/config/.config/calibre/plugins
+      - $DOCKERDIR/appdata/calibre-server/config/.config/calibre/plugins:/config/.config/calibre/plugins
+      - $DOCKERDIR/appdata/calibre-server/config/.config/calibre/customize.py.json:/config/.config/calibre/customize.py.json
     # ports:
     #   - 8083:8083
     labels:
