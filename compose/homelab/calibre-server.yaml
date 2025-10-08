@@ -23,5 +23,5 @@ services:
       - "traefik.http.routers.calibre-server-int-rtr.entrypoints=websecure"
       - "traefik.http.routers.calibre-server-int-rtr.rule=Host(`calibre.$DOMAINNAME_HL`)"
       - "traefik.http.routers.calibre-server-int-rtr.service=calibre-server-svc"
-      - "traefik.http.services.calibre-server-svc.loadbalancer.server.port=8083"
+      - "traefik.http.services.calibre-server-svc.loadbalancer.server.port=8080"
       - "traefik.docker.network=trf_int"
