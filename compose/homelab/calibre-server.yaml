@@ -1,0 +1,27 @@
+---
+services:
+  calibre-server:
+    image: lscr.io/linuxserver/calibre
+    container_name: calibre-server
+    restart: unless-stopped
+    profiles: ["apps", "all"]
+    networks:
+      - trf_int
+    environment:
+      - PUID=$PUID
+      - PGID=$PGID
+      - TZ=$TZ
+      - PASSWORD=$CALIBRE_PASSWORD
+    volumes:
+      - $DOCKERDIR/appdata/calibre-server/config:/config
+      # - $DOCKERDIR/appdata/calibre-server/data:/data
+    # ports:
+    #   - 8083:8083
+    labels:
+      - "traefik.enable=true"
+      - "traefik.group=internal"
+      - "traefik.http.routers.calibre-server-int-rtr.entrypoints=websecure"
+      - "traefik.http.routers.calibre-server-int-rtr.rule=Host(`calibre.$DOMAINNAME_HL`)"
+      - "traefik.http.routers.calibre-server-int-rtr.service=calibre-server-svc"
+      - "traefik.http.services.calibre-server-svc.loadbalancer.server.port=8083"
+      - "traefik.docker.network=trf_int"

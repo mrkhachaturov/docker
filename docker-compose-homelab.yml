@@ -79,7 +79,8 @@ include:
   # - compose/$HOSTNAME/oauth.yml
   # - compose/$HOSTNAME/authelia.yml
   - compose/$HOSTNAME/portainer.yaml
-  - compose/$HOSTNAME/calibre.yaml
+  - compose/$HOSTNAME/calibre-web.yaml
+  - compose/$HOSTNAME/calibre-server.yaml
   #- compose/$HOSTNAME/rustdesk.yaml
   # - compose/$HOSTNAME/rustdeskpro.yaml
   - compose/$HOSTNAME/pdf.yaml
