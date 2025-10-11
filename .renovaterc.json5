@@ -7,10 +7,11 @@
   ],
   automerge: false,
   automergeType: 'pr',
-  prConcurrentLimit: 5,
-  prHourlyLimit: 2,
+  prConcurrentLimit: 10,
+  prHourlyLimit: 5,
   schedule: [
     'before 6am on monday',
+    'before 6am on thursday',
   ],
   timezone: 'Europe/Moscow',
   labels: [
@@ -28,6 +29,18 @@
       ],
       pinDigests: false,
       separateMajorMinor: true,
+    },
+    {
+      description: 'Disable digest updates for docker-compose files',
+      matchFileNames: [
+        '**/docker-compose*.yml',
+        '**/docker-compose*.yaml',
+        'compose/**/*.yml',
+        'compose/**/*.yaml',
+      ],
+      matchDatasources: ['docker'],
+      matchUpdateTypes: ['digest'],
+      enabled: false,
     },
     {
       description: 'Group Docker Compose updates together',
@@ -143,6 +156,9 @@
   },
   'docker-compose': {
     pinDigests: false,
+    digest: {
+      enabled: false,
+    },
     managerFilePatterns: [
       '**/docker-compose*.yml',
       '**/docker-compose*.yaml',
