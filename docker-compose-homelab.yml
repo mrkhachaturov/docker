@@ -30,6 +30,11 @@ networks:
           gateway: 10.2.130.1
           ip_range: 10.2.130.192/26
 
+  paperless_internal:
+    name: paperless_internal
+    driver: bridge
+    internal: false
+
 ########################### SECRETS
 secrets:
   # basic_auth_credentials:

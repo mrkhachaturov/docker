@@ -6,6 +6,7 @@ services:
     profiles: ["apps", "all"]
     networks:
       - trf_int
+      - paperless_internal
     restart: unless-stopped
     depends_on:
       - gotenberg
@@ -16,7 +17,13 @@ services:
       - $DOCKERDIR/appdata/paperless/data:/usr/src/paperless/data
       - $DOCKERDIR/appdata/paperless/media:/usr/src/paperless/media
       - $DOCKERDIR/appdata/paperless/export:/usr/src/paperless/export
-      - $DOCKERDIR/appdata/paperless/consume:/usr/src/paperless/consume
+      # Direct NFS subpath mounts
+      - type: volume
+        source: paperless-docs-root
+        target: /usr/src/paperless/media/documents/originals/docs
+      - type: volume
+        source: paperless-consume-folder
+        target: /usr/src/paperless/consume
     environment:
       PAPERLESS_REDIS: $PPR_REDIS_URL
       PAPERLESS_REDIS_PREFIX: PPR
@@ -41,6 +48,8 @@ services:
       PAPERLESS_CONSUMER_POLLING: 5
       PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://gotenberg:3000
       PAPERLESS_TIKA_ENDPOINT: http://tika:9998
+      PAPERLESS_CONSUMER_RECURSIVE: true
+      PAPERLESS_CONSUMER_SUBDIRS_AS_TAGS: true
       
       PAPERLESS_SOCIAL_AUTO_SIGNUP: "false"
       PAPERLESS_DISABLE_REGULAR_LOGIN: "false"
@@ -57,6 +66,8 @@ services:
   gotenberg:
     image: ghcr.io/astrateam-net/gotenberg:8.21.1
     restart: unless-stopped
+    networks:
+      - paperless_internal
     # The gotenberg chromium route is used to convert .eml files. We do not
     # want to allow external content like tracking pixels or even javascript.
     command:
@@ -66,3 +77,19 @@ services:
   tika:
     image: ghcr.io/paperless-ngx/tika:2.9.1-full
     restart: unless-stopped
+    networks:
+      - paperless_internal
+
+volumes:
+  paperless-docs-root:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.2.120.10,rw,soft,intr,vers=4
+      device: ":/volume1/01_Documents"
+  paperless-consume-folder:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=10.2.120.10,rw,soft,intr,vers=4
+      device: ":/volume1/01_Documents/98_Upload"
