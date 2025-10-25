@@ -7,8 +7,7 @@ http:
       middlewares:
         - chain-no-auth
       service: bkm-svc
-      tls:
-        options: tls-opts@file
+      tls: {}
         
   services:
     bkm-svc:

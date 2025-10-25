@@ -10,8 +10,7 @@ http:
       middlewares:
         - chain-no-auth
       service: pve01-svc
-      tls:
-        options: tls-opts@file
+      tls: {}
 
     ##NODE02
     pve02-rtr:
@@ -21,8 +20,7 @@ http:
       middlewares:
         - chain-no-auth
       service: pve02-svc
-      tls:
-        options: tls-opts@file
+      tls: {}
 
     ##NODE03
     pve03-rtr:
@@ -32,8 +30,7 @@ http:
       middlewares:
         - chain-no-auth
       service: pve03-svc
-      tls:
-        options: tls-opts@file
+      tls: {}
 
     ##NODE04
     pve04-rtr:
@@ -43,8 +40,7 @@ http:
       middlewares:
         - chain-no-auth
       service: pve04-svc
-      tls:
-        options: tls-opts@file
+      tls: {}
 
     ##NODE05
     pve05-rtr:
@@ -65,8 +61,7 @@ http:
       middlewares:
         - chain-no-auth
       service: pve06-svc
-      tls:
-        options: tls-opts@file   
+      tls: {}   
           
   #Services
   services:
