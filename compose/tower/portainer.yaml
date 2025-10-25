@@ -31,4 +31,5 @@ services:
       # HTTP Services
       - "traefik.http.routers.portainer-rtr.service=portainer-svc"
       - "traefik.http.services.portainer-svc.loadbalancer.server.port=9000"
+      - "traefik.http.routers.portainer-rtr.tls=true"
       - "traefik.docker.network=trf_proxy"
