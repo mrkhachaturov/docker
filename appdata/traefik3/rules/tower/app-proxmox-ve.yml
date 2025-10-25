@@ -11,7 +11,6 @@ http:
         - chain-no-auth
       service: pve01-svc
       tls:
-        certResolver: internalca
         options: tls-opts@file
 
     ##NODE02
@@ -23,8 +22,7 @@ http:
         - chain-no-auth
       service: pve02-svc
       tls:
-        certResolver: internalca
-        options: tls-opts@file    
+        options: tls-opts@file
 
     ##NODE03
     pve03-rtr:
@@ -35,7 +33,6 @@ http:
         - chain-no-auth
       service: pve03-svc
       tls:
-        certResolver: internalca
         options: tls-opts@file
 
     ##NODE04
@@ -47,8 +44,7 @@ http:
         - chain-no-auth
       service: pve04-svc
       tls:
-        certResolver: internalca
-        options: tls-opts@file    
+        options: tls-opts@file
 
     ##NODE05
     pve05-rtr:
@@ -59,8 +55,7 @@ http:
         - chain-no-auth
       service: pve05-svc
       tls:
-        certResolver: internalca
-        options: tls-opts@file     
+        options: tls-opts@file
 
     ##NODE06
     pve06-rtr:
@@ -71,7 +66,6 @@ http:
         - chain-no-auth
       service: pve06-svc
       tls:
-        certResolver: internalca
         options: tls-opts@file   
           
   #Services

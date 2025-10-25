@@ -8,7 +8,7 @@ http:
         - chain-no-auth
       service: bpm-svc
       tls:
-        certResolver: zerossl
+        options: tls-opts@file
         
   services:
     bpm-svc:
