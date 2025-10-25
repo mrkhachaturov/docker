@@ -7,8 +7,8 @@ http:
       middlewares:
         - chain-no-auth
       service: minio-console-svc
-      tls:
-        options: tls-opts@file
+      # tls:
+      #   options: tls-opts@file
 
     minio-s3-rtr:
       rule: "Host(`s3.{{env "DOMAIN1"}}`)" 
@@ -17,8 +17,8 @@ http:
       middlewares:
         - chain-no-auth
       service: minio-s3-svc
-      tls:
-        options: tls-opts@file
+      # tls:
+      #   options: tls-opts@file
         
   services:
     minio-console-svc:
