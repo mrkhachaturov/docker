@@ -9,7 +9,7 @@ services:
     profiles: ["core", "all"]
     networks:
       trf_proxy:
-        ipv4_address: 10.1.140.254 # You can specify a static IP
+        ipv4_address: 10.1.140.253 # You can specify a static IP
       socket_proxy:  
     command: # CLI arguments
       - --global.checkNewVersion=true
