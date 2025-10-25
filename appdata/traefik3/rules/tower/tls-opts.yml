@@ -1,9 +1,9 @@
 tls:
-  # stores:
-  #   default:
-  #     defaultCertificate:
-  #       certFile: /etc/certs/cert.crt
-  #       keyFile: /etc/certs/cert.key
+  stores:
+    default:
+      defaultCertificate:
+        certFile: /etc/traefik/tls/{{env "DOMAIN1"}}.cer
+        keyFile: /etc/traefik/tls/{{env "DOMAIN1"}}.key
   options:
     tls-opts:
       minVersion: VersionTLS12

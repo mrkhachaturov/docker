@@ -48,9 +48,9 @@ services:
       - --entrypoints.websecure.http.tls=true
       - --entrypoints.websecure.http.tls.options=tls-opts@file
       # Add dns-cloudflare as default certresolver for all services. Also enables TLS and no need to specify on individual services
-      - --entrypoints.websecure.http.tls.certresolver=zerossl
-      - --entrypoints.websecure.http.tls.domains[0].main=$DOMAIN1
-      - --entrypoints.websecure.http.tls.domains[0].sans=*.$DOMAIN1
+      # - --entrypoints.websecure.http.tls.certresolver=zerossl
+      # - --entrypoints.websecure.http.tls.domains[0].main=$DOMAIN1
+      # - --entrypoints.websecure.http.tls.domains[0].sans=*.$DOMAIN1
       # - --entrypoints.websecure.http.tls.domains[1].main=$DOMAIN2
       # - --entrypoints.websecure.http.tls.domains[1].sans=*.$DOMAIN2
       # - --entrypoints.websecure.http.tls.domains[2].main=$DOMAINNAME_2 # Pulls main cert for third domain
@@ -73,14 +73,14 @@ services:
       # - --metrics.influxdb2.addServicesLabels=true
       # - --metrics.influxdb2.pushInterval=30s
       # - --metrics.influxdb2.additionallabels.host=$DOMAINNAME_HS
-      - --certificatesresolvers.zerossl.acme.caserver=https://acme.zerossl.com/v2/DV90
-      - --certificatesresolvers.zerossl.acme.email=$ZEROSSL_EMAIL
-      - --certificatesresolvers.zerossl.acme.storage=/acme.json
-      - --certificatesresolvers.zerossl.acme.dnschallenge.provider=cloudflare
-      - --certificatesresolvers.zerossl.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
-      - --certificatesresolvers.zerossl.acme.dnschallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
-      - --certificatesresolvers.zerossl.acme.eab.kid=$ZEROSSL_KID
-      - --certificatesresolvers.zerossl.acme.eab.hmacencoded=$ZEROSSL_HMAC
+      # - --certificatesresolvers.zerossl.acme.caserver=https://acme.zerossl.com/v2/DV90
+      # - --certificatesresolvers.zerossl.acme.email=$ZEROSSL_EMAIL
+      # - --certificatesresolvers.zerossl.acme.storage=/acme.json
+      # - --certificatesresolvers.zerossl.acme.dnschallenge.provider=cloudflare
+      # - --certificatesresolvers.zerossl.acme.dnschallenge.resolvers=1.1.1.1:53,1.0.0.1:53
+      # - --certificatesresolvers.zerossl.acme.dnschallenge.delayBeforeCheck=90 # To delay DNS check and reduce LE hitrate
+      # - --certificatesresolvers.zerossl.acme.eab.kid=$ZEROSSL_KID
+      # - --certificatesresolvers.zerossl.acme.eab.hmacencoded=$ZEROSSL_HMAC
 
     #healthcheck:
     #  test: ["CMD", "traefik", "healthcheck", "--ping"]
@@ -104,7 +104,7 @@ services:
     volumes:
       - $DOCKERDIR/appdata/traefik3/rules/$HOSTNAME:/rules # Dynamic File Provider directory
       # - /var/run/docker.sock:/var/run/docker.sock:ro # Enable if not using Socket Proxy
-      - $DOCKERDIR/appdata/traefik3/tls/acme.json:/acme.json # Certs File 
+      - $DOCKERDIR/appdata/traefik3/tls:/etc/traefik/tls:ro # ACME.sh certificates
       - $DOCKERDIR/logs/$HOSTNAME/traefik-int:/logs # Traefik logs
     environment:
       - TZ=$TZ
@@ -126,6 +126,7 @@ services:
       - "traefik.http.routers.traefik-int-rtr.rule=Host(`traefik.$DOMAIN1`)"
       # Services - API
       - "traefik.http.routers.traefik-int-rtr.service=api@internal"
+      - "traefik.http.routers.traefik-int-rtr.tls=true"
       # Healthcheck/ping
       #- "traefik.http.routers.ping.rule=Host(`traefik.$DOMAINNAME_HS`) && Path(`/ping`)"
       #- "traefik.http.routers.ping.tls=true"
