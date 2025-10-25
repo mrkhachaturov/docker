@@ -7,8 +7,8 @@ http:
       middlewares:
         - chain-no-auth
       service: minio-console-svc
-      tls:
-        certResolver: zerossl
+      tls: {}
+
     minio-s3-rtr:
       rule: "Host(`s3.{{env "DOMAIN1"}}`)" 
       entryPoints:
@@ -16,8 +16,7 @@ http:
       middlewares:
         - chain-no-auth
       service: minio-s3-svc
-      tls:
-        certResolver: zerossl
+      tls: {}
         
   services:
     minio-console-svc:
