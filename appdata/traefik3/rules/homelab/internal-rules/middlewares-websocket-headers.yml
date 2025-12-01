@@ -1,0 +1,15 @@
+http:
+  middlewares:
+    middlewares-websocket-headers:
+      headers:
+        customRequestHeaders:
+          X-Forwarded-Proto: "https"
+        # Allow WebSocket upgrade by not stripping these headers
+        accessControlAllowHeaders:
+          - "Connection"
+          - "Upgrade"
+          - "Sec-WebSocket-Key"
+          - "Sec-WebSocket-Version"
+          - "Sec-WebSocket-Extensions"
+          - "Sec-WebSocket-Protocol"
+

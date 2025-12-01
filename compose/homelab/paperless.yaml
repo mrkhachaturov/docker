@@ -62,6 +62,7 @@ services:
       - "traefik.http.routers.paperless-int-rtr.rule=Host(`dms.$DOMAINNAME_HL`)"
       - "traefik.http.routers.paperless-int-rtr.service=paperless-svc"
       - "traefik.http.services.paperless-svc.loadbalancer.server.port=8000"
+      - "traefik.http.routers.paperless-int-rtr.middlewares=chain-no-auth@file"
       - "traefik.docker.network=trf_int"
   gotenberg:
     image: ghcr.io/astrateam-net/gotenberg:8.21.1

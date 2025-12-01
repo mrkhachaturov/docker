@@ -1,0 +1,16 @@
+http:
+  routers:
+    haos-rtr:
+      rule: "Host(`sso.{{env "DOMAINNAME_HL"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: haos-svc
+      tls:
+        certResolver: zerossl
+  services:
+    haos-svc:
+      loadBalancer:
+        servers:
+          - url: "http://10.2.120.16:9000"  # or whatever your external host's IP:port is 
