@@ -5,6 +5,7 @@ http:
       entryPoints:
         - websecure
       middlewares:
+        - obsidiansync-cors
         - chain-no-auth
       service: webdav-svc
       tls:
