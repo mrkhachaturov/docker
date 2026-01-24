@@ -1,0 +1,18 @@
+http:
+  routers:
+    webdav-rtr:
+      rule: "Host(`webdav.{{env "DOMAINNAME_HL"}}`)" 
+      entryPoints:
+        - websecure
+      middlewares:
+        - chain-no-auth
+      service: webdav-svc
+      tls:
+        certResolver: zerossl
+        
+  services:
+    webdav-svc:
+      loadBalancer:
+        passHostHeader: true   
+        servers:
+          - url: "http://10.2.120.10:5005"
