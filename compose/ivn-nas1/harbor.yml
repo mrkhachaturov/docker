@@ -31,7 +31,7 @@ services:
     ports:
       - 127.0.0.1:1514:10514
     networks:
-      - harbor
+      - harbor_network
   registry:
     image: goharbor/registry-photon:v2.14.2
     container_name: registry
