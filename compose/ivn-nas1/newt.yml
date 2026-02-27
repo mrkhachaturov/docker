@@ -15,5 +15,3 @@ services:
 networks:
   docker_harbor:
     external: true
-  socket_proxy:
-    external: true
