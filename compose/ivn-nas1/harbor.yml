@@ -57,12 +57,10 @@ services:
       log:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "registry"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
   registryctl:
     image: goharbor/harbor-registryctl:v2.14.2
     container_name: registryctl
@@ -90,12 +88,10 @@ services:
       log:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "registryctl"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
   core:
     image: goharbor/harbor-core:v2.14.2
     container_name: harbor-core
@@ -133,12 +129,10 @@ services:
       redis:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "core"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
   portal:
     image: goharbor/harbor-portal:v2.14.2
     container_name: harbor-portal
@@ -160,12 +154,10 @@ services:
       log:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "portal"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
 
   jobservice:
     image: goharbor/harbor-jobservice:v2.14.2
@@ -195,12 +187,10 @@ services:
       core:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "jobservice"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
   redis:
     image: goharbor/redis-photon:v2.14.2
     container_name: redis
@@ -219,12 +209,10 @@ services:
       log:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "redis"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
   proxy:
     image: goharbor/nginx-photon:v2.14.2
     container_name: nginx
@@ -255,12 +243,10 @@ services:
       portal:
         condition: service_started
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "proxy"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
   trivy-adapter:
     container_name: trivy-adapter
     image: goharbor/trivy-adapter-photon:v2.14.2
@@ -285,12 +271,10 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/shared/trust-certificates
         target: /harbor_cust_cert
     logging:
-      driver: "syslog"
+      driver: "json-file"
       options:
-        syslog-address: "tcp://127.0.0.1:1514"
-        tag: "trivy-adapter"
-        mode: "non-blocking"
-        max-buffer-size: "4m"
+        max-size: "10m"
+        max-file: "3"
     env_file:
       ${DOCKERDIR}/appdata/harbor/common/config/trivy-adapter/env
 networks:
