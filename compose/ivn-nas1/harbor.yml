@@ -52,7 +52,7 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
-      - harbor
+      - harbor_network
     depends_on:
       log:
         condition: service_started
