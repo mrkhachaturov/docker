@@ -7,9 +7,13 @@ services:
       - PANGOLIN_ENDPOINT=https://pangolin.${DOMAIN1}.net
       - NEWT_ID=${NEWT_ID}
       - NEWT_SECRET=${NEWT_SECRET}
+      - DOCKER_SOCKET=tcp://socket-proxy:2375
     networks:
       - docker_harbor
+      - socket_proxy
 
 networks:
   docker_harbor:
+    external: true
+  socket_proxy:
     external: true
