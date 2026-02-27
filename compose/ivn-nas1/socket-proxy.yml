@@ -3,8 +3,7 @@ services:
   socket-proxy:
     container_name: socket-proxy
     image: tecnativa/docker-socket-proxy:edge
-    security_opt:
-      - no-new-privileges:true
+    privileged: true
     restart: unless-stopped
     networks:
       socket_proxy:
