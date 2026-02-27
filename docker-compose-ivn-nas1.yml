@@ -8,6 +8,12 @@
 networks:
   default:
     driver: bridge
+  socket_proxy:
+    name: socket_proxy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.91.0/24    
 
 # Docker Compose v2.20 or greater required to use "include"
 include:
@@ -18,3 +24,4 @@ include:
   - compose/$HOSTNAME/onepassword.yml
   - compose/$HOSTNAME/harbor.yml
   - compose/$HOSTNAME/newt.yml
+  - compose/$HOSTNAME/socket-proxy.yml
