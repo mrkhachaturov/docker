@@ -9,8 +9,9 @@ services:
       - NEWT_SECRET=${NEWT_SECRET}
       - DOCKER_SOCKET=tcp://socket-proxy:2375
     networks:
-      - docker_harbor
-      - socket_proxy
+      docker_harbor:
+        ipv4_address: 172.20.0.11
+      socket_proxy: {}
 
 networks:
   docker_harbor:
