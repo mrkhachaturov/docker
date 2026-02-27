@@ -83,7 +83,7 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
-      - harbor
+      - harbor_network
     depends_on:
       log:
         condition: service_started
@@ -120,7 +120,7 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
-      harbor:
+      harbor_network:
     depends_on:
       log:
         condition: service_started
@@ -149,7 +149,7 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/portal/nginx.conf
         target: /etc/nginx/nginx.conf
     networks:
-      - harbor
+      - harbor_network
     depends_on:
       log:
         condition: service_started
@@ -180,7 +180,7 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
-      - harbor
+      - harbor_network
     depends_on:
       log:
         condition: service_started
@@ -204,7 +204,7 @@ services:
     volumes:
       - ${DOCKERDIR}/appdata/harbor/data/redis:/var/lib/redis
     networks:
-      harbor:
+      harbor_network:
     depends_on:
       log:
         condition: service_started
@@ -230,7 +230,7 @@ services:
         source: ${DOCKERDIR}/appdata/harbor/common/config/shared/trust-certificates
         target: /harbor_cust_cert
     networks:
-      - harbor
+      - harbor_network
     ports:
       - 18080:8080
     depends_on:
@@ -259,7 +259,7 @@ services:
       redis:
         condition: service_started
     networks:
-      - harbor
+      - harbor_network
     volumes:
       - type: bind
         source: ${DOCKERDIR}/appdata/harbor/data/trivy-adapter/trivy
@@ -277,6 +277,3 @@ services:
         max-file: "3"
     env_file:
       ${DOCKERDIR}/appdata/harbor/common/config/trivy-adapter/env
-networks:
-  harbor:
-    external: false
