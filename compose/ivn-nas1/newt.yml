@@ -1,0 +1,15 @@
+services:
+  newt:
+    image: fosrl/newt
+    container_name: newt
+    restart: unless-stopped
+    environment:
+      - PANGOLIN_ENDPOINT=https://pangolin.${DOMAIN1}.net
+      - NEWT_ID=${NEWT_ID}
+      - NEWT_SECRET=${NEWT_SECRET}
+    networks:
+      - docker_harbor
+
+networks:
+  docker_harbor:
+    external: true

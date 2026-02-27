@@ -31,3 +31,4 @@ include:
   - compose/$HOSTNAME/onepassword.yml
   - compose/$HOSTNAME/atuin.yml
   - compose/$HOSTNAME/jellyfin.yml
+  - compose/$HOSTNAME/newt.yml
