@@ -21,7 +21,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - ${DOCKERDIR}/logs/harbor/:/var/log/docker/
+      - ${DOCKERDIR}/appdata/harbor/logs/:/var/log/docker/
       - type: bind
         source: ${DOCKERDIR}/appdata/harbor/common/config/log/logrotate.conf
         target: /etc/logrotate.d/logrotate.conf
