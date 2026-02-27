@@ -16,3 +16,4 @@ include:
   # HOSTNAME=ivn-nas1 - defined in .env
   - compose/$HOSTNAME/minio.yml
   - compose/$HOSTNAME/onepassword.yml
+  - compose/$HOSTNAME/harbor.yml
