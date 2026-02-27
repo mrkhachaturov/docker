@@ -58,7 +58,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "registry"
   registryctl:
     image: goharbor/harbor-registryctl:v2.14.2
@@ -88,7 +88,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "registryctl"
   core:
     image: goharbor/harbor-core:v2.14.2
@@ -126,7 +126,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "core"
   portal:
     image: goharbor/harbor-portal:v2.14.2
@@ -150,7 +150,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "portal"
 
   jobservice:
@@ -180,7 +180,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "jobservice"
   redis:
     image: goharbor/redis-photon:v2.14.2
@@ -201,7 +201,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "redis"
   proxy:
     image: goharbor/nginx-photon:v2.14.2
@@ -231,7 +231,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "proxy"
   trivy-adapter:
     container_name: trivy-adapter
@@ -257,7 +257,7 @@ services:
     logging:
       driver: "syslog"
       options:
-        syslog-address: "tcp://localhost:1514"
+        syslog-address: "tcp://127.0.0.1:1514"
         tag: "trivy-adapter"
     env_file:
       ${DOCKERDIR}/appdata/harbor/common/config/trivy-adapter/env
