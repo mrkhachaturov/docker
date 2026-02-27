@@ -12,7 +12,3 @@ services:
       harbor_network:
         ipv4_address: 172.20.0.254
       socket_proxy: {}
-
-networks:
-  docker_harbor:
-    external: true
