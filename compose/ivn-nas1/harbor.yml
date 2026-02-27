@@ -30,6 +30,12 @@ services:
         target: /etc/rsyslog.d/rsyslog_docker.conf
     ports:
       - 127.0.0.1:1514:10514
+    healthcheck:
+      test: ["CMD-SHELL", "ss -ltn 2>/dev/null | grep -q ':10514' || netstat -ltn 2>/dev/null | grep -q ':10514'"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 10s
     networks:
       - harbor
   registry:
@@ -54,12 +60,15 @@ services:
     networks:
       - harbor
     depends_on:
-      - log
+      log:
+        condition: service_healthy
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "registry"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
   registryctl:
     image: goharbor/harbor-registryctl:v2.14.2
     container_name: registryctl
@@ -84,12 +93,15 @@ services:
     networks:
       - harbor
     depends_on:
-      - log
+      log:
+        condition: service_healthy
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "registryctl"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
   core:
     image: goharbor/harbor-core:v2.14.2
     container_name: harbor-core
@@ -120,14 +132,19 @@ services:
     networks:
       harbor:
     depends_on:
-      - log
-      - registry
-      - redis
+      log:
+        condition: service_healthy
+      registry:
+        condition: service_started
+      redis:
+        condition: service_started
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "core"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
   portal:
     image: goharbor/harbor-portal:v2.14.2
     container_name: harbor-portal
@@ -146,12 +163,15 @@ services:
     networks:
       - harbor
     depends_on:
-      - log
+      log:
+        condition: service_healthy
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "portal"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
 
   jobservice:
     image: goharbor/harbor-jobservice:v2.14.2
@@ -176,12 +196,17 @@ services:
     networks:
       - harbor
     depends_on:
-      - core
+      log:
+        condition: service_healthy
+      core:
+        condition: service_started
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "jobservice"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
   redis:
     image: goharbor/redis-photon:v2.14.2
     container_name: redis
@@ -197,12 +222,15 @@ services:
     networks:
       harbor:
     depends_on:
-      - log
+      log:
+        condition: service_healthy
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "redis"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
   proxy:
     image: goharbor/nginx-photon:v2.14.2
     container_name: nginx
@@ -224,15 +252,21 @@ services:
     ports:
       - 18080:8080
     depends_on:
-      - registry
-      - core
-      - portal
-      - log
+      log:
+        condition: service_healthy
+      registry:
+        condition: service_started
+      core:
+        condition: service_started
+      portal:
+        condition: service_started
     logging:
       driver: "syslog"
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "proxy"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
   trivy-adapter:
     container_name: trivy-adapter
     image: goharbor/trivy-adapter-photon:v2.14.2
@@ -240,8 +274,10 @@ services:
     cap_drop:
       - ALL
     depends_on:
-      - log
-      - redis
+      log:
+        condition: service_healthy
+      redis:
+        condition: service_started
     networks:
       - harbor
     volumes:
@@ -259,6 +295,8 @@ services:
       options:
         syslog-address: "tcp://127.0.0.1:1514"
         tag: "trivy-adapter"
+        mode: "non-blocking"
+        max-buffer-size: "4m"
     env_file:
       ${DOCKERDIR}/appdata/harbor/common/config/trivy-adapter/env
 networks:
