@@ -1,6 +1,6 @@
 services:
   obsidian:
-    image: linuxserver/obsidian:1.10.6@sha256:00fe3310623eb4b1dcd6ff25d810c9a9d8e52126f5137ff0b3373c1f67753612
+    image: linuxserver/obsidian:1.12.4@sha256:c7bc60aa7f8fc10f64cb9883ccebea3ba6a5e44bffcd96eeb65761fc683ad90e
     container_name: obsidian
     restart: unless-stopped
     security_opt:
