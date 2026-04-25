@@ -2,7 +2,7 @@ services:
   # Traefik 3 - Reverse Proxy
   traefik-external:
     container_name: traefik-external
-    image: traefik:v3.6.2@sha256:aaf0f6185419a50c74651448c1a5bf4606bd2d2ddb7b8749eed505d55bf8b8ea
+    image: traefik:v3.6.14@sha256:4cda3393930dceff030e144b46260e96e1337c9cfaa4fed81c90cb8f4d498f57
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped
